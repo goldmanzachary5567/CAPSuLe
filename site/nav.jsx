@@ -1,9 +1,9 @@
 // NavBar and Footer shared across all pages.
-// Pages: index / CAPSuLe_Homepage.html, About.html, Programs.html,
+// Pages: index / index.html, About.html, Programs.html,
 //        Episodes.html, Blog.html, Network.html, Donate.html
 
 const CL_PAGES = {
-  home: 'index.html',
+  home:     'index.html',
   about:    'About.html',
   programs: 'Programs.html',
   episodes: 'Episodes.html',
