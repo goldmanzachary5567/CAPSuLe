@@ -3,7 +3,7 @@
 //        Episodes.html, Blog.html, Network.html, Donate.html
 
 const CL_PAGES = {
-  home:     'CAPSuLe_Homepage.html',
+  home: 'index.html',
   about:    'About.html',
   programs: 'Programs.html',
   episodes: 'Episodes.html',
