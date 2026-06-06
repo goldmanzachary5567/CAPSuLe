@@ -79,32 +79,48 @@ function DonateHero() {
 
 function DonateImpact() {
   const isMobile = useIsMobile();
+  const urgencyStats = [
+    { n: '17 yrs', label: 'Average lag between research publication and clinical practice', note: 'Most parents & teachers never see the findings at all.' },
+    { n: '$0',     label: 'What most developmental research earns its authors in public reach', note: 'Publishing in academic journals doesn\'t pay the rent.' },
+    { n: '5 hrs',  label: 'Average time a parent or educator spends searching for evidence-based guidance per year', note: 'They\'re not finding it — they\'re guessing.' },
+  ];
   return (
     <section style={{ padding: '100px 0', background: window.CL.paperWarm, borderBottom: `1.5px solid ${window.CL.ink}` }}>
       <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: isMobile ? '0 20px' : '0 32px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
-          <div className="cl-mono" style={{ color: window.CL.signal }}>Why now</div>
+          <div className="cl-mono" style={{ color: window.CL.signal }}>Why we need you</div>
           <div className="cl-mono" style={{ color: window.CL.inkSoft }}>The translation gap</div>
         </div>
 
-        <div className="cl-grid-2" style={{ gap: isMobile ? 40 : 80 }}>
+        <div className="cl-grid-2" style={{ gap: isMobile ? 40 : 80, marginBottom: 56 }}>
           <h2 style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 0.98, letterSpacing: '-0.025em', margin: 0, color: window.CL.ink, textWrap: 'balance' }}>
-            The research exists. The <em style={{ color: window.CL.signal }}>translation</em> is missing.
+            The research exists.<br />The <em style={{ color: window.CL.signal }}>translation</em> is missing.
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <p style={{ fontFamily: window.CL.serif, fontSize: 18, lineHeight: 1.55, color: window.CL.ink, margin: 0, textWrap: 'pretty' }}>
-              Every year, developmental neuroscience and clinical psychology produce findings that could meaningfully improve the lives of children, adolescents, and the adults raising them. Very little of it reaches the parents, teachers, clinicians, and coaches who need it most.
+              Every year, developmental neuroscience and clinical psychology produce findings that could meaningfully improve the lives of children, adolescents, and the adults raising them. Virtually none of it reaches the parents, teachers, clinicians, and coaches who need it most.
             </p>
             <p style={{ fontFamily: window.CL.serif, fontSize: 16, lineHeight: 1.55, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>
-              CAPSuLe is the bridge. We work in the formats each audience already trusts: long-form film, structured courses, peer-reviewed-but-readable essays, and conversational podcasts. Our sponsors fund the bridge.
+              CAPSuLe exists because no one else is doing this work at this level. We don't publish for journals. We publish for the parent up at midnight, the coach before the big game, the teacher in room 14. <strong style={{ color: window.CL.ink }}>That work is entirely funded by partners like you.</strong>
             </p>
           </div>
         </div>
 
-        <div style={{ marginTop: 56, display: 'grid', border: `1.5px solid ${window.CL.ink}` }} className="cl-grid-2-eq">
+        {/* Urgency stats */}
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 1, background: window.CL.ink, border: `1.5px solid ${window.CL.ink}`, marginBottom: 56 }}>
+          {urgencyStats.map((s, i) => (
+            <div key={i} style={{ background: window.CL.paper, padding: '28px 24px' }}>
+              <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 52, fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1, color: window.CL.signal, marginBottom: 12 }}>{s.n}</div>
+              <div style={{ fontFamily: window.CL.serif, fontSize: 15, lineHeight: 1.5, color: window.CL.ink, marginBottom: 8 }}>{s.label}</div>
+              <div style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 13, color: window.CL.inkSoft }}>{s.note}</div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: 'grid', border: `1.5px solid ${window.CL.ink}` }} className="cl-grid-2-eq">
           {[
-            { n: '01', h: 'Sustained, not seasonal', b: 'Sponsors fund a continuous translation pipeline. Your support compounds across every program we ship, not just one campaign.' },
-            { n: '02', h: 'Trusted distribution',    b: 'Films land on Amazon Prime Video. Courses go to Coursera. Essays sit in the inboxes of educators who opted in. We meet audiences where they already are.' },
+            { n: '01', h: 'We don\'t sell ads or charge access fees', b: 'Every essay, episode, and course we release is free or subsidized. That model only works with donors who believe the science should reach everyone — not just the people who can pay for it.' },
+            { n: '02', h: 'Films, courses, and podcasts cost real money', b: 'WordRx alone requires gear, crew, travel, and post-production. MicroDose requires instructional design, platform integration, and expert review. None of it happens on goodwill alone.' },
           ].map((c, i) => (
             <div key={i} style={{ padding: '28px 24px', borderRight: i < 1 ? `1px solid ${window.CL.ink}` : 'none', background: window.CL.paper }}>
               <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 12 }}>{c.n}</div>
@@ -112,6 +128,91 @@ function DonateImpact() {
               <p style={{ fontFamily: window.CL.serif, fontSize: 15, lineHeight: 1.55, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>{c.b}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function DonateWordRxBudget() {
+  const isMobile = useIsMobile();
+  const budget = [
+    { name: 'Gear + Insurance',        amount: 4000, group: 'Production',      color: '#c8453a', what: 'Cameras, lighting, audio rigs, and full production insurance for the Belleair shoot.' },
+    { name: 'Crew Compensation',       amount: 3000, group: 'Production',      color: '#d9693e', what: 'Cinematographer, sound engineer, and on-set production coordinator.' },
+    { name: 'Meals',                   amount: 2000, group: 'Production',      color: '#e8a060', what: 'On-location catering and meals for cast and crew across all shoot days.' },
+    { name: 'Travel & Accommodations', amount: 1000, group: 'Production',      color: '#f2cab4', what: 'Travel and lodging for out-of-market crew members coming to Belleair, FL.' },
+    { name: 'E&O Insurance',           amount: 3000, group: 'Post-Production', color: '#4a8a6a', what: 'Errors & omissions coverage required for Amazon Prime Video distribution.' },
+    { name: 'Sound Mixing',            amount: 2000, group: 'Post-Production', color: '#72b890', what: 'Professional dialogue editing, music licensing clearance, and final mix.' },
+    { name: 'Color Grading',           amount: 1000, group: 'Post-Production', color: '#a8d4b8', what: 'Cinematic color grade to bring the visual look of the film up to distribution standard.' },
+  ];
+  const total = 16000;
+
+  return (
+    <section style={{ padding: '100px 0', background: window.CL.ink, color: window.CL.paper, borderBottom: `1.5px solid rgba(245,239,226,.2)` }}>
+      <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: isMobile ? '0 20px' : '0 32px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid rgba(245,239,226,.25)`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
+          <div className="cl-mono" style={{ color: window.CL.signal }}>Where WordRx money goes</div>
+          <div className="cl-mono" style={{ color: 'rgba(245,239,226,.45)' }}>Full budget breakdown · $16,000 goal</div>
+        </div>
+
+        <div className="cl-grid-2" style={{ gap: isMobile ? 40 : 80, marginBottom: 48 }}>
+          <div>
+            <h2 style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.025em', margin: '0 0 20px', textWrap: 'balance' }}>
+              Every dollar<br />has a <em style={{ color: window.CL.signal }}>job.</em>
+            </h2>
+            <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: 'rgba(245,239,226,.75)', margin: 0, textWrap: 'pretty' }}>
+              100% of WordRx donations go directly to production costs. No administrative overhead is taken from designated gifts. Here is exactly where each dollar goes.
+            </p>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {['Production', 'Post-Production'].map(group => {
+              const gTotal = budget.filter(b => b.group === group).reduce((s, b) => s + b.amount, 0);
+              return (
+                <div key={group}>
+                  <div className="cl-mono" style={{ color: 'rgba(245,239,226,.4)', marginBottom: 8, marginTop: 4 }}>{group.toUpperCase()} — ${gTotal.toLocaleString()}</div>
+                  {budget.filter(b => b.group === group).map(item => (
+                    <div key={item.name} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '8px 0', borderBottom: `1px solid rgba(245,239,226,.1)` }}>
+                      <span style={{ width: 10, height: 10, borderRadius: 2, background: item.color, flexShrink: 0 }} />
+                      <span style={{ fontFamily: window.CL.serif, fontSize: 14, color: 'rgba(245,239,226,.85)', flex: 1 }}>{item.name}</span>
+                      <span style={{ fontFamily: window.CL.display, fontSize: 18, fontWeight: 500, color: window.CL.paper, letterSpacing: '-0.01em' }}>${item.amount.toLocaleString()}</span>
+                      <span className="cl-mono" style={{ color: 'rgba(245,239,226,.4)', width: 36 }}>{Math.round(item.amount/total*100)}%</span>
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', paddingTop: 16, borderTop: `1.5px solid rgba(245,239,226,.3)`, marginTop: 8 }}>
+              <span className="cl-mono" style={{ color: 'rgba(245,239,226,.5)' }}>TOTAL GOAL</span>
+              <span style={{ fontFamily: window.CL.display, fontSize: 28, fontWeight: 500, letterSpacing: '-0.02em', color: window.CL.paper }}>${total.toLocaleString()}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Line-item descriptions */}
+        <div style={{ borderTop: `1px solid rgba(245,239,226,.18)`, paddingTop: 40 }}>
+          <div className="cl-mono" style={{ color: 'rgba(245,239,226,.4)', marginBottom: 24 }}>LINE ITEM DETAIL</div>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 1, background: 'rgba(245,239,226,.12)' }}>
+            {budget.map((item, i) => (
+              <div key={item.name} style={{ background: window.CL.ink, padding: '20px 24px', display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span style={{ width: 8, height: 8, borderRadius: 2, background: item.color, flexShrink: 0 }} />
+                  <span style={{ fontFamily: window.CL.display, fontSize: 16, fontWeight: 500, color: window.CL.paper }}>{item.name}</span>
+                  <span style={{ marginLeft: 'auto', fontFamily: window.CL.display, fontSize: 20, fontWeight: 500, color: window.CL.signal, letterSpacing: '-0.01em' }}>${item.amount.toLocaleString()}</span>
+                </div>
+                <p style={{ fontFamily: window.CL.serif, fontSize: 14, lineHeight: 1.5, color: 'rgba(245,239,226,.55)', margin: 0 }}>{item.what}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ marginTop: 40, display: 'flex', gap: 20, alignItems: 'center', flexWrap: 'wrap' }}>
+          <p style={{ fontFamily: window.CL.serif, fontSize: 16, color: 'rgba(245,239,226,.7)', margin: 0, flex: 1, textWrap: 'pretty' }}>
+            Ready to put a dollar to work? Every amount closes the gap.
+          </p>
+          <a href="mailto:sponsor@thecapsl.org"
+            style={{ flexShrink: 0, padding: '14px 28px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.22em', textTransform: 'uppercase' }}>
+            Fund WordRx →
+          </a>
         </div>
       </div>
     </section>
@@ -214,7 +315,7 @@ function DonateProjects() {
   const projects = [
     {
       code: 'PRX-WORDRX', name: 'WordRx', kind: 'Documentary Film',
-      status: 'In production', goal: '$20,000', raised: '$xx,xxx', pct: 0,
+      status: 'In production', goal: '$16,000', raised: '$xx,xxx', pct: 0,
       note: 'Filming Dec 2026 · Belleair, FL',
       desc: 'Our flagship documentary following four "word pharmacists." Distribution via Amazon Prime Video.',
     },
@@ -313,9 +414,10 @@ function DonateFAQ() {
   );
 }
 
-window.DonatePartnerBanner = DonatePartnerBanner;
-window.DonateHero          = DonateHero;
-window.DonateImpact        = DonateImpact;
-window.DonateTiers         = DonateTiers;
-window.DonateProjects      = DonateProjects;
-window.DonateFAQ           = DonateFAQ;
+window.DonatePartnerBanner  = DonatePartnerBanner;
+window.DonateHero           = DonateHero;
+window.DonateImpact         = DonateImpact;
+window.DonateWordRxBudget   = DonateWordRxBudget;
+window.DonateTiers          = DonateTiers;
+window.DonateProjects       = DonateProjects;
+window.DonateFAQ            = DonateFAQ;

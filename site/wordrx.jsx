@@ -58,7 +58,7 @@ function WordRx() {
               {/* Amount raised */}
               <div>
                 <div style={{ fontFamily: window.CL.display, fontSize: 72, fontWeight: 500, lineHeight: 0.9, letterSpacing: '-0.04em', color: window.CL.paper }}>$xx,xxx</div>
-                <div className="cl-mono" style={{ color: 'rgba(245,239,226,.45)', marginTop: 10 }}>RAISED OF $20,000 GOAL</div>
+                <div className="cl-mono" style={{ color: 'rgba(245,239,226,.45)', marginTop: 10 }}>RAISED OF $16,000 GOAL</div>
               </div>
 
               {/* Tube thermometer */}
@@ -88,9 +88,9 @@ function WordRx() {
               {/* What funds do */}
               <div style={{ borderTop: `1px solid rgba(245,239,226,.12)`, paddingTop: 20, display: 'flex', flexDirection: 'column', gap: 10 }}>
                 {[
-                  '$1,000 · Covers one full day of principal photography',
-                  '$2,500 · Funds post-production editing for one sequence',
-                  '$5,000 · Sponsors the Belleair filming location',
+                  '$1,000 · Covers crew compensation for a full shoot day',
+                  '$2,000 · Funds sound mixing for the entire film',
+                  '$4,000 · Covers all gear and production insurance',
                 ].map(item => (
                   <div key={item} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
                     <span style={{ width: 4, height: 4, borderRadius: 4, background: window.CL.signal, marginTop: 7, flexShrink: 0 }} />

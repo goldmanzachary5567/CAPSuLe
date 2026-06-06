@@ -54,37 +54,184 @@ function CAPSuLeAcronym({ size }) {
   );
 }
 
-// Simple SVG pie chart for WordRx budget.
-function PieChart({ slices, size }) {
-  var r = (size || 140) / 2;
-  var total = slices.reduce(function(s, sl) { return s + sl.value; }, 0);
-  var paths = [];
-  var angle = -Math.PI / 2;
-  slices.forEach(function(sl, i) {
-    var sweep = (sl.value / total) * 2 * Math.PI;
-    var x1 = r + r * Math.cos(angle);
-    var y1 = r + r * Math.sin(angle);
-    angle += sweep;
-    var x2 = r + r * Math.cos(angle);
-    var y2 = r + r * Math.sin(angle);
-    var large = sweep > Math.PI ? 1 : 0;
-    paths.push({ d: 'M'+r+' '+r+' L'+x1+' '+y1+' A'+r+' '+r+' 0 '+large+' 1 '+x2+' '+y2+' Z', fill: sl.color, label: sl.label, value: sl.value, pct: Math.round(sl.value/total*100) });
+// Interactive donut chart for WordRx budget (dark-background variant).
+function DonutChart({ budget, total }) {
+  var isMobile = useIsMobile();
+  var [hovered, setHovered] = React.useState(null);
+  var r = 38, cx = 50, cy = 50, sw = 18;
+  var circ = 2 * Math.PI * r;
+  var offset = 0;
+  var segments = budget.map(function(item) {
+    var dash = (item.amount / total) * circ;
+    var seg = { name: item.name, amount: item.amount, group: item.group, color: item.color, dash: dash, offset: offset };
+    offset += dash;
+    return seg;
   });
+  var activeItem = hovered !== null ? budget[hovered] : null;
+
   return (
-    <div style={{ display: 'flex', gap: 28, alignItems: 'center', flexWrap: 'wrap' }}>
-      <svg width={size || 140} height={size || 140} viewBox={'0 0 '+(size||140)+' '+(size||140)} style={{ flexShrink: 0 }}>
-        {paths.map(function(p, i) { return <path key={i} d={p.d} fill={p.fill} stroke={window.CL.paper} strokeWidth="2" />; })}
-      </svg>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {paths.map(function(p, i) {
+    <div style={{ display: 'flex', gap: isMobile ? 20 : 40, alignItems: 'center', flexWrap: 'wrap' }}>
+      <div style={{ position: 'relative', width: 180, height: 180, flexShrink: 0 }}>
+        <svg width={180} height={180} viewBox="0 0 100 100" style={{ transform: 'rotate(-90deg)', filter: 'drop-shadow(0 0 16px rgba(200,69,58,0.18))' }}>
+          {segments.map(function(seg, i) {
+            var gap = circ - seg.dash;
+            return (
+              <circle key={i} cx={cx} cy={cy} r={r} fill="none"
+                stroke={seg.color}
+                strokeWidth={hovered === i ? sw + 4 : sw - (hovered !== null ? 2 : 0)}
+                strokeDasharray={seg.dash + ' ' + gap}
+                strokeDashoffset={-seg.offset}
+                style={{ cursor: 'pointer', transition: 'stroke-width 0.2s, opacity 0.2s', opacity: hovered !== null && hovered !== i ? 0.3 : 1 }}
+                onMouseEnter={function() { setHovered(i); }}
+                onMouseLeave={function() { setHovered(null); }}
+              />
+            );
+          })}
+        </svg>
+        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', textAlign: 'center', pointerEvents: 'none' }}>
+          {activeItem ? (
+            <div>
+              <div style={{ fontFamily: window.CL.mono, fontSize: 8, color: 'rgba(245,239,226,.5)', letterSpacing: '.1em', marginBottom: 2 }}>{Math.round(activeItem.amount / total * 100)}%</div>
+              <div style={{ fontFamily: window.CL.display, fontSize: 14, fontWeight: 500, color: 'rgba(245,239,226,.95)', lineHeight: 1.1 }}>${activeItem.amount.toLocaleString()}</div>
+            </div>
+          ) : (
+            <div>
+              <div style={{ fontFamily: window.CL.mono, fontSize: 7, color: 'rgba(245,239,226,.4)', marginBottom: 2 }}>TOTAL</div>
+              <div style={{ fontFamily: window.CL.display, fontSize: 15, fontWeight: 500, color: 'rgba(245,239,226,.9)', lineHeight: 1 }}>${total.toLocaleString()}</div>
+            </div>
+          )}
+        </div>
+      </div>
+      <div style={{ flex: 1, minWidth: 200 }}>
+        {['Production', 'Post-Production'].map(function(group) {
+          var groupItems = budget.filter(function(b) { return b.group === group; });
+          var groupTotal = groupItems.reduce(function(s, b) { return s + b.amount; }, 0);
           return (
-            <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <div style={{ width: 12, height: 12, borderRadius: 2, background: p.fill, flexShrink: 0 }} />
-              <span style={{ fontFamily: window.CL.serif, fontSize: 14, color: window.CL.ink }}>{p.label}</span>
-              <span className="cl-mono" style={{ color: window.CL.inkSoft, marginLeft: 'auto', paddingLeft: 16 }}>{p.pct}%</span>
+            <div key={group} style={{ marginBottom: 14 }}>
+              <div className="cl-mono" style={{ color: 'rgba(245,239,226,.4)', fontSize: 9, marginBottom: 6 }}>{group.toUpperCase()} · ${groupTotal.toLocaleString()}</div>
+              {groupItems.map(function(item) {
+                var i = budget.indexOf(item);
+                return (
+                  <div key={item.name}
+                    style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '5px 8px', cursor: 'pointer', transition: 'background .15s', background: hovered === i ? 'rgba(245,239,226,.08)' : 'transparent' }}
+                    onMouseEnter={function() { setHovered(i); }}
+                    onMouseLeave={function() { setHovered(null); }}
+                  >
+                    <span style={{ width: 10, height: 10, borderRadius: 2, background: item.color, flexShrink: 0 }} />
+                    <span style={{ fontFamily: window.CL.serif, fontSize: 13, color: 'rgba(245,239,226,.8)', flex: 1 }}>{item.name}</span>
+                    <span style={{ fontFamily: window.CL.mono, fontSize: 9, color: 'rgba(245,239,226,.45)' }}>${item.amount.toLocaleString()} · {Math.round(item.amount / total * 100)}%</span>
+                  </div>
+                );
+              })}
             </div>
           );
         })}
+      </div>
+    </div>
+  );
+}
+
+// MicroDose course launch modal with live countdown.
+function MicroDoseModal({ onClose }) {
+  var isMobile = useIsMobile();
+  var [timeLeft, setTimeLeft] = React.useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  React.useEffect(function() {
+    var launch = new Date('2026-09-18T00:00:00');
+    function tick() {
+      var diff = launch - new Date();
+      if (diff <= 0) { setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 }); return; }
+      setTimeLeft({
+        days:    Math.floor(diff / 86400000),
+        hours:   Math.floor((diff % 86400000) / 3600000),
+        minutes: Math.floor((diff % 3600000)  / 60000),
+        seconds: Math.floor((diff % 60000)    / 1000),
+      });
+    }
+    tick();
+    var id = setInterval(tick, 1000);
+    return function() { clearInterval(id); };
+  }, []);
+
+  var modules = [
+    { l: 'C', full: 'Child',         desc: 'Child-centered development — the science of how young people grow',                pct: 10 },
+    { l: 'A', full: 'Adolescent',    desc: 'Adolescent neuroscience — brain development and behavioral implications',            pct: 10 },
+    { l: 'P', full: 'Performance',   desc: 'Performance science — how environment shapes outcomes in school and sport',          pct: 10 },
+    { l: 'S', full: 'Science',       desc: 'Science translation — turning research into practical, actionable guidance',         pct: 10 },
+    { l: 'u', full: 'Understanding', desc: 'Understanding communication — language as a tool for connection and healing',        pct: 10 },
+    { l: 'L', full: 'Laboratory',    desc: 'Lab to life — bringing clinical-grade rigor into everyday home and classroom use',   pct: 10 },
+    { l: 'e', full: 'Evidence',      desc: 'Evidence-based outcomes — measuring what matters for children and families',         pct: 10 },
+  ];
+
+  return (
+    <div
+      onClick={function(e) { if (e.target === e.currentTarget) onClose(); }}
+      style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? 16 : 32, background: 'rgba(11,27,38,.84)', backdropFilter: 'blur(4px)' }}
+    >
+      <div style={{ background: window.CL.paper, maxWidth: 760, width: '100%', maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
+        <button
+          onClick={onClose}
+          style={{ position: 'sticky', top: 0, float: 'right', zIndex: 10, padding: '12px 18px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.18em', cursor: 'pointer', border: 'none' }}
+        >CLOSE ×</button>
+
+        <div style={{ padding: isMobile ? '28px 20px 40px' : '40px 40px 52px', clear: 'right' }}>
+          <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 12 }}>PRX-MICRO · COURSE PREVIEW</div>
+          <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 38 : 56, fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 10 }}>
+            Micro<em style={{ color: window.CL.signal }}>Dose</em>
+          </div>
+          <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 17, color: window.CL.inkSoft, margin: '0 0 36px' }}>
+            Science-based courses for the people raising the next generation.
+          </p>
+
+          {/* Live countdown */}
+          <div style={{ background: window.CL.ink, color: window.CL.paper, padding: isMobile ? '24px 20px' : '28px 32px', marginBottom: 40 }}>
+            <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 18 }}>COURSE LAUNCH — SEPTEMBER 18, 2026</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'rgba(245,239,226,.15)' }}>
+              {[{ v: timeLeft.days, l: 'DAYS' }, { v: timeLeft.hours, l: 'HOURS' }, { v: timeLeft.minutes, l: 'MIN' }, { v: timeLeft.seconds, l: 'SEC' }].map(function(unit) {
+                return (
+                  <div key={unit.l} style={{ background: window.CL.ink, padding: isMobile ? '16px 8px' : '22px 16px', textAlign: 'center' }}>
+                    <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 38 : 60, fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1, color: window.CL.paper }}>
+                      {String(unit.v).padStart(2, '0')}
+                    </div>
+                    <div className="cl-mono" style={{ color: 'rgba(245,239,226,.4)', marginTop: 8 }}>{unit.l}</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Course modules — CAPSuLe acronym */}
+          <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 20 }}>COURSE MODULES — CONTENT IN DEVELOPMENT</div>
+          <div style={{ borderTop: `1.5px solid ${window.CL.ink}` }}>
+            {modules.map(function(mod) {
+              return (
+                <div key={mod.l} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '210px 1fr', gap: isMobile ? 6 : 28, padding: '20px 0', borderBottom: `1px solid ${window.CL.rule}`, alignItems: 'center' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                    <span style={{ fontFamily: window.CL.display, fontSize: isMobile ? 36 : 44, fontWeight: 500, color: window.CL.signal, lineHeight: 1, minWidth: 32 }}>{mod.l}</span>
+                    <div style={{ flex: 1 }}>
+                      <div style={{ fontFamily: window.CL.display, fontSize: 19, fontWeight: 500, letterSpacing: '-0.01em', color: window.CL.ink, marginBottom: 6 }}>{mod.full}</div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <div style={{ flex: 1, height: 3, background: window.CL.rule, borderRadius: 3, overflow: 'hidden' }}>
+                          <div style={{ height: '100%', width: mod.pct + '%', background: window.CL.signal, borderRadius: 3 }} />
+                        </div>
+                        <span className="cl-mono" style={{ color: window.CL.inkSoft, fontSize: 9 }}>{mod.pct}%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 14, color: window.CL.inkSoft, margin: 0, lineHeight: 1.55 }}>{mod.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Distribution note */}
+          <div style={{ marginTop: 32, padding: '20px 24px', background: window.CL.paperWarm, borderLeft: `3px solid ${window.CL.signal}` }}>
+            <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 8 }}>DISTRIBUTION</div>
+            <p style={{ fontFamily: window.CL.serif, fontSize: 15, color: window.CL.inkSoft, margin: 0, lineHeight: 1.55 }}>
+              MicroDose will be distributed via <strong style={{ color: window.CL.ink }}>Coursera</strong> alongside a formal book and e-book. Enrollment opens September 18, 2026.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -94,6 +241,7 @@ function Programs() {
   var isMobile = useIsMobile();
   var pad = isMobile ? '0 20px' : '0 32px';
   var secPad = isMobile ? '64px 0' : '100px 0';
+  var [showMicroModal, setShowMicroModal] = React.useState(false);
 
   var partners = [
     { name: 'Harvard University',       dept: 'Medical School affiliations' },
@@ -103,12 +251,16 @@ function Programs() {
     { name: 'University of Toronto',    dept: 'Learning and Neural Development Lab' },
   ];
 
-  var wordrxPie = [
-    { label: 'Pre-production & development', value: 25, color: '#C84B32' },
-    { label: 'Production / filming',         value: 40, color: '#1B4066' },
-    { label: 'Post-production & editing',    value: 20, color: '#0B1B26' },
-    { label: 'Distribution & marketing',     value: 15, color: '#8B2FC9' },
+  var wordrxBudget = [
+    { name: 'Gear + Insurance',        amount: 4000, group: 'Production',      color: '#c8453a' },
+    { name: 'Crew Compensation',       amount: 3000, group: 'Production',      color: '#d9693e' },
+    { name: 'Meals',                   amount: 2000, group: 'Production',      color: '#e8a060' },
+    { name: 'Travel & Accommodations', amount: 1000, group: 'Production',      color: '#f2cab4' },
+    { name: 'E&O Insurance',           amount: 3000, group: 'Post-Production', color: '#4a8a6a' },
+    { name: 'Sound Mixing',            amount: 2000, group: 'Post-Production', color: '#72b890' },
+    { name: 'Color Grading',           amount: 1000, group: 'Post-Production', color: '#a8d4b8' },
   ];
+  var wordrxTotal = 16000;
 
   var featuredEps = [
     { no: '008', title: 'Sport as a Laboratory for Learning Confidence in Youth', guest: 'Dr. Jonathan Jenkins', tag: 'COACHING', yt: 'https://www.youtube.com/watch?v=dcOqvhIQw3M' },
@@ -116,24 +268,6 @@ function Programs() {
     { no: '005', title: 'Nutrition, Performance, and the Power of Clean Fuel', guest: 'Dr. Mary Balliett', tag: 'NUTRITION', yt: 'https://www.youtube.com/watch?v=2JsgKUFkpy0' },
   ];
 
-  var countdownTopics = [
-    'Confidence & Identity in Youth Sport',
-    'The Science of Motivation',
-    'Sleep, Learning & Adolescent Brain',
-    'Nutrition and Cognitive Performance',
-    'Stress, Resilience & Post-traumatic Growth',
-    'Parent-Child Communication in High-Stakes Environments',
-  ];
-
-  var letterProgress = [
-    { l: 'C', word: 'Child',       pct: 100 },
-    { l: 'A', word: 'Adolescent',  pct: 100 },
-    { l: 'P', word: 'Performance', pct: 75  },
-    { l: 'S', word: 'Science',     pct: 80  },
-    { l: 'u', word: '&',           pct: 90  },
-    { l: 'L', word: 'Laboratory',  pct: 60  },
-    { l: 'e', word: '',            pct: 45  },
-  ];
 
   return (
     <React.Fragment>
@@ -227,95 +361,23 @@ function Programs() {
               </p>
             </div>
 
-            {/* Placeholder card */}
-            <div style={{ border: `1.5px dashed ${window.CL.ink}`, padding: '40px 28px', background: window.CL.paperWarm, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: 16 }}>
+            {/* Course preview — opens modal */}
+            <button
+              onClick={function() { setShowMicroModal(true); }}
+              style={{ border: `1.5px solid ${window.CL.ink}`, padding: '40px 28px', background: window.CL.paperWarm, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: 16, cursor: 'pointer', width: '100%', transition: 'background .2s' }}
+              onMouseEnter={function(e) { e.currentTarget.style.background = window.CL.paper; }}
+              onMouseLeave={function(e) { e.currentTarget.style.background = window.CL.paperWarm; }}
+            >
               <div className="cl-mono" style={{ color: window.CL.signal }}>COURSE PREVIEW</div>
-              <div style={{ fontFamily: window.CL.display, fontSize: 22, fontWeight: 500, color: window.CL.inkSoft, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
-                Full course details<br />coming soon
+              <div style={{ fontFamily: window.CL.display, fontSize: 22, fontWeight: 500, color: window.CL.ink, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+                Preview the course<br />curriculum →
               </div>
               <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 15, color: window.CL.inkSoft, margin: 0 }}>
-                We'll have curriculum previews, instructor bios, and enrollment info here before launch.
+                Live countdown to launch · All 7 course modules · September 18, 2026
               </p>
               <div className="cl-mono" style={{ color: window.CL.inkSoft, marginTop: 8 }}>Distribution: Coursera · Book · E-book</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Countdown ──────────────────────────────────────── */}
-      <section id="countdown" style={{ padding: secPad, background: window.CL.blueprint, color: window.CL.paper, borderBottom: `1.5px solid ${window.CL.ink}` }}>
-        <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid rgba(245,239,226,.4)`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
-            <div className="cl-mono" style={{ color: window.CL.signal }}>§ — Countdown</div>
-            <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)' }}>What's building</div>
-          </div>
-
-          <div className="cl-grid-2" style={{ gap: isMobile ? 40 : 80, marginBottom: 64 }}>
-            <div>
-              <h2 style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.025em', margin: 0, textWrap: 'balance' }}>
-                Every letter,<br /><em style={{ color: window.CL.signal }}>in motion.</em>
-              </h2>
-              <p style={{ fontFamily: window.CL.serif, fontSize: 16, lineHeight: 1.6, color: 'rgba(245,239,226,.75)', marginTop: 20, textWrap: 'pretty' }}>
-                Track the progress of each dimension of our mission. Hover the letters to see what they stand for.
-              </p>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-              {letterProgress.map(function(lt) {
-                return (
-                  <div key={lt.l} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                    <div className="cl-tooltip-wrap" style={{ width: 28, flexShrink: 0, textAlign: 'center' }}>
-                      <span style={{ fontFamily: window.CL.display, fontSize: 22, fontWeight: 500, color: window.CL.paper }}>{lt.l}</span>
-                      {lt.word && <div className="cl-tooltip">{lt.word}</div>}
-                    </div>
-                    <div style={{ flex: 1, height: 8, background: 'rgba(245,239,226,.15)', borderRadius: 8, overflow: 'hidden' }}>
-                      <div style={{ height: '100%', width: lt.pct+'%', background: window.CL.signal, borderRadius: 8 }} />
-                    </div>
-                    <span className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', width: 36, textAlign: 'right', fontSize: 10 }}>{lt.pct}%</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Topics */}
-          <div style={{ borderTop: `1px solid rgba(245,239,226,.2)`, paddingTop: 40, marginBottom: 48 }}>
-            <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 24 }}>UPCOMING TOPICS</div>
-            <div className="cl-grid-3" style={{ gap: isMobile ? 16 : 20 }}>
-              {countdownTopics.map(function(t, i) {
-                return (
-                  <div key={i} style={{ border: `1px solid rgba(245,239,226,.2)`, padding: '18px 16px', display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                    <span className="cl-mono" style={{ color: window.CL.signal, flexShrink: 0 }}>{String(i+1).padStart(2,'0')}</span>
-                    <span style={{ fontFamily: window.CL.serif, fontSize: 15, color: 'rgba(245,239,226,.85)', lineHeight: 1.4 }}>{t}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Partner logos */}
-          <div style={{ borderTop: `1px solid rgba(245,239,226,.2)`, paddingTop: 40, marginBottom: 48 }}>
-            <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 24 }}>PARTNER INSTITUTIONS</div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16 }}>
-              {partners.map(function(p) {
-                return (
-                  <div key={p.name} style={{ border: `1px solid rgba(245,239,226,.25)`, padding: '12px 20px', display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <span style={{ fontFamily: window.CL.display, fontSize: 16, fontWeight: 500, color: window.CL.paper }}>{p.name}</span>
-                    <span style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 12, color: 'rgba(245,239,226,.5)' }}>{p.dept}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Donate CTA */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
-            <p style={{ fontFamily: window.CL.serif, fontSize: 16, color: 'rgba(245,239,226,.75)', margin: 0, flex: 1, textWrap: 'pretty' }}>
-              Every program runs on donor support. Help us build the bridge.
-            </p>
-            <a href="Donate.html"
-              style={{ flexShrink: 0, padding: '14px 28px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.22em', textTransform: 'uppercase' }}>
-              Donate →
-            </a>
+            </button>
+            {showMicroModal && <MicroDoseModal onClose={function() { setShowMicroModal(false); }} />}
           </div>
         </div>
       </section>
@@ -410,7 +472,7 @@ function Programs() {
 
             {/* Funding thermometer */}
             <div>
-              <Thermometer label="WORDRX PRODUCTION FUND" raised="$xx,xxx" goal="$20,000" pct={0} note="FILMING DEC 2026 · BELLEAIR, FL" />
+              <Thermometer label="WORDRX PRODUCTION FUND" raised="$xx,xxx" goal="$16,000" pct={0} note="FILMING DEC 2026 · BELLEAIR, FL" />
             </div>
           </div>
 
@@ -432,7 +494,7 @@ function Programs() {
             <div>
               <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 20 }}>PRODUCTION BUDGET ALLOCATION</div>
               <div style={{ background: 'rgba(245,239,226,.06)', border: `1px solid rgba(245,239,226,.15)`, padding: '28px 24px' }}>
-                <PieChart slices={wordrxPie} size={120} />
+                <DonutChart budget={wordrxBudget} total={wordrxTotal} />
               </div>
             </div>
           </div>
