@@ -4,12 +4,22 @@
 function Mission({ preview = false }) {
   const isMobile = useIsMobile();
 
-  const partners = [
-    'Harvard University', 'Cornell University', 'Columbia University',
-    'Johns Hopkins University', 'University of Toronto',
-    'Harvard University', 'Cornell University', 'Columbia University',
-    'Johns Hopkins University', 'University of Toronto',
+  const partnerLogos = [
+    { name: 'Arizona State University',           src: 'site/assets/asu.webp' },
+    { name: 'University of Pennsylvania',         src: 'site/assets/penn.jpg' },
+    { name: 'CAMH',                               src: 'site/assets/camh_edited.jpg' },
+    { name: 'Cornell University',                 src: 'site/assets/cornell.png' },
+    { name: 'Harvard University',                 src: 'site/assets/harvard.png' },
+    { name: 'Johns Hopkins University',           src: 'site/assets/johns.jpg' },
+    { name: 'Mississippi State University',       src: 'site/assets/missisipi state.png' },
+    { name: 'McGill University',                  src: 'site/assets/mcgill.jpg' },
+    { name: 'University of Pittsburgh',           src: 'site/assets/up.png' },
+    { name: 'UPMC',                               src: 'site/assets/upmc.png' },
+    { name: 'LECOM',                              src: 'site/assets/lecom.jpeg' },
+    { name: 'University of Toronto',              src: 'site/assets/unit.png' },
   ];
+  // duplicate for seamless marquee loop
+  const logoTrack = [...partnerLogos, ...partnerLogos, ...partnerLogos];
 
   return (
     <section id="about" style={{ padding: isMobile ? '72px 0' : '120px 0', borderBottom: `1px solid ${window.CL.rule}`, position: 'relative' }} className="cl-page-grid">
@@ -27,16 +37,22 @@ function Mission({ preview = false }) {
           </p>
         </div>
 
-        {/* 2 — Partner carousel */}
+        {/* 2 — Partner logo carousel */}
         <div style={{ borderTop: `1.5px solid ${window.CL.ink}`, borderBottom: `1.5px solid ${window.CL.ink}`, overflow: 'hidden', position: 'relative', marginBottom: isMobile ? 36 : 52 }}>
           <div className="cl-mono" style={{ color: window.CL.inkSoft, padding: '10px 0', marginBottom: 4, fontSize: 10 }}>PARTNER INSTITUTIONS</div>
-          <div style={{ overflow: 'hidden', paddingBottom: 16 }}>
-            <div className="cl-carousel-track" style={{ display: 'flex', gap: 48, width: 'max-content', alignItems: 'center' }}>
-              {partners.map((p, i) => (
-                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: 6, background: window.CL.signal, flexShrink: 0 }} />
-                  <span style={{ fontFamily: window.CL.display, fontSize: 18, fontWeight: 500, letterSpacing: '-0.01em', color: window.CL.ink, whiteSpace: 'nowrap' }}>{p}</span>
-                </div>
+          <div style={{ overflow: 'hidden', paddingBottom: 20 }}>
+            <div className="cl-carousel-track" style={{ display: 'flex', gap: 52, width: 'max-content', alignItems: 'center' }}>
+              {logoTrack.map((logo, i) => (
+                <img
+                  key={i}
+                  src={logo.src}
+                  alt={logo.name}
+                  title={logo.name}
+                  style={{ height: 38, width: 'auto', display: 'block', flexShrink: 0, filter: 'grayscale(100%) opacity(55%)', transition: 'filter .2s', maxWidth: 140 }}
+                  onMouseEnter={function(e) { e.currentTarget.style.filter = 'grayscale(0%) opacity(100%)'; }}
+                  onMouseLeave={function(e) { e.currentTarget.style.filter = 'grayscale(100%) opacity(55%)'; }}
+                  onError={function(e) { e.currentTarget.style.display = 'none'; }}
+                />
               ))}
             </div>
           </div>

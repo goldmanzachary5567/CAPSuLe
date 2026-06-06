@@ -131,8 +131,8 @@ function DonutChart({ budget, total }) {
   );
 }
 
-// MicroDose course preview modal — CAPSuLe framework tracker.
-function MicroDoseModal({ onClose }) {
+// MicroDose course framework tracker — embedded inline, no modal.
+function MicroDoseTracker() {
   var isMobile = useIsMobile();
   var [hovered, setHovered] = React.useState(null);
   var [fillIndices, setFillIndices] = React.useState([]);
@@ -181,20 +181,13 @@ function MicroDoseModal({ onClose }) {
   var stageH = CARD_H + (N - 1) * STEP_Y;           // 208
   var activeChapter = hovered !== null ? chapters[hovered] : null;
 
-  // Scale stair to fit modal content area (~660px desktop, narrower mobile)
-  var contentW = isMobile ? Math.max(280, window.innerWidth - 48) : 660;
+  // Scale stair to fit available content width
+  var contentW = isMobile ? Math.max(280, window.innerWidth - 64) : Math.min(720, window.innerWidth - 160);
   var scale = Math.min(1, contentW / stageNativeW);
 
   return (
-    <div onClick={function(e) { if (e.target === e.currentTarget) onClose(); }}
-      style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? 12 : 24, background: 'rgba(5,10,20,.92)', backdropFilter: 'blur(6px)' }}>
-      <div style={{ background: '#0d1b3e', maxWidth: 740, width: '100%', maxHeight: '94vh', overflowY: 'auto', position: 'relative', borderRadius: 14, border: '1px solid rgba(255,255,255,0.08)' }}>
-        <button onClick={onClose}
-          style={{ position: 'sticky', top: 0, float: 'right', zIndex: 10, padding: '10px 18px', background: 'rgba(255,255,255,0.08)', color: '#f0ece4', fontFamily: '"JetBrains Mono",monospace', fontSize: 11, letterSpacing: '.18em', cursor: 'pointer', border: 'none', borderBottomLeftRadius: 10 }}>
-          CLOSE ×
-        </button>
-
-        <div style={{ padding: isMobile ? '28px 16px 40px' : '36px 40px 52px', clear: 'right' }}>
+    <div style={{ background: '#0d1b3e', borderRadius: 14, border: '1px solid rgba(255,255,255,0.08)', overflow: 'hidden', width: '100%' }}>
+        <div style={{ padding: isMobile ? '28px 16px 40px' : '36px 40px 52px' }}>
           {/* Header */}
           <div style={{ textAlign: 'center', marginBottom: 28 }}>
             <span style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#e8197a', display: 'block', marginBottom: 8 }}>
@@ -307,7 +300,6 @@ function MicroDoseModal({ onClose }) {
             )}
           </div>
         </div>
-      </div>
     </div>
   );
 }
@@ -316,7 +308,6 @@ function Programs() {
   var isMobile = useIsMobile();
   var pad = isMobile ? '0 20px' : '0 32px';
   var secPad = isMobile ? '64px 0' : '100px 0';
-  var [showMicroModal, setShowMicroModal] = React.useState(false);
 
   var partners = [
     { name: 'Harvard University',       dept: 'Medical School affiliations' },
@@ -436,23 +427,33 @@ function Programs() {
               </p>
             </div>
 
-            {/* Course preview — opens modal */}
-            <button
-              onClick={function() { setShowMicroModal(true); }}
-              style={{ border: `1.5px solid ${window.CL.ink}`, padding: '40px 28px', background: window.CL.paperWarm, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', gap: 16, cursor: 'pointer', width: '100%', transition: 'background .2s' }}
-              onMouseEnter={function(e) { e.currentTarget.style.background = window.CL.paper; }}
-              onMouseLeave={function(e) { e.currentTarget.style.background = window.CL.paperWarm; }}
-            >
-              <div className="cl-mono" style={{ color: window.CL.signal }}>COURSE PREVIEW</div>
-              <div style={{ fontFamily: window.CL.display, fontSize: 22, fontWeight: 500, color: window.CL.ink, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
-                Preview the course<br />curriculum →
+            {/* Course info card */}
+            <div style={{ border: `1.5px solid ${window.CL.ink}`, padding: '28px 24px', background: window.CL.paperWarm }}>
+              <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 18 }}>ABOUT THIS COURSE</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {[
+                  { k: 'Format',       v: '5-min micro-modules' },
+                  { k: 'Chapters',     v: '7 · C A P S u L e' },
+                  { k: 'Modules',      v: '315 total · 45 per chapter' },
+                  { k: 'Courses',      v: 'Parents · Teachers · Coaches' },
+                  { k: 'Distribution', v: 'Coursera · Book · E-book' },
+                  { k: 'Launch',       v: 'December 1, 2026' },
+                ].map(function(r) {
+                  return (
+                    <div key={r.k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, borderBottom: `1px solid ${window.CL.rule}`, paddingBottom: 10 }}>
+                      <span className="cl-mono" style={{ color: window.CL.inkSoft }}>{r.k}</span>
+                      <span style={{ fontFamily: window.CL.serif, fontSize: 15, color: window.CL.ink, textAlign: 'right' }}>{r.v}</span>
+                    </div>
+                  );
+                })}
               </div>
-              <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 15, color: window.CL.inkSoft, margin: 0 }}>
-                Live countdown to launch · All 7 course modules · September 18, 2026
-              </p>
-              <div className="cl-mono" style={{ color: window.CL.inkSoft, marginTop: 8 }}>Distribution: Coursera · Book · E-book</div>
-            </button>
-            {showMicroModal && <MicroDoseModal onClose={function() { setShowMicroModal(false); }} />}
+            </div>
+          </div>
+
+          {/* Inline framework tracker */}
+          <div style={{ marginTop: 48 }}>
+            <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 16 }}>COURSE FRAMEWORK · HOVER ANY LETTER TO EXPLORE</div>
+            <MicroDoseTracker />
           </div>
         </div>
       </section>
@@ -553,14 +554,21 @@ function Programs() {
 
           {/* Poster / elevator pitch placeholder + pie chart */}
           <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, borderTop: `1px solid rgba(245,239,226,.2)`, paddingTop: 48 }}>
-            {/* Film poster */}
+            {/* Film poster + elevator pitch */}
             <div>
               <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 16 }}>FILM POSTER & ELEVATOR PITCH</div>
-              <img
-                src="site/assets/WORDRX%20POSTER%20EP.png"
-                alt="WordRx — Film Poster"
-                style={{ width: '100%', display: 'block', borderRadius: 4, border: '1px solid rgba(245,239,226,.15)' }}
-              />
+              {/* Poster cropped to remove pill pile at bottom */}
+              <div style={{ overflow: 'hidden', borderRadius: 4, border: '1px solid rgba(245,239,226,.15)', marginBottom: 24 }}>
+                <img
+                  src="site/assets/WORDRX%20POSTER.png"
+                  alt="WordRx — Film Poster"
+                  style={{ width: '100%', display: 'block', marginBottom: '-36%' }}
+                />
+              </div>
+              {/* Elevator pitch */}
+              <p style={{ fontFamily: window.CL.serif, fontSize: 15, lineHeight: 1.7, color: 'rgba(245,239,226,.72)', margin: 0, textWrap: 'pretty' }}>
+                Every single one of us carries a prescription in our pocket: our words. In WordRx, we'll prove that language is a potent therapeutic lever by exploring how words interact with individual minds to shape physiological change. Just like a clinician considers prescription and dosage based on individual factors, we must orient words toward the characteristics of the receiver, because what heals one soul can harm another. By blending raw stories and insights from behavioral neuroscience, we'll show that we're all practitioners of health. Viewers will walk away as newly trained linguistic pharmacists, understanding how we can shape prescriptions for the people in front of us to prompt more resilient health, whether we don a white coat or not.
+              </p>
             </div>
 
             {/* Pie chart */}
