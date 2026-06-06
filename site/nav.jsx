@@ -71,6 +71,7 @@ function NavBar() {
           <div style={{ display: 'none', alignItems: 'center', gap: 10 }}>
             <BrandCapsule size={30} color={window.CL.signal} />
             <Wordmark size={20} />
+            </a>
           </div>
         </div>
       </header>
