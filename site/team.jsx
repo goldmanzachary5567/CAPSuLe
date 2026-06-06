@@ -1,8 +1,9 @@
 // Team and Board components for the About page.
 
-function TeamPhoto({ name, src }) {
+function TeamPhoto({ name, src, objPos }) {
   var [err, setErr] = React.useState(false);
   var initials = name.split(' ').slice(0,2).map(function(w){ return w[0]; }).join('').toUpperCase();
+  var pos = objPos || '50% 15%';
   if (err || !src) {
     return (
       <div style={{
@@ -19,7 +20,7 @@ function TeamPhoto({ name, src }) {
   }
   return (
     <img src={src} alt={name}
-      style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', objectPosition: 'top center', borderRadius: 4, flexShrink: 0, display: 'block' }}
+      style={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', objectPosition: pos, borderRadius: 4, flexShrink: 0, display: 'block' }}
       onError={function(){ setErr(true); }}
     />
   );
@@ -71,60 +72,70 @@ function TeamSection() {
       role: 'Founder & Vision Director',
       bio: 'Nate is a PhD student in neuroscience and Team USA Bobsled athlete at McGill University. His mission is to translate neuroscience into practical tools for clinics and communities around the world.',
       photo: 'site/assets/Nate%20headshot.png',
+      objPos: '50% 10%',
     },
     {
       name: 'Keton Johnson',
       role: 'President & Community Connection Director',
       bio: 'Keton is a pre-med graduate at Seattle Pacific University. She is driven to provide thoughtful, compassionate, patient-centered care.',
       photo: 'site/assets/keton%20headshot.jpg',
+      objPos: '50% 10%',
     },
     {
       name: 'Emily Smith Ph.D',
       role: 'Director of Narrative Translation',
       bio: 'Emily is a postdoctoral research fellow at the Centre for Addiction and Mental Health. She is passionate about applying her expertise in the brain–body connection to support mental and physical well-being across the lifespan.',
       photo: 'site/assets/emily%20headshot.jpg',
+      objPos: '50% 10%',
     },
     {
       name: 'Gabriella Cha',
       role: 'Director of Digital Product Design',
       bio: 'Gabriella is an undergraduate student in biochemistry and neuroscience at McGill University. She is passionate about exploring the neuroscience of addiction and aspires to pursue a medical career with a focus in neuroscience.',
       photo: 'site/assets/gabrielle%20headshot.jpg',
+      objPos: '50% 10%',
     },
     {
       name: 'Matt Shumway',
       role: 'Director of Clinical Integration',
       bio: 'Matt is a medical student at LECOM. He is dedicated to bridging the gap between complex clinical research and everyday wellness.',
       photo: 'site/assets/Matt%20bio%20pic.jpg',
+      objPos: '50% 5%',
     },
     {
       name: 'Nicole Ahsan',
       role: 'Director of Visual Narrative',
       bio: 'Nicole is a pre-med student in Film and Media Studies at Yale University. She strives to bridge the worlds of science and storytelling to make health information more accessible to diverse communities.',
       photo: 'site/assets/nicole%20headshot.JPG',
+      objPos: '50% 10%',
     },
     {
       name: 'Lyra Tiffin',
       role: 'Director of Narrative Dissemination',
       bio: 'Lyra is a pre-med student in Nutrition and Health Sciences at Pepperdine University. She hopes to integrate nutrition and medicine as a physician to improve health outcomes and support patient longevity.',
       photo: 'site/assets/lyra%20headshot.jpg',
+      objPos: '50% 55%',
     },
     {
       name: 'Curtis Roy',
       role: 'Growth Engineer',
       bio: 'Curtis is an undergraduate student in neuroscience at the University of Rochester. He is passionate about applying neuroscience to enhance human performance and better understand how the brain drives physical and mental potential.',
       photo: 'site/assets/curtis%20headshot.jpg',
+      objPos: '50% 10%',
     },
     {
       name: 'Zachary Goldman',
       role: 'Director of Implementation Strategy',
       bio: 'Zachary is a senior at the University of Alabama studying physics and conducting biophysics research through their Randall Research Scholars Program. As a founder of multiple nonprofits, he is passionate about bringing a quantitative, research-driven perspective to scientific engagement and community development.',
       photo: 'site/assets/Zach%20Goldman%20headshot%20%281%29.jpg',
+      objPos: '50% 10%',
     },
     {
       name: 'Avery Kirchmann',
       role: 'Director of Operations and Production Logistics',
       bio: 'Avery leads operations and production logistics for CAPSuLe, ensuring every program runs with precision and purpose.',
       photo: 'site/assets/avery%20headshot.jpg',
+      objPos: '50% 10%',
     },
     {
       name: 'Johanna Kunz',
@@ -189,7 +200,7 @@ function TeamSection() {
                       <div className="cl-mono" style={{ color: window.CL.signal }}>Coming Soon</div>
                     </div>
                   ) : (
-                    <TeamPhoto name={m.name} src={m.photo} />
+                    <TeamPhoto name={m.name} src={m.photo} objPos={m.objPos} />
                   )}
                   <div>
                     <div style={{ fontFamily: window.CL.display, fontSize: 18, fontWeight: 500, letterSpacing: '-0.01em', color: window.CL.ink, marginBottom: 4 }}>{m.name}</div>
@@ -215,7 +226,7 @@ function TeamSection() {
             {board.map(function(m) {
               return (
                 <div key={m.name} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                  <TeamPhoto name={m.name} src={m.photo} />
+                  <TeamPhoto name={m.name} src={m.photo} objPos={m.objPos} />
                   <div>
                     <div style={{ fontFamily: window.CL.display, fontSize: 18, fontWeight: 500, letterSpacing: '-0.01em', color: window.CL.ink, marginBottom: 4 }}>{m.name}</div>
                     <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 8, fontSize: 10 }}>{m.role}</div>

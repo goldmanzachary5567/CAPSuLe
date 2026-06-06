@@ -131,105 +131,180 @@ function DonutChart({ budget, total }) {
   );
 }
 
-// MicroDose course launch modal with live countdown.
+// MicroDose course preview modal — CAPSuLe framework tracker.
 function MicroDoseModal({ onClose }) {
   var isMobile = useIsMobile();
-  var [timeLeft, setTimeLeft] = React.useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  var [hovered, setHovered] = React.useState(null);
+  var [fillIndices, setFillIndices] = React.useState([]);
 
-  React.useEffect(function() {
-    var launch = new Date('2026-09-18T00:00:00');
-    function tick() {
-      var diff = launch - new Date();
-      if (diff <= 0) { setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 }); return; }
-      setTimeLeft({
-        days:    Math.floor(diff / 86400000),
-        hours:   Math.floor((diff % 86400000) / 3600000),
-        minutes: Math.floor((diff % 3600000)  / 60000),
-        seconds: Math.floor((diff % 60000)    / 1000),
-      });
-    }
-    tick();
-    var id = setInterval(tick, 1000);
-    return function() { clearInterval(id); };
-  }, []);
-
-  var modules = [
-    { l: 'C', full: 'Child',         desc: 'Child-centered development — the science of how young people grow',                pct: 10 },
-    { l: 'A', full: 'Adolescent',    desc: 'Adolescent neuroscience — brain development and behavioral implications',            pct: 10 },
-    { l: 'P', full: 'Performance',   desc: 'Performance science — how environment shapes outcomes in school and sport',          pct: 10 },
-    { l: 'S', full: 'Science',       desc: 'Science translation — turning research into practical, actionable guidance',         pct: 10 },
-    { l: 'u', full: 'Understanding', desc: 'Understanding communication — language as a tool for connection and healing',        pct: 10 },
-    { l: 'L', full: 'Laboratory',    desc: 'Lab to life — bringing clinical-grade rigor into everyday home and classroom use',   pct: 10 },
-    { l: 'e', full: 'Evidence',      desc: 'Evidence-based outcomes — measuring what matters for children and families',         pct: 10 },
+  var chapters = [
+    { letter: 'C', color: '#00c8f8', progress: 7,  name: 'Cognition & Learning',   tagline: 'How children think, remember, focus, and build knowledge',
+      breakdown: [{ name: 'Expert Wishlist', val: 'Being built — 3 rows/member/week' }, { name: 'Module Topics', val: 'Memory, attention, executive function, language, metacognition' }, { name: 'Target Audience', val: 'Parents, Teachers, Coaches' }, { name: 'Status', val: 'Outreach launching — LinkedIn & email' }, { name: 'Goal', val: '15 expert clips × 3 course versions = 45 doses' }, { name: 'Course Format', val: '60s Expert + 60s Translation + 3min Recipe' }] },
+    { letter: 'A', color: '#e8412a', progress: 5,  name: 'Athleticism & Movement',  tagline: 'Physical literacy, motor development, and the science of sport',
+      breakdown: [{ name: 'Expert Wishlist', val: 'Being built — 3 rows/member/week' }, { name: 'Module Topics', val: 'Motor milestones, sports specialization, physical literacy, recovery' }, { name: 'Target Audience', val: 'Coaches & youth sport staff (primary), Parents' }, { name: 'Status', val: 'Wishlist seeding in progress' }, { name: 'Goal', val: 'Ideal expert: published clinician/scientist + public presence' }, { name: 'Course Format', val: '60s Expert + 60s Translation + 3min Recipe' }] },
+    { letter: 'P', color: '#e8197a', progress: 4,  name: 'Physical Existence',       tagline: 'Nutrition, sleep, puberty, and the biology of a growing body',
+      breakdown: [{ name: 'Expert Wishlist', val: 'Being built — 3 rows/member/week' }, { name: 'Module Topics', val: 'Puberty, nutrition, gut health, sleep science, chronic illness' }, { name: 'Target Audience', val: 'Parents & Caregivers (primary), Teachers' }, { name: 'Status', val: 'Outreach begins as spreadsheet fills' }, { name: 'Goal', val: 'Close 33% of wishlist → 105 experts total across all chapters' }, { name: 'Course Format', val: '60s Expert + 60s Translation + 3min Recipe' }] },
+    { letter: 'S', color: '#9b3fd4', progress: 3,  name: 'Spiritual Existence',      tagline: 'Purpose, meaning, identity formation, and values in youth',
+      breakdown: [{ name: 'Expert Wishlist', val: 'Being built — 3 rows/member/week' }, { name: 'Module Topics', val: 'Identity development, moral reasoning, meaning-making, awe' }, { name: 'Target Audience', val: 'Parents, Teachers, Coaches' }, { name: 'Status', val: 'Early planning — expert wishlist being seeded' }, { name: 'Goal', val: 'Most underrepresented domain in conventional child dev curricula' }, { name: 'Course Format', val: '60s Expert + 60s Translation + 3min Recipe' }] },
+    { letter: 'U', color: '#2d5be8', progress: 6,  name: 'Universal Needs',         tagline: "What every child requires to thrive — safety, belonging, autonomy",
+      breakdown: [{ name: 'Expert Wishlist', val: 'Being built — 3 rows/member/week' }, { name: 'Module Topics', val: 'Self-determination theory, poverty & adversity, trauma-informed care' }, { name: 'Target Audience', val: 'Teachers & school staff (primary), Coaches' }, { name: 'Status', val: 'Active wishlist — outreach launching in parallel' }, { name: 'Goal', val: 'TEDx preview Sept 18 — 2 letters fully LIVE' }, { name: 'Course Format', val: '60s Expert + 60s Translation + 3min Recipe' }] },
+    { letter: 'L', color: '#f5c800', progress: 9,  name: 'Love & Attachment',       tagline: 'Bonding, secure base theory, and the relational roots of resilience',
+      breakdown: [{ name: 'Expert Wishlist', val: 'Being built — furthest along of all 7 chapters' }, { name: 'Module Topics', val: 'Attachment styles, co-regulation, parenting warmth, peer relationships' }, { name: 'Target Audience', val: 'Parents & Caregivers (primary), Teachers' }, { name: 'Status', val: 'Video translations begin Aug 23 (Nate & Keton)' }, { name: 'Goal', val: 'Narrative translations (Emily, Avery, Zach) begin Aug 30' }, { name: 'Course Format', val: '60s Expert + 60s Translation + 3min Recipe' }] },
+    { letter: 'E', color: '#f07800', progress: 5,  name: 'Emotion & Stress',        tagline: 'Emotional regulation, anxiety, dysregulation, and stress science',
+      breakdown: [{ name: 'Expert Wishlist', val: 'Being built — 3 rows/member/week' }, { name: 'Module Topics', val: 'Polyvagal theory, co-regulation, anxiety in youth, emotion coaching' }, { name: 'Target Audience', val: 'Parents, Teachers, Coaches' }, { name: 'Status', val: 'Outreach launching — LinkedIn primary channel' }, { name: 'Goal', val: 'Full MicroDose course goes LIVE December 1, 2026' }, { name: 'Course Format', val: '60s Expert + 60s Translation + 3min Recipe' }] },
   ];
 
+  // Inject fonts + wave CSS keyframes once
+  React.useEffect(function() {
+    var styleId = 'md-modal-css';
+    if (!document.getElementById(styleId)) {
+      var s = document.createElement('style');
+      s.id = styleId;
+      s.textContent = '@keyframes md-sl1{0%,100%{transform:translateX(0)}50%{transform:translateX(-25%)}} @keyframes md-sl2{0%,100%{transform:translateX(-20%)}50%{transform:translateX(0)}} .md-w1{animation:md-sl1 3s ease-in-out infinite;position:absolute;top:-7px;left:0;width:200%;height:14px} .md-w2{animation:md-sl2 3.6s ease-in-out infinite;opacity:0.5;position:absolute;top:-4px;left:0;width:200%;height:10px}';
+      document.head.appendChild(s);
+    }
+    var linkId = 'md-fonts';
+    if (!document.getElementById(linkId)) {
+      var l = document.createElement('link');
+      l.id = linkId; l.rel = 'stylesheet';
+      l.href = 'https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap';
+      document.head.appendChild(l);
+    }
+    chapters.forEach(function(ch, i) {
+      setTimeout(function() { setFillIndices(function(prev) { return prev.concat([i]); }); }, 350 + i * 140);
+    });
+  }, []);
+
+  var CARD_W = 82, CARD_H = 100, GAP_X = 14, STEP_Y = 18;
+  var N = chapters.length;
+  var stageNativeW = N * CARD_W + (N - 1) * GAP_X; // 658
+  var stageH = CARD_H + (N - 1) * STEP_Y;           // 208
+  var activeChapter = hovered !== null ? chapters[hovered] : null;
+
+  // Scale stair to fit modal content area (~660px desktop, narrower mobile)
+  var contentW = isMobile ? Math.max(280, window.innerWidth - 48) : 660;
+  var scale = Math.min(1, contentW / stageNativeW);
+
   return (
-    <div
-      onClick={function(e) { if (e.target === e.currentTarget) onClose(); }}
-      style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? 16 : 32, background: 'rgba(11,27,38,.84)', backdropFilter: 'blur(4px)' }}
-    >
-      <div style={{ background: window.CL.paper, maxWidth: 760, width: '100%', maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
-        <button
-          onClick={onClose}
-          style={{ position: 'sticky', top: 0, float: 'right', zIndex: 10, padding: '12px 18px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.18em', cursor: 'pointer', border: 'none' }}
-        >CLOSE ×</button>
+    <div onClick={function(e) { if (e.target === e.currentTarget) onClose(); }}
+      style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? 12 : 24, background: 'rgba(5,10,20,.92)', backdropFilter: 'blur(6px)' }}>
+      <div style={{ background: '#0d1b3e', maxWidth: 740, width: '100%', maxHeight: '94vh', overflowY: 'auto', position: 'relative', borderRadius: 14, border: '1px solid rgba(255,255,255,0.08)' }}>
+        <button onClick={onClose}
+          style={{ position: 'sticky', top: 0, float: 'right', zIndex: 10, padding: '10px 18px', background: 'rgba(255,255,255,0.08)', color: '#f0ece4', fontFamily: '"JetBrains Mono",monospace', fontSize: 11, letterSpacing: '.18em', cursor: 'pointer', border: 'none', borderBottomLeftRadius: 10 }}>
+          CLOSE ×
+        </button>
 
-        <div style={{ padding: isMobile ? '28px 20px 40px' : '40px 40px 52px', clear: 'right' }}>
-          <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 12 }}>PRX-MICRO · COURSE PREVIEW</div>
-          <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 38 : 56, fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 10 }}>
-            Micro<em style={{ color: window.CL.signal }}>Dose</em>
-          </div>
-          <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 17, color: window.CL.inkSoft, margin: '0 0 36px' }}>
-            Science-based courses for the people raising the next generation.
-          </p>
-
-          {/* Live countdown */}
-          <div style={{ background: window.CL.ink, color: window.CL.paper, padding: isMobile ? '24px 20px' : '28px 32px', marginBottom: 40 }}>
-            <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 18 }}>COURSE LAUNCH — SEPTEMBER 18, 2026</div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'rgba(245,239,226,.15)' }}>
-              {[{ v: timeLeft.days, l: 'DAYS' }, { v: timeLeft.hours, l: 'HOURS' }, { v: timeLeft.minutes, l: 'MIN' }, { v: timeLeft.seconds, l: 'SEC' }].map(function(unit) {
-                return (
-                  <div key={unit.l} style={{ background: window.CL.ink, padding: isMobile ? '16px 8px' : '22px 16px', textAlign: 'center' }}>
-                    <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 38 : 60, fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1, color: window.CL.paper }}>
-                      {String(unit.v).padStart(2, '0')}
-                    </div>
-                    <div className="cl-mono" style={{ color: 'rgba(245,239,226,.4)', marginTop: 8 }}>{unit.l}</div>
-                  </div>
-                );
-              })}
+        <div style={{ padding: isMobile ? '28px 16px 40px' : '36px 40px 52px', clear: 'right' }}>
+          {/* Header */}
+          <div style={{ textAlign: 'center', marginBottom: 28 }}>
+            <span style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.68rem', fontWeight: 700, letterSpacing: '0.22em', textTransform: 'uppercase', color: '#e8197a', display: 'block', marginBottom: 8 }}>
+              MicroDose Series · CAPSuLe
+            </span>
+            <div style={{ fontFamily: '"Bebas Neue",sans-serif', fontSize: 'clamp(1.8rem,4.5vw,2.8rem)', letterSpacing: '0.05em', color: '#fff', lineHeight: 1, marginBottom: 6 }}>
+              The <span style={{ color: '#5ba8c4' }}>Framework</span>
             </div>
+            <p style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.9rem', color: '#7a9ab8', fontWeight: 400, margin: 0 }}>
+              7 chapters · 15 modules each · 3 courses · Hover any letter to explore
+            </p>
           </div>
 
-          {/* Course modules — CAPSuLe acronym */}
-          <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 20 }}>COURSE MODULES — CONTENT IN DEVELOPMENT</div>
-          <div style={{ borderTop: `1.5px solid ${window.CL.ink}` }}>
-            {modules.map(function(mod) {
+          {/* Stair stage */}
+          <div style={{ position: 'relative', width: stageNativeW * scale, height: stageH * scale, margin: '0 auto 32px', transformOrigin: 'top left' }}>
+            {chapters.map(function(ch, i) {
+              var isHov = hovered === i;
+              var isFilled = fillIndices.indexOf(i) !== -1;
               return (
-                <div key={mod.l} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '210px 1fr', gap: isMobile ? 6 : 28, padding: '20px 0', borderBottom: `1px solid ${window.CL.rule}`, alignItems: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                    <span style={{ fontFamily: window.CL.display, fontSize: isMobile ? 36 : 44, fontWeight: 500, color: window.CL.signal, lineHeight: 1, minWidth: 32 }}>{mod.l}</span>
-                    <div style={{ flex: 1 }}>
-                      <div style={{ fontFamily: window.CL.display, fontSize: 19, fontWeight: 500, letterSpacing: '-0.01em', color: window.CL.ink, marginBottom: 6 }}>{mod.full}</div>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                        <div style={{ flex: 1, height: 3, background: window.CL.rule, borderRadius: 3, overflow: 'hidden' }}>
-                          <div style={{ height: '100%', width: mod.pct + '%', background: window.CL.signal, borderRadius: 3 }} />
-                        </div>
-                        <span className="cl-mono" style={{ color: window.CL.inkSoft, fontSize: 9 }}>{mod.pct}%</span>
-                      </div>
-                    </div>
+                <div key={ch.letter}
+                  onMouseEnter={function() { setHovered(i); }}
+                  onMouseLeave={function() { setHovered(null); }}
+                  style={{
+                    position: 'absolute',
+                    left: i * (CARD_W + GAP_X) * scale,
+                    top:  i * STEP_Y * scale,
+                    width: CARD_W * scale,
+                    height: CARD_H * scale,
+                    cursor: 'pointer', borderRadius: 11, overflow: 'hidden',
+                    border: '2px solid ' + ch.color + (isHov ? 'cc' : '38'),
+                    boxShadow: isHov ? '0 0 22px 4px '+ch.color+'55,0 8px 30px rgba(0,0,0,.5)' : '0 0 8px 0 '+ch.color+'22',
+                    transform: isHov ? 'scale(1.1) translateY(-5px)' : 'scale(1)',
+                    transition: 'box-shadow .22s,border-color .22s,transform .25s cubic-bezier(.34,1.56,.64,1)',
+                    zIndex: isHov ? 10 : 1,
+                  }}>
+                  <div style={{ position: 'absolute', inset: 0, background: '#0b1630' }} />
+                  {/* Water fill */}
+                  <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, borderRadius: '0 0 9px 9px', height: isFilled ? ch.progress + '%' : '0%', background: ch.color + '28', transition: 'height 1.3s cubic-bezier(.22,1,.36,1)', overflow: 'hidden' }}>
+                    <svg className="md-w1" viewBox="0 0 200 14" preserveAspectRatio="none">
+                      <path d="M0,7 C25,0 50,14 75,7 C100,0 125,14 150,7 C175,0 200,14 200,7 L200,14 L0,14 Z" fill={ch.color + 'bb'} />
+                    </svg>
+                    <svg className="md-w2" viewBox="0 0 200 10" preserveAspectRatio="none">
+                      <path d="M0,5 C30,0 60,10 90,5 C120,0 150,10 180,5 C190,2 200,8 200,5 L200,10 L0,10 Z" fill={ch.color + 'cc'} />
+                    </svg>
                   </div>
-                  <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 14, color: window.CL.inkSoft, margin: 0, lineHeight: 1.55 }}>{mod.desc}</p>
+                  {/* Glyph */}
+                  <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', zIndex: 3, gap: 2 }}>
+                    <span style={{ fontFamily: '"Bebas Neue",sans-serif', fontSize: 3.4 * scale + 'rem', lineHeight: 1, color: ch.color, textShadow: '0 2px 10px rgba(0,0,0,.6)' }}>{ch.letter}</span>
+                    <span style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.66rem', fontWeight: 600, color: 'rgba(255,255,255,.75)', letterSpacing: '.05em' }}>{ch.progress}%</span>
+                  </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Distribution note */}
-          <div style={{ marginTop: 32, padding: '20px 24px', background: window.CL.paperWarm, borderLeft: `3px solid ${window.CL.signal}` }}>
-            <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 8 }}>DISTRIBUTION</div>
-            <p style={{ fontFamily: window.CL.serif, fontSize: 15, color: window.CL.inkSoft, margin: 0, lineHeight: 1.55 }}>
-              MicroDose will be distributed via <strong style={{ color: window.CL.ink }}>Coursera</strong> alongside a formal book and e-book. Enrollment opens September 18, 2026.
-            </p>
+          {/* Panel zone */}
+          <div style={{ position: 'relative', minHeight: 220 }}>
+            {/* Default description */}
+            <div style={{ opacity: activeChapter ? 0 : 1, transition: 'opacity .22s', pointerEvents: activeChapter ? 'none' : 'auto', padding: '4px 0' }}>
+              <div style={{ fontFamily: '"Bebas Neue",sans-serif', fontSize: '1.35rem', letterSpacing: '0.1em', color: '#e0eaf5', marginBottom: 10 }}>What is MicroDose?</div>
+              <p style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.93rem', color: '#a8c4dc', fontWeight: 600, lineHeight: 1.75, maxWidth: 520, marginBottom: 14 }}>
+                MicroDose is CAPSuLe's flagship course — <strong style={{ color: '#d0e8f8', fontWeight: 700 }}>developmental science delivered in 5 minutes or less.</strong> Each module pairs a 60-second expert clip with a plain-language translation and a ready-to-use protocol. Three parallel courses serve: <strong style={{ color: '#d0e8f8', fontWeight: 700 }}>parents, teachers, and coaches.</strong>
+              </p>
+              <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 20 }}>
+                {['315 Modules','3 Courses','7 Chapters','105 Experts','Live Dec 1, 2026'].map(function(p) {
+                  return <span key={p} style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '4px 12px', borderRadius: 100, border: '1px solid rgba(255,255,255,.15)', color: '#7a9ab8' }}>{p}</span>;
+                })}
+              </div>
+              <a href="mailto:microdose@thecapsl.org"
+                style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '18px 24px', background: 'linear-gradient(135deg,#1a2f5a,#16264d)', border: '2px solid rgba(255,255,255,.15)', borderRadius: 14, color: '#fff', textDecoration: 'none', transition: 'all .2s' }}
+                onMouseEnter={function(e){ e.currentTarget.style.background='linear-gradient(135deg,#e8197a,#c8127a)'; e.currentTarget.style.borderColor='#e8197a'; }}
+                onMouseLeave={function(e){ e.currentTarget.style.background='linear-gradient(135deg,#1a2f5a,#16264d)'; e.currentTarget.style.borderColor='rgba(255,255,255,.15)'; }}
+              >
+                <span style={{ fontSize: '1.6rem' }}>🎙️</span>
+                <span style={{ flex: 1 }}>
+                  <span style={{ fontFamily: '"Bebas Neue",sans-serif', fontSize: '1.25rem', letterSpacing: '.06em', display: 'block', lineHeight: 1 }}>Are you — or do you know — a true expert?</span>
+                  <span style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.8rem', color: 'rgba(255,255,255,.6)' }}>We're looking for leading scientists & clinicians to contribute to MicroDose</span>
+                </span>
+                <span style={{ fontSize: '1.4rem', color: 'rgba(255,255,255,.5)' }}>→</span>
+              </a>
+            </div>
+
+            {/* Hover panel */}
+            {activeChapter && (
+              <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', background: '#0b172f', border: '1px solid ' + activeChapter.color + '30', borderRadius: 14, padding: '20px 24px', boxShadow: '0 0 35px ' + activeChapter.color + '18,0 4px 24px rgba(0,0,0,.4)', transition: 'all .22s' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16, marginBottom: 16, paddingBottom: 14, borderBottom: '1px solid rgba(255,255,255,.06)' }}>
+                  <div style={{ fontFamily: '"Bebas Neue",sans-serif', fontSize: '2.8rem', lineHeight: 1, color: activeChapter.color, flexShrink: 0, width: 48, textAlign: 'center' }}>{activeChapter.letter}</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontFamily: '"Bebas Neue",sans-serif', fontSize: '1.45rem', letterSpacing: '.06em', color: '#fff', lineHeight: 1.1 }}>{activeChapter.name}</div>
+                    <div style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.88rem', color: '#7a9ab8', marginTop: 3 }}>{activeChapter.tagline}</div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
+                      <div style={{ flex: 1, height: 4, background: 'rgba(255,255,255,.08)', borderRadius: 100, overflow: 'hidden' }}>
+                        <div style={{ height: '100%', width: activeChapter.progress + '%', borderRadius: 100, background: 'linear-gradient(90deg,' + activeChapter.color + '88,' + activeChapter.color + ')', transition: 'width .9s cubic-bezier(.22,1,.36,1)' }} />
+                      </div>
+                      <span style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.72rem', color: '#7a9ab8', whiteSpace: 'nowrap' }}>{activeChapter.progress}% underway</span>
+                    </div>
+                  </div>
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: '8px 20px' }}>
+                  {activeChapter.breakdown.map(function(b) {
+                    return (
+                      <div key={b.name} style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                        <span style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.72rem', fontWeight: 600, letterSpacing: '.06em', textTransform: 'uppercase', color: 'rgba(255,255,255,.45)' }}>{b.name}</span>
+                        <span style={{ fontFamily: '"DM Sans",sans-serif', fontSize: '0.88rem', color: '#d0dff0', lineHeight: 1.45 }}>{b.val}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -478,16 +553,14 @@ function Programs() {
 
           {/* Poster / elevator pitch placeholder + pie chart */}
           <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, borderTop: `1px solid rgba(245,239,226,.2)`, paddingTop: 48 }}>
-            {/* Poster placeholder */}
+            {/* Film poster */}
             <div>
               <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 16 }}>FILM POSTER & ELEVATOR PITCH</div>
-              <div style={{ border: `1.5px dashed rgba(245,239,226,.3)`, padding: '48px 28px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 14, textAlign: 'center', minHeight: 240, background: 'rgba(245,239,226,.04)' }}>
-                <div className="cl-mono" style={{ color: 'rgba(245,239,226,.4)' }}>POSTER</div>
-                <div style={{ fontFamily: window.CL.display, fontStyle: 'italic', fontSize: 20, color: 'rgba(245,239,226,.4)' }}>Coming soon</div>
-                <p style={{ fontFamily: window.CL.serif, fontSize: 14, color: 'rgba(245,239,226,.4)', margin: 0, maxWidth: 280 }}>
-                  "A film about the words that heal — and the people who prescribe them."
-                </p>
-              </div>
+              <img
+                src="site/assets/WORDRX%20POSTER%20EP.png"
+                alt="WordRx — Film Poster"
+                style={{ width: '100%', display: 'block', borderRadius: 4, border: '1px solid rgba(245,239,226,.15)' }}
+              />
             </div>
 
             {/* Pie chart */}

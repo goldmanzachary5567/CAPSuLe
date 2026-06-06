@@ -19,44 +19,44 @@ function Mission({ preview = false }) {
           <div className="cl-mono" style={{ color: window.CL.inkSoft }}>501(c)(3) Nonprofit · Est. 2024</div>
         </div>
 
-        <div className="cl-grid-2" style={{ gap: isMobile ? 40 : 80, alignItems: 'flex-start' }}>
-          <div>
-            <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 14 }}>OUR MISSION</div>
-            <p style={{ fontFamily: window.CL.display, fontSize: isMobile ? 28 : 36, fontWeight: 500, lineHeight: 1.15, letterSpacing: '-0.02em', color: window.CL.ink, margin: 0, textWrap: 'pretty' }}>
-              To equip those who shape adolescent development with <em style={{ color: window.CL.signal }}>actionable insights</em> grounded in science.
-            </p>
-          </div>
+        {/* 1 — Big mission statement */}
+        <div style={{ marginBottom: isMobile ? 36 : 52 }}>
+          <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 16 }}>OUR MISSION</div>
+          <p style={{ fontFamily: window.CL.display, fontSize: isMobile ? 32 : 'clamp(36px,4vw,52px)', fontWeight: 500, lineHeight: 1.1, letterSpacing: '-0.025em', color: window.CL.ink, margin: 0, textWrap: 'pretty' }}>
+            To equip those who shape adolescent development with <em style={{ color: window.CL.signal }}>actionable insights</em> grounded in science.
+          </p>
+        </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-            <p style={{ fontFamily: window.CL.serif, fontSize: 18, lineHeight: 1.6, color: window.CL.ink, margin: 0, textWrap: 'pretty' }}>
-              We bring together researchers, clinicians, and community leaders to bridge disciplines and translate developmental research into meaningful practice. Together, we form a working alliance committed to advancing child and adolescent well-being through research, education, and public engagement.
-            </p>
-
-            {!preview && (
-              <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>
-                Our work spans documentary film, podcast, micro-courses, and a weekly research blog. Every format serves one goal: get the science to the people who can use it.
-              </p>
-            )}
-
-            {/* Partner institutions carousel */}
-            <div style={{ marginTop: 24, borderTop: `1.5px solid ${window.CL.ink}`, borderBottom: `1.5px solid ${window.CL.ink}`, overflow: 'hidden', position: 'relative' }}>
-              <div className="cl-mono" style={{ color: window.CL.inkSoft, padding: '10px 0', marginBottom: 4, fontSize: 10 }}>PARTNER INSTITUTIONS</div>
-              <div style={{ overflow: 'hidden', paddingBottom: 16 }}>
-                <div className="cl-carousel-track" style={{ display: 'flex', gap: 48, width: 'max-content', alignItems: 'center' }}>
-                  {partners.map((p, i) => (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
-                      <div style={{ width: 6, height: 6, borderRadius: 6, background: window.CL.signal, flexShrink: 0 }} />
-                      <span style={{ fontFamily: window.CL.display, fontSize: 18, fontWeight: 500, letterSpacing: '-0.01em', color: window.CL.ink, whiteSpace: 'nowrap' }}>{p}</span>
-                    </div>
-                  ))}
+        {/* 2 — Partner carousel */}
+        <div style={{ borderTop: `1.5px solid ${window.CL.ink}`, borderBottom: `1.5px solid ${window.CL.ink}`, overflow: 'hidden', position: 'relative', marginBottom: isMobile ? 36 : 52 }}>
+          <div className="cl-mono" style={{ color: window.CL.inkSoft, padding: '10px 0', marginBottom: 4, fontSize: 10 }}>PARTNER INSTITUTIONS</div>
+          <div style={{ overflow: 'hidden', paddingBottom: 16 }}>
+            <div className="cl-carousel-track" style={{ display: 'flex', gap: 48, width: 'max-content', alignItems: 'center' }}>
+              {partners.map((p, i) => (
+                <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10, flexShrink: 0 }}>
+                  <div style={{ width: 6, height: 6, borderRadius: 6, background: window.CL.signal, flexShrink: 0 }} />
+                  <span style={{ fontFamily: window.CL.display, fontSize: 18, fontWeight: 500, letterSpacing: '-0.01em', color: window.CL.ink, whiteSpace: 'nowrap' }}>{p}</span>
                 </div>
-              </div>
+              ))}
             </div>
-
-            {preview && (
-              <a href="About.html" className="cl-link cl-mono" style={{ color: window.CL.ink, alignSelf: 'flex-start' }}>LEARN MORE ABOUT US →</a>
-            )}
           </div>
+        </div>
+
+        {/* 3 — Body text */}
+        <div style={{ maxWidth: 820 }}>
+          <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 17 : 19, lineHeight: 1.65, color: window.CL.ink, margin: 0, textWrap: 'pretty' }}>
+            We bring together researchers, clinicians, and community leaders to bridge disciplines and translate developmental research into meaningful practice. Together, we form a working alliance committed to advancing child and adolescent well-being through research, education, and public engagement.
+          </p>
+
+          {!preview && (
+            <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: '20px 0 0', textWrap: 'pretty' }}>
+              Our work spans documentary film, podcast, micro-courses, and a weekly research blog. Every format serves one goal: get the science to the people who can use it.
+            </p>
+          )}
+
+          {preview && (
+            <a href="About.html" className="cl-link cl-mono" style={{ color: window.CL.ink, display: 'inline-block', marginTop: 24 }}>LEARN MORE ABOUT US →</a>
+          )}
         </div>
       </div>
     </section>
