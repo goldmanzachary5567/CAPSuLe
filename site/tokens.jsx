@@ -15,6 +15,18 @@ window.CL = {
   sans:      '-apple-system, BlinkMacSystemFont, system-ui, sans-serif',
 };
 
+// Responsive breakpoint hook — call inside any React functional component.
+window.useBreakpoint = function(bp) {
+  bp = bp == null ? 768 : bp;
+  const [below, setBelow] = React.useState(window.innerWidth <= bp);
+  React.useEffect(function() {
+    const h = function() { setBelow(window.innerWidth <= bp); };
+    window.addEventListener('resize', h, { passive: true });
+    return function() { window.removeEventListener('resize', h); };
+  }, [bp]);
+  return below;
+};
+
 (function injectGlobal() {
   const s = document.createElement('style');
   s.textContent = `

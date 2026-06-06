@@ -20,12 +20,36 @@ function NavBar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  React.useEffect(() => {
+    if (!isMobile) setMenuOpen(false);
+    document.body.style.overflow = (isMobile && menuOpen) ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobile, menuOpen]);
+
   const items = [
     { label: 'Home',     href: CL_PAGES.home     },
     { label: 'About',    href: CL_PAGES.about    },
     { label: 'Programs', href: CL_PAGES.programs  },
     { label: 'Join Us',  href: CL_PAGES.joinus    },
   ];
+
+  const LogoImg = ({ height }) => (
+    <span style={{ display: 'inline-block', position: 'relative', height, lineHeight: 0 }}>
+      <img
+        src="site/assets/Capsule logo for profile's.png"
+        alt="CAPSuLe"
+        style={{ height, width: 'auto', display: 'block' }}
+        onError={function(e) {
+          e.target.style.display = 'none';
+          e.target.parentNode.querySelector('.cl-logo-fallback').style.display = 'flex';
+        }}
+      />
+      <span className="cl-logo-fallback" style={{ display: 'none', alignItems: 'center', gap: 10, height }}>
+        <BrandCapsule size={height * 0.7} color={window.CL.signal} />
+        <Wordmark size={height * 0.5} />
+      </span>
+    </span>
+  );
 
   return (
     <header style={{
@@ -48,7 +72,8 @@ function NavBar() {
             <BrandCapsule size={30} color={window.CL.signal} />
             <Wordmark size={20} />
           </div>
-        </a>
+        </div>
+      </header>
 
         {/* Desktop nav */}
         <nav className="cl-nav-desktop">
@@ -107,6 +132,8 @@ function NavBar() {
 }
 
 function Footer() {
+  const isMobile = window.useBreakpoint(768);
+
   const cols = [
     { title: 'Explore', items: [
         { label: 'Home',     href: CL_PAGES.home     },
@@ -173,5 +200,6 @@ function Footer() {
   );
 }
 
-window.NavBar = NavBar;
-window.Footer = Footer;
+window.NavBar   = NavBar;
+window.Footer   = Footer;
+window.CL_PAGES = CL_PAGES;

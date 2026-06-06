@@ -14,18 +14,18 @@ function Hero() {
           <div className="cl-mono" style={{ color: window.CL.inkSoft, textAlign: 'right' }}>
             File · CAPSL/2026/03<br />Edition · Spring 2026
           </div>
-        </div>
+        )}
 
         <div className="cl-grid-hero" style={{ paddingTop: 56, paddingBottom: 32, gap: isMobile ? 40 : 48 }}>
           <div>
-            <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 20 }}>
+            <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: isMobile ? 14 : 20 }}>
               § 01 — Premise
             </div>
             <h1 style={{
               fontFamily: window.CL.display,
               fontSize: 'clamp(48px, 7.2vw, 116px)',
               fontWeight: 500, lineHeight: 0.92, letterSpacing: '-0.035em',
-              margin: 0, color: window.CL.ink, textWrap: 'balance',
+              margin: 0, color: window.CL.ink,
             }}>
               From the lab<br />
               to the{' '}
@@ -43,7 +43,7 @@ function Hero() {
               room.
             </h1>
 
-            <div style={{ marginTop: 40, maxWidth: 560 }}>
+            <div style={{ marginTop: isMobile ? 28 : 40, maxWidth: 560 }}>
               <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 12 }}>
                 § 02 — Mission
               </div>
@@ -55,7 +55,7 @@ function Hero() {
                   <span style={{ width: 6, height: 6, borderRadius: 6, background: window.CL.signal }} />
                   Our Programs
                 </a>
-                <a href="Donate.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '14px 22px', border: `1.5px solid ${window.CL.ink}`, background: 'transparent', color: window.CL.ink, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}>
+                <a href="Donate.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, padding: '13px 20px', border: `1.5px solid ${window.CL.ink}`, background: 'transparent', color: window.CL.ink, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}>
                   Donate →
                 </a>
               </div>
@@ -86,7 +86,7 @@ function Hero() {
                 </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
 
       </div>
