@@ -1,5 +1,25 @@
 // NavBar and Footer shared across all pages.
 
+function LogoImg({ height }) {
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, lineHeight: 0 }}>
+      <img
+        src="site/assets/Capsule logo for profile's.png"
+        alt="CAPSuLe"
+        style={{ height, width: 'auto', display: 'block' }}
+        onError={function(e) {
+          e.target.style.display = 'none';
+          e.target.parentNode.querySelector('.cl-logo-fallback').style.display = 'flex';
+        }}
+      />
+      <span className="cl-logo-fallback" style={{ display: 'none', alignItems: 'center', gap: 10 }}>
+        <BrandCapsule size={height * 0.7} color={window.CL.signal} />
+        <Wordmark size={height * 0.5} />
+      </span>
+    </span>
+  );
+}
+
 const CL_PAGES = {
   home:     'index.html',
   about:    'About.html',
@@ -12,6 +32,7 @@ const CL_PAGES = {
 function NavBar() {
   const [scrolled, setScrolled] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
+  const isMobile = window.useBreakpoint(900);
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -33,24 +54,6 @@ function NavBar() {
     { label: 'Join Us',  href: CL_PAGES.joinus    },
   ];
 
-  const LogoImg = ({ height }) => (
-    <span style={{ display: 'inline-block', position: 'relative', height, lineHeight: 0 }}>
-      <img
-        src="site/assets/Capsule logo for profile's.png"
-        alt="CAPSuLe"
-        style={{ height, width: 'auto', display: 'block' }}
-        onError={function(e) {
-          e.target.style.display = 'none';
-          e.target.parentNode.querySelector('.cl-logo-fallback').style.display = 'flex';
-        }}
-      />
-      <span className="cl-logo-fallback" style={{ display: 'none', alignItems: 'center', gap: 10, height }}>
-        <BrandCapsule size={height * 0.7} color={window.CL.signal} />
-        <Wordmark size={height * 0.5} />
-      </span>
-    </span>
-  );
-
   return (
     <header style={{
       position: 'sticky', top: 0, zIndex: 50,
@@ -60,73 +63,68 @@ function NavBar() {
       borderBottom: scrolled ? `1px solid ${window.CL.rule}` : '1px solid transparent',
       transition: 'background .25s, border-color .25s',
     }}>
-      <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: '14px 32px', display: 'grid', gridTemplateColumns: 'auto 1fr auto', alignItems: 'center', gap: 24 }}>
+      <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: isMobile ? '10px 20px' : '14px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 20 }}>
 
         {/* Logo */}
-        <a href={CL_PAGES.home} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <img src="site/assets/capsule-logo.png" alt="CAPSuLe"
-            style={{ height: 40, width: 'auto', objectFit: 'contain' }}
-            onError={e => { e.currentTarget.style.display='none'; e.currentTarget.nextSibling.style.display='flex'; }}
-          />
-          <div style={{ display: 'none', alignItems: 'center', gap: 10 }}>
-            <BrandCapsule size={30} color={window.CL.signal} />
-            <Wordmark size={20} />
-          </div>
-        </div>
-      </header>
+        <a href={CL_PAGES.home} style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
+          <LogoImg height={isMobile ? 36 : 44} />
+        </a>
 
         {/* Desktop nav */}
-        <nav className="cl-nav-desktop">
-          {items.map(it => (
-            <a key={it.href} href={it.href} className="cl-link"
-              style={{ fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', color: window.CL.ink }}>
-              {it.label}
-            </a>
-          ))}
-        </nav>
+        {!isMobile && (
+          <nav style={{ display: 'flex', gap: 28, flex: 1, justifyContent: 'center' }}>
+            {items.map(it => (
+              <a key={it.label} href={it.href} className="cl-link"
+                style={{ fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', color: window.CL.ink }}>
+                {it.label}
+              </a>
+            ))}
+          </nav>
+        )}
 
         {/* Right: Donate CTA + hamburger */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <a href={CL_PAGES.donate}
-            className="cl-hide-mobile"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 16px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase', border: `1px solid ${window.CL.ink}`, transition: 'background .15s, color .15s' }}
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: isMobile ? '8px 14px' : '10px 16px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase', border: `1px solid ${window.CL.ink}`, transition: 'background .15s, border-color .15s', whiteSpace: 'nowrap' }}
             onMouseEnter={e => { e.currentTarget.style.background = window.CL.signal; e.currentTarget.style.borderColor = window.CL.signal; }}
             onMouseLeave={e => { e.currentTarget.style.background = window.CL.ink; e.currentTarget.style.borderColor = window.CL.ink; }}
           >
-            <span style={{ width: 6, height: 6, borderRadius: 6, background: window.CL.signal, display: 'inline-block' }} />
+            <span style={{ width: 5, height: 5, borderRadius: 5, background: window.CL.signal, display: 'inline-block', flexShrink: 0 }} />
             Donate
           </a>
 
-          {/* Hamburger */}
-          <button className="cl-hamburger"
-            style={{ display: 'none', flexDirection: 'column', gap: 5, padding: 8, cursor: 'pointer', background: 'none', border: 'none' }}
-            onClick={() => setMenuOpen(m => !m)}
-            aria-label="Toggle menu"
-          >
-            <span style={{ width: 22, height: 2, background: window.CL.ink, display: 'block', transition: 'transform .2s', transform: menuOpen ? 'rotate(45deg) translate(5px,5px)' : 'none' }} />
-            <span style={{ width: 22, height: 2, background: window.CL.ink, display: 'block', opacity: menuOpen ? 0 : 1, transition: 'opacity .2s' }} />
-            <span style={{ width: 22, height: 2, background: window.CL.ink, display: 'block', transition: 'transform .2s', transform: menuOpen ? 'rotate(-45deg) translate(5px,-5px)' : 'none' }} />
-          </button>
+          {/* Hamburger — mobile only */}
+          {isMobile && (
+            <button onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              style={{ width: 36, height: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 5, background: 'transparent', border: 'none', cursor: 'pointer', padding: 6, flexShrink: 0 }}>
+              <span style={{ display: 'block', width: 20, height: 1.5, background: window.CL.ink, transition: 'transform .2s', transform: menuOpen ? 'translateY(6.5px) rotate(45deg)' : 'none' }} />
+              <span style={{ display: 'block', width: 20, height: 1.5, background: window.CL.ink, transition: 'opacity .2s', opacity: menuOpen ? 0 : 1 }} />
+              <span style={{ display: 'block', width: 20, height: 1.5, background: window.CL.ink, transition: 'transform .2s', transform: menuOpen ? 'translateY(-6.5px) rotate(-45deg)' : 'none' }} />
+            </button>
+          )}
         </div>
       </div>
 
-      {/* Mobile dropdown */}
-      <div className={`cl-nav-mobile-menu${menuOpen ? ' open' : ''}`}>
-        {items.map(it => (
-          <a key={it.href} href={it.href}
-            style={{ fontFamily: window.CL.mono, fontSize: 13, letterSpacing: '.18em', textTransform: 'uppercase', color: window.CL.ink, padding: '14px 0', borderBottom: `1px solid ${window.CL.rule}` }}
-            onClick={() => setMenuOpen(false)}
-          >
-            {it.label}
+      {/* Mobile overlay menu */}
+      {isMobile && menuOpen && (
+        <div style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          background: window.CL.paper, zIndex: 49,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          gap: 0, padding: '80px 32px 48px',
+        }}>
+          {items.map((it, i) => (
+            <a key={it.label} href={it.href} onClick={() => setMenuOpen(false)}
+              style={{ fontFamily: window.CL.display, fontSize: 'clamp(36px, 10vw, 52px)', fontWeight: 500, color: window.CL.ink, letterSpacing: '-0.02em', padding: '16px 0', borderBottom: i < items.length - 1 ? `1px solid ${window.CL.rule}` : 'none', width: '100%', textAlign: 'center' }}>
+              {it.label}
+            </a>
+          ))}
+          <a href={CL_PAGES.donate} onClick={() => setMenuOpen(false)}
+            style={{ marginTop: 32, padding: '16px 40px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 12, letterSpacing: '.22em', textTransform: 'uppercase' }}>
+            Donate →
           </a>
-        ))}
-        <a href={CL_PAGES.donate}
-          style={{ display: 'block', marginTop: 16, padding: '14px 20px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 12, letterSpacing: '.22em', textTransform: 'uppercase', textAlign: 'center' }}
-          onClick={() => setMenuOpen(false)}
-        >
-          Donate →
-        </a>
-      </div>
+        </div>
+      )}
     </header>
   );
 }
@@ -143,10 +141,10 @@ function Footer() {
         { label: 'Blog',     href: CL_PAGES.blog, ext: true },
     ]},
     { title: 'Get involved', items: [
-        { label: 'Donate',        href: CL_PAGES.donate },
-        { label: 'Volunteer',     href: CL_PAGES.joinus },
-        { label: 'Join the team', href: CL_PAGES.joinus },
-        { label: 'Partner with us', href: CL_PAGES.joinus },
+        { label: 'Donate',          href: CL_PAGES.donate },
+        { label: 'Volunteer',       href: CL_PAGES.joinus },
+        { label: 'Join the team',   href: CL_PAGES.joinus },
+        { label: 'Partner with us', href: 'mailto:keton@thecapsl.org' },
     ]},
     { title: 'Connect', items: [
         { label: 'LinkedIn',  href: 'https://www.linkedin.com/company/the-capsl-', ext: true },
@@ -159,15 +157,16 @@ function Footer() {
 
   return (
     <footer style={{ borderTop: `1.5px solid ${window.CL.ink}`, marginTop: 0, background: window.CL.paperWarm }}>
-      <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: '56px 32px 32px' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 40, paddingBottom: 48 }} className="cl-grid-4">
-          <div>
-            <Wordmark size={40} />
-            <div style={{ marginTop: 12 }}>
-              <Tagline size={14} weight={500} color={window.CL.ink} accent={window.CL.signal} font={window.CL.display} />
-            </div>
-            <p style={{ fontFamily: window.CL.serif, fontSize: 14, lineHeight: 1.55, color: window.CL.inkSoft, marginTop: 14, maxWidth: 320 }}>
-              The Child and Adolescent Performance Science Laboratory is a 501(c)(3) nonprofit that translates youth development research into real-world guidance.
+      <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: isMobile ? '48px 20px 28px' : '56px 32px 32px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : '1.4fr 1fr 1fr 1fr', gap: isMobile ? 36 : 40, paddingBottom: 48 }}>
+          <div style={{ gridColumn: isMobile ? '1 / -1' : 'auto' }}>
+            <span style={{ display: 'inline-block', lineHeight: 0, marginBottom: 14 }}>
+              <img src="site/assets/Capsule logo for profile's.png" alt="CAPSuLe" style={{ height: 52, width: 'auto' }}
+                onError={function(e) { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
+              <span style={{ display: 'none' }}><Wordmark size={40} /></span>
+            </span>
+            <p style={{ fontFamily: window.CL.serif, fontSize: 14, lineHeight: 1.55, color: window.CL.inkSoft, marginTop: 0, maxWidth: 320 }}>
+              The Child and Adolescent Performance Science Laboratory is a 501(c)(3) nonprofit that translates youth development research into real-world guidance for parents, educators, and coaches.
             </p>
           </div>
           {cols.map((c, i) => (
@@ -192,7 +191,7 @@ function Footer() {
           ))}
         </div>
         <div style={{ borderTop: `1px solid ${window.CL.rule}`, paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-          <span className="cl-mono" style={{ color: window.CL.inkSoft }}>CAPSuLe © 2026 · 501(c)(3) Nonprofit · File CAPSL/2026/03</span>
+          <span className="cl-mono" style={{ color: window.CL.inkSoft }}>CAPSuLe © 2026 · 501(c)(3) Nonprofit</span>
           <span className="cl-mono" style={{ color: window.CL.inkSoft }}>Cat. № 240-80-22</span>
         </div>
       </div>
