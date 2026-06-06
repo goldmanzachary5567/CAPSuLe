@@ -36,7 +36,7 @@ function NavBar() {
   const LogoImg = ({ height }) => (
     <span style={{ display: 'inline-block', position: 'relative', height, lineHeight: 0 }}>
       <img
-        src="site/assets/capsule-logo.png"
+        src="site/assets/Capsule logo for profile's.png"
         alt="CAPSuLe"
         style={{ height, width: 'auto', display: 'block' }}
         onError={function(e) {
@@ -162,7 +162,7 @@ function Footer() {
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : '1.4fr 1fr 1fr 1fr', gap: isMobile ? 36 : 48, paddingBottom: 56 }}>
           <div style={{ gridColumn: isMobile ? '1 / -1' : 'auto' }}>
             <span style={{ display: 'inline-block', lineHeight: 0, marginBottom: 14 }}>
-              <img src="site/assets/capsule-logo.png" alt="CAPSuLe" style={{ height: 56, width: 'auto' }}
+              <img src="site/assets/Capsule logo for profile's.png" alt="CAPSuLe" style={{ height: 56, width: 'auto' }}
                 onError={function(e) { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }} />
               <span style={{ display: 'none' }}><Wordmark size={44} /></span>
             </span>
