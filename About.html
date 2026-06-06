@@ -19,7 +19,7 @@
 <script type="text/babel" src="site/logo.jsx"></script>
 <script type="text/babel" src="site/nav.jsx"></script>
 <script type="text/babel" src="site/mission-donate.jsx"></script>
-<script type="text/babel" src="site/network.jsx"></script>
+<script type="text/babel" src="site/team.jsx"></script>
 
 <script type="text/babel" data-presets="react">
 window.CL.display = '"Fraunces", "GT Sectra Display", "Tiempos Headline", Georgia, serif';
@@ -29,7 +29,9 @@ function App() {
     <div>
       <NavBar />
       <Mission preview={false} />
-      <Network />
+      <FoundingStory />
+      <TeamSection />
+      <DonateCTA />
       <Footer />
     </div>
   );
