@@ -15,6 +15,18 @@ window.CL = {
   sans:      '-apple-system, BlinkMacSystemFont, system-ui, sans-serif',
 };
 
+// Responsive breakpoint hook — call inside any React functional component.
+window.useBreakpoint = function(bp) {
+  bp = bp == null ? 768 : bp;
+  const [below, setBelow] = React.useState(window.innerWidth <= bp);
+  React.useEffect(function() {
+    const h = function() { setBelow(window.innerWidth <= bp); };
+    window.addEventListener('resize', h, { passive: true });
+    return function() { window.removeEventListener('resize', h); };
+  }, [bp]);
+  return below;
+};
+
 (function injectGlobal() {
   const s = document.createElement('style');
   s.textContent = `
@@ -31,6 +43,38 @@ window.CL = {
     .cl-link { border-bottom: 1px solid transparent; transition: border-color .18s; }
     .cl-link:hover { border-bottom-color: currentColor; }
     .cl-page-grid { width: 100%; }
+
+    /* Partner institution marquee */
+    @keyframes cl-marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .cl-marquee-wrap { overflow: hidden; }
+    .cl-marquee-track {
+      display: flex;
+      animation: cl-marquee 28s linear infinite;
+      width: max-content;
+    }
+    .cl-marquee-track:hover { animation-play-state: paused; }
+
+    /* Progress letter fill animation */
+    @keyframes cl-letter-fill {
+      from { background-size: 0% 100%; }
+      to   { background-size: 100% 100%; }
+    }
+
+    /* Mobile — hide on small screens */
+    @media (max-width: 900px) {
+      .cl-hide-mobile { display: none !important; }
+    }
+    @media (min-width: 901px) {
+      .cl-mobile-only { display: none !important; }
+    }
+
+    /* Responsive section padding */
+    @media (max-width: 600px) {
+      .cl-section-pad { padding-left: 20px !important; padding-right: 20px !important; }
+    }
   `;
   document.head.appendChild(s);
 })();

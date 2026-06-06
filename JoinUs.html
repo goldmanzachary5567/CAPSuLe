@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CAPSuLe — Episodes</title>
+<title>CAPSuLe — Join Us</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -18,7 +18,8 @@
 <script type="text/babel" src="site/slot.jsx"></script>
 <script type="text/babel" src="site/logo.jsx"></script>
 <script type="text/babel" src="site/nav.jsx"></script>
-<script type="text/babel" src="site/episodes.jsx"></script>
+<script type="text/babel" src="site/mission-donate.jsx"></script>
+<script type="text/babel" src="site/join-us.jsx"></script>
 
 <script type="text/babel" data-presets="react">
 window.CL.display = '"Fraunces", "GT Sectra Display", "Tiempos Headline", Georgia, serif';
@@ -27,7 +28,10 @@ function App() {
   return (
     <div>
       <NavBar />
-      <Episodes preview={false} />
+      <JoinUsHero />
+      <ProfessionalCollaboratorForm />
+      <TeamApplicationForm />
+      <DonateCTA />
       <Footer />
     </div>
   );

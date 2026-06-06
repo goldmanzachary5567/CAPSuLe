@@ -8,7 +8,7 @@ function DonateHero() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 14, marginBottom: 56 }}>
           <div className="cl-mono" style={{ color: window.CL.signal }}>Sponsorship Prospectus</div>
           <div className="cl-mono" style={{ color: window.CL.inkSoft }}>
-            <a href="CAPSuLe_Homepage.html" style={{ borderBottom: `1px solid ${window.CL.inkSoft}`, paddingBottom: 2 }}>Back to home</a>
+            <a href="index.html" style={{ borderBottom: `1px solid ${window.CL.inkSoft}`, paddingBottom: 2 }}>Back to home</a>
             <span style={{ margin: '0 14px', opacity: .4 }}>/</span>
             File CAPSL/SPN/2026
           </div>
