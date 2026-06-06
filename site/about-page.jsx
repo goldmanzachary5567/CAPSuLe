@@ -27,15 +27,27 @@ function AboutMission() {
               Our work spans documentary film, podcast, micro-courses, and a weekly research blog. Every format serves one goal: get the science to the people who can use it.
             </p>
 
-            {/* Founding story placeholder */}
+            {/* Founding story */}
             <div style={{ borderTop: `1.5px solid ${window.CL.ink}`, paddingTop: 32, marginTop: 4 }}>
-              <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 16 }}>§ 02 — FOUNDING STORY</div>
-              <div style={{ padding: '32px', background: window.CL.paperWarm, border: `1px dashed ${window.CL.inkSoft}`, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 20 : 26, fontWeight: 500, letterSpacing: '-0.015em', color: window.CL.inkSoft }}>
-                  Coming soon
-                </div>
-                <p style={{ fontFamily: window.CL.serif, fontSize: 15, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0 }}>
-                  We are currently crafting the founding story of CAPSuLe. Check back soon to learn how this lab came to life.
+              <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 24 }}>§ 02 — FOUNDING STORY</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                <p style={{ fontFamily: window.CL.display, fontSize: isMobile ? 22 : 28, fontWeight: 500, lineHeight: 1.2, letterSpacing: '-0.015em', color: window.CL.ink, margin: 0, fontStyle: 'italic' }}>
+                  Youth developmental trajectories are drowning in information, and starving for understanding.
+                </p>
+                <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.ink, margin: 0 }}>
+                  In college, I spent my time between two worlds that rarely spoke to each other: the football field and the neuroscience lab. What I kept noticing was the lack of cross talk. Everything we were uncovering about how the adolescent brain develops, how stress shapes it, and how specific experiences can actually armor the brain to adversity — none of it was being funneled into the lived experiences of the youth who desperately needed it.
+                </p>
+                <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.ink, margin: 0 }}>
+                  That gap is why I founded Cortex Flex, a neuropsychological performance company built to give adolescents the mental and physical tools to thrive in every endeavor and through every trial. The deeper I got into that work, the more clearly I heard another signal. In nearly every conversation with a parent, coach, or school administrator about our program, there was the same vulnerable confession underneath their questions: <em>I want to do right by this kid. I just don't know where to start.</em>
+                </p>
+                <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.ink, margin: 0 }}>
+                  They weren't uninformed. If anything, they were overwhelmed, awash in headlines and hot takes and contradictory advice. They cared deeply. They wanted to learn and apply. The problem was that the developmental science they needed — translated honestly, accessibly, and practically — had never been handed to them.
+                </p>
+                <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.ink, margin: 0 }}>
+                  CAPSuLe exists because of that moment of recognition. The adults in a young person's life are not peripheral to their development. They are the environment. And when those adults feel confident, grounded, and equipped, the kids in front of them feel it too.
+                </p>
+                <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.signal, margin: 0, fontStyle: 'italic', fontWeight: 500 }}>
+                  By educating adults, we change the path every young person walks along and the destinations they find.
                 </p>
               </div>
             </div>
@@ -94,61 +106,61 @@ function AboutTeam() {
     {
       name: 'Nate Roy M.S.',
       title: 'Founder & Vision Director',
-      photo: 'site/assets/Nate headshot.png',
+      photo: 'site/assets/Nate%20headshot.png',
       bio: 'Nate is a PhD student in neuroscience and Team USA Bobsled athlete at McGill University. His mission is to translate neuroscience into practical tools for clinics and communities around the world.',
     },
     {
       name: 'Keton Johnson',
       title: 'President & Community Connection Director',
-      photo: 'site/assets/keton headshot.jpg',
+      photo: 'site/assets/keton%20headshot.jpg',
       bio: 'Keton is a pre-med graduate at Seattle Pacific University. She is driven to provide thoughtful, compassionate, patient-centered care.',
     },
     {
       name: 'Emily Smith Ph.D',
       title: 'Director of Narrative Translation',
-      photo: 'site/assets/emily headshot.jpg',
+      photo: 'site/assets/emily%20headshot.jpg',
       bio: 'Emily is a postdoctoral research fellow at the Centre for Addiction and Mental Health. She is passionate about applying her expertise in the brain–body connection to support mental and physical well-being across the lifespan.',
     },
     {
       name: 'Gabriella Cha',
       title: 'Director of Digital Product Design',
-      photo: 'site/assets/gabrielle headshot.jpg',
+      photo: 'site/assets/gabrielle%20headshot.jpg',
       bio: 'Gabriella is an undergraduate student in biochemistry and neuroscience at McGill University. She is passionate about exploring the neuroscience of addiction and aspires to pursue a medical career with a focus in neuroscience.',
     },
     {
       name: 'Matt Shumway',
       title: 'Director of Clinical Integration',
-      photo: 'site/assets/Matt bio pic.jpg',
+      photo: 'site/assets/Matt%20bio%20pic.jpg',
       bio: 'Matt is a medical student at LECOM. He is dedicated to bridging the gap between complex clinical research and everyday wellness.',
     },
     {
       name: 'Nicole Ahsan',
       title: 'Director of Visual Narrative',
-      photo: 'site/assets/nicole headshot.JPG',
+      photo: 'site/assets/nicole%20headshot.JPG',
       bio: 'Nicole is a pre-med student in Film and Media Studies at Yale University. She strives to bridge the worlds of science and storytelling to make health information more accessible to diverse communities.',
     },
     {
       name: 'Lyra Tiffin',
       title: 'Director of Narrative Dissemination',
-      photo: 'site/assets/lyra headshot.jpg',
+      photo: 'site/assets/lyra%20headshot.jpg',
       bio: 'Lyra is a pre-med student in Nutrition and Health Sciences at Pepperdine University. She hopes to integrate nutrition and medicine as a physician to improve health outcomes and support patient longevity.',
     },
     {
       name: 'Curtis Roy',
       title: 'Growth Engineer',
-      photo: 'site/assets/curtis headshot.jpg',
+      photo: 'site/assets/curtis%20headshot.jpg',
       bio: 'Curtis is an undergraduate student in neuroscience at the University of Rochester. He is passionate about applying neuroscience to enhance human performance and better understand how the brain drives physical and mental potential.',
     },
     {
       name: 'Zachary Goldman',
       title: 'Director of Implementation Strategy',
-      photo: 'site/assets/Zach Goldman headshot (1).jpg',
+      photo: 'site/assets/Zach%20Goldman%20headshot%20%281%29.jpg',
       bio: 'Zachary is a senior at the University of Alabama studying physics and conducting biophysics research through their Randall Research Scholars Program. As a founder of multiple nonprofits, he is passionate about bringing a quantitative, research-driven perspective to scientific engagement and community development.',
     },
     {
       name: 'Avery Kirchmann',
       title: 'Director of Operations & Production Logistics',
-      photo: 'site/assets/avery headshot.jpg',
+      photo: 'site/assets/avery%20headshot.jpg',
       bio: 'Avery leads operations and production logistics for CAPSuLe, ensuring every program runs with precision and purpose.',
     },
     {
@@ -171,7 +183,7 @@ function AboutTeam() {
     {
       name: 'Kevin Wisniewski',
       title: 'Board Member',
-      photo: 'site/assets/Kevin Wisniewski_edited.jpg',
+      photo: 'site/assets/Kevin%20Wisniewski_edited.jpg',
       bio: 'Kevin is a medical student at LECOM. He combines scientific insight with a commitment to service in health and athletics.',
     },
     {
