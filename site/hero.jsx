@@ -14,7 +14,7 @@ function Hero() {
           <div className="cl-mono" style={{ color: window.CL.inkSoft, textAlign: 'right' }}>
             File · CAPSL/2026/03<br />Edition · Spring 2026
           </div>
-        )}
+        </div>
 
         <div className="cl-grid-hero" style={{ paddingTop: 56, paddingBottom: 32, gap: isMobile ? 40 : 48 }}>
           <div>
@@ -65,7 +65,7 @@ function Hero() {
           {/* CAPSuLe logo replacing the pill diagram */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center', justifyContent: 'center', position: 'relative', paddingTop: isMobile ? 0 : 24 }}>
             <img
-              src="site/assets/capsule-logo.png"
+              src="site/assets/Capsule logo for profile's.png"
               alt="CAPSuLe — Child and Adolescent Performance Science Laboratory"
               style={{ width: '100%', maxWidth: isMobile ? 280 : 420, height: 'auto', objectFit: 'contain' }}
               onError={e => {
@@ -86,7 +86,7 @@ function Hero() {
                 </div>
               </div>
             </div>
-          )}
+          </div>
         </div>
 
       </div>
