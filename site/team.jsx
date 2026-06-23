@@ -37,9 +37,21 @@ function FoundingStory() {
         </div>
 
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.4fr', gap: isMobile ? 36 : 80, alignItems: 'flex-start' }}>
-          <h2 style={{ fontFamily: window.CL.display, fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 500, lineHeight: 1.05, letterSpacing: '-0.025em', margin: 0, color: window.CL.ink, fontStyle: 'italic' }}>
-            "Youth developmental trajectories are drowning in information, and starving for understanding."
-          </h2>
+          <div>
+            <h2 style={{ fontFamily: window.CL.display, fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 500, lineHeight: 1.05, letterSpacing: '-0.025em', margin: '0 0 32px', color: window.CL.ink, fontStyle: 'italic' }}>
+              "Youth developmental trajectories are drowning in information, and starving for understanding."
+            </h2>
+            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, overflow: 'hidden', border: `1.5px solid ${window.CL.ink}` }}>
+              <iframe
+                src="https://www.youtube.com/embed/0JmkDyIbEZw"
+                title="Nate Roy — TEDx Talk"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }}
+              />
+            </div>
+            <div className="cl-mono" style={{ color: window.CL.inkSoft, fontSize: 10, marginTop: 10 }}>Nate Roy · TEDx Talk</div>
+          </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.ink, margin: 0 }}>
               In college, I spent my time between two worlds that rarely spoke to each other: the football field and the neuroscience lab. What I kept noticing was the lack of cross talk. Everything we were uncovering about how the adolescent brain develops, how stress shapes it, and how specific experiences can actually armor the brain to adversity — none of it was being funneled into the lived experiences of the youth who desperately needed it.

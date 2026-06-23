@@ -192,6 +192,10 @@ function Footer() {
         </div>
         <div style={{ borderTop: `1px solid ${window.CL.rule}`, paddingTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <span className="cl-mono" style={{ color: window.CL.inkSoft }}>CAPSuLe © 2026 · 501(c)(3) Nonprofit</span>
+          <span className="cl-mono" style={{ color: window.CL.inkSoft }}>
+            <a href="WordRx-Donate.html" style={{ color: window.CL.signal, textDecoration: 'none' }}>WordRx Fund</a>
+            {' '}· $700 raised of $16,000 goal
+          </span>
           <span className="cl-mono" style={{ color: window.CL.inkSoft }}>Cat. № 240-80-22</span>
         </div>
       </div>

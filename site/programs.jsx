@@ -356,7 +356,7 @@ function Programs() {
 
           <div style={{ marginBottom: 48 }}>
             <CAPSuLeAcronym />
-            <div className="cl-mono" style={{ color: window.CL.inkSoft, marginTop: 8, fontSize: 10 }}>Hover each letter · C=Child · A=Adolescent · P=Performance · S=Science · L=Laboratory</div>
+            <div className="cl-mono" style={{ color: window.CL.inkSoft, marginTop: 8, fontSize: 10 }}>Hover each letter</div>
           </div>
 
           {/* Program selector */}
@@ -433,6 +433,7 @@ function Programs() {
               </div>
               <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80 }}>
                 <div>
+                  <img src="site/assets/MicroDose_logo.png" alt="MicroDose" style={{ height: 56, width: 'auto', marginBottom: 20, display: 'block', objectFit: 'contain' }} />
                   <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 1, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>MicroDose</div>
                   <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Science-based courses for the people raising the next generation.</p>
                   <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>A micro-course series designed for educators and parents. The 2026 installments are <strong>The Learning Environment</strong> — for educators — and <strong>The Home Environment</strong> — for parents. Distributed via Coursera, alongside a formal book and e-book release.</p>
@@ -468,6 +469,7 @@ function Programs() {
               </div>
               <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, marginBottom: 56 }}>
                 <div>
+                  <img src="site/assets/EffectiveDose_logo.png" alt="Effective Dose" style={{ height: 56, width: 'auto', marginBottom: 20, display: 'block', objectFit: 'contain' }} />
                   <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 1, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>Effective Dose</div>
                   <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Conversations with the people doing the science.</p>
                   <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>Long-form interviews with researchers, clinicians, and practitioners. The archive that anchors everything we make. Eight episodes available on Spotify, Apple Podcasts, and YouTube.</p>
@@ -480,25 +482,29 @@ function Programs() {
                 </div>
               </div>
               <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 20 }}>FEATURED EPISODES</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 0, borderTop: `1.5px solid ${window.CL.ink}` }}>
+              <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 1, background: window.CL.ink, border: `1.5px solid ${window.CL.ink}` }}>
                 {featuredEps.map(function(ep) {
+                  var ytId = ep.yt.split('v=')[1].split('&')[0];
+                  var thumb = 'https://img.youtube.com/vi/' + ytId + '/hqdefault.jpg';
                   return (
-                    <div key={ep.no} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '80px 1fr auto', gap: isMobile ? 8 : 24, alignItems: 'center', padding: '20px 0', borderBottom: `1px solid ${window.CL.rule}` }}>
-                      <div className="cl-mono" style={{ color: window.CL.signal }}>No. {ep.no}</div>
-                      <div>
-                        <div style={{ fontFamily: window.CL.serif, fontSize: 17, fontWeight: 600, color: window.CL.ink, marginBottom: 4, lineHeight: 1.3 }}>{ep.title}</div>
-                        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-                          <span style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 14, color: window.CL.inkSoft }}>{ep.guest}</span>
-                          <span style={{ display: 'inline-block', padding: '2px 6px', border: `1px solid ${window.CL.rule}`, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em', color: window.CL.inkSoft }}>{ep.tag}</span>
+                    <a key={ep.no} href={ep.yt} target="_blank" rel="noopener noreferrer"
+                      style={{ display: 'flex', flexDirection: 'column', background: window.CL.paper, textDecoration: 'none', transition: 'background .15s' }}
+                      onMouseEnter={function(e){ e.currentTarget.style.background = window.CL.paperWarm; }}
+                      onMouseLeave={function(e){ e.currentTarget.style.background = window.CL.paper; }}>
+                      <div style={{ position: 'relative', paddingBottom: '56.25%', overflow: 'hidden', background: window.CL.rule }}>
+                        <img src={thumb} alt={ep.title} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+                        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <div style={{ width: 40, height: 40, borderRadius: 40, background: 'rgba(0,0,0,.55)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <span style={{ fontSize: 14, color: '#fff', marginLeft: 3 }}>▶</span>
+                          </div>
                         </div>
                       </div>
-                      <a href={ep.yt} target="_blank" rel="noopener noreferrer"
-                        style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 16px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 10, letterSpacing: '.2em', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0, marginTop: isMobile ? 8 : 0 }}
-                        onMouseEnter={function(e){ e.currentTarget.style.background = window.CL.signal; }}
-                        onMouseLeave={function(e){ e.currentTarget.style.background = window.CL.ink; }}>
-                        Watch →
-                      </a>
-                    </div>
+                      <div style={{ padding: '16px 18px', flex: 1, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                        <div className="cl-mono" style={{ color: window.CL.signal, fontSize: 9 }}>No. {ep.no} · {ep.tag}</div>
+                        <div style={{ fontFamily: window.CL.serif, fontSize: 14, fontWeight: 600, color: window.CL.ink, lineHeight: 1.35 }}>{ep.title}</div>
+                        <div style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 13, color: window.CL.inkSoft, marginTop: 'auto' }}>{ep.guest}</div>
+                      </div>
+                    </a>
                   );
                 })}
               </div>
@@ -556,6 +562,7 @@ function Programs() {
               </div>
               <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80 }}>
                 <div>
+                  <img src="site/assets/ExtendedRelease_logo.png" alt="Extended Release" style={{ height: 56, width: 'auto', marginBottom: 20, display: 'block', objectFit: 'contain' }} />
                   <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>Extended Release</div>
                   <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Healthcare is often a translation problem.</p>
                   <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>A second documentary in development examining what real patient–clinician relationships look like — and what gets lost between diagnosis and understanding. Where WordRx looks at language as medicine, Extended Release looks at medicine as language.</p>
