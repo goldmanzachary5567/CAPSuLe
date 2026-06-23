@@ -6,16 +6,16 @@ function Mission({ preview = false }) {
 
   const partnerLogos = [
     { name: 'Arizona State University',           src: 'site/assets/asu.webp' },
-    { name: 'University of Pennsylvania',         src: 'site/assets/penn.jpg' },
-    { name: 'CAMH',                               src: 'site/assets/camh_edited.jpg' },
+    { name: 'University of Pennsylvania',         src: 'site/assets/penn.png' },
+    { name: 'CAMH',                               src: 'site/assets/camh_edited.png' },
     { name: 'Cornell University',                 src: 'site/assets/cornell.png' },
     { name: 'Harvard University',                 src: 'site/assets/harvard.png' },
-    { name: 'Johns Hopkins University',           src: 'site/assets/johns.jpg' },
+    { name: 'Johns Hopkins University',           src: 'site/assets/johns.png' },
     { name: 'Mississippi State University',       src: 'site/assets/missisipi state.png' },
-    { name: 'McGill University',                  src: 'site/assets/mcgill.jpg' },
+    { name: 'McGill University',                  src: 'site/assets/mcgill.png' },
     { name: 'University of Pittsburgh',           src: 'site/assets/up.png' },
     { name: 'UPMC',                               src: 'site/assets/upmc.png' },
-    { name: 'LECOM',                              src: 'site/assets/lecom.jpeg' },
+    { name: 'LECOM',                              src: 'site/assets/lecom.png' },
     { name: 'University of Toronto',              src: 'site/assets/unit.png' },
   ];
   // duplicate for seamless marquee loop
@@ -48,7 +48,7 @@ function Mission({ preview = false }) {
                   src={logo.src}
                   alt={logo.name}
                   title={logo.name}
-                  style={{ height: 38, width: 'auto', display: 'block', flexShrink: 0, filter: 'grayscale(100%) opacity(55%)', mixBlendMode: 'multiply', transition: 'filter .2s', maxWidth: 140 }}
+                  style={{ height: 38, width: 'auto', display: 'block', flexShrink: 0, filter: 'grayscale(100%) opacity(55%)', transition: 'filter .2s', maxWidth: 140 }}
                   onMouseEnter={function(e) { e.currentTarget.style.filter = 'grayscale(0%) opacity(100%)'; }}
                   onMouseLeave={function(e) { e.currentTarget.style.filter = 'grayscale(100%) opacity(55%)'; }}
                   onError={function(e) { e.currentTarget.style.display = 'none'; }}
