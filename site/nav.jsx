@@ -67,7 +67,7 @@ function NavBar() {
 
         {/* Logo */}
         <a href={CL_PAGES.home} style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>
-          <LogoImg height={isMobile ? 36 : 44} />
+          <LogoImg height={isMobile ? 48 : 64} />
         </a>
 
         {/* Desktop nav */}

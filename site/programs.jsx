@@ -8,7 +8,7 @@ function CAPSuLeAcronym({ size }) {
     { l: 'A', word: 'Adolescent',  italic: false },
     { l: 'P', word: 'Performance', italic: false },
     { l: 'S', word: 'Science',     italic: false },
-    { l: 'u', word: '&',           italic: true  },
+    { l: 'u', word: '',            italic: true  },
     { l: 'L', word: 'Laboratory',  italic: false },
     { l: 'e', word: '',            italic: true  },
   ];
@@ -356,7 +356,7 @@ function Programs() {
 
           <div style={{ marginBottom: 48 }}>
             <CAPSuLeAcronym />
-            <div className="cl-mono" style={{ color: window.CL.inkSoft, marginTop: 8, fontSize: 10 }}>Hover each letter · Child and Adolescent Performance Science Laboratory</div>
+            <div className="cl-mono" style={{ color: window.CL.inkSoft, marginTop: 8, fontSize: 10 }}>Hover each letter · C=Child · A=Adolescent · P=Performance · S=Science · L=Laboratory</div>
           </div>
 
           {/* Program selector */}
@@ -525,7 +525,7 @@ function Programs() {
                   <a href="WordRx-Donate.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 28, padding: '14px 22px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}>Fund WordRx →</a>
                 </div>
                 <div>
-                  <Thermometer label="WORDRX PRODUCTION FUND" raised="$xx,xxx" goal="$16,000" pct={0} note="FILMING DEC 2026 · BELLEAIR, FL" />
+                  <Thermometer label="WORDRX PRODUCTION FUND" raised="$700" goal="$16,000" pct={4} note="FILMING DEC 2026 · BELLEAIR, FL" />
                 </div>
               </div>
               <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, borderTop: `1px solid rgba(245,239,226,.2)`, paddingTop: 48 }}>
