@@ -32,7 +32,7 @@ function AboutMission() {
               <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 24 }}>§ 02 — FOUNDING STORY</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 <p style={{ fontFamily: window.CL.display, fontSize: isMobile ? 22 : 28, fontWeight: 500, lineHeight: 1.2, letterSpacing: '-0.015em', color: window.CL.ink, margin: 0, fontStyle: 'italic' }}>
-                  Youth developmental trajectories are drowning in information, and starving for understanding.
+                  "Youth developmental trajectories are drowning in information, and starving for understanding."
                 </p>
                 <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.ink, margin: 0 }}>
                   In college, I spent my time between two worlds that rarely spoke to each other: the football field and the neuroscience lab. What I kept noticing was the lack of cross talk. Everything we were uncovering about how the adolescent brain develops, how stress shapes it, and how specific experiences can actually armor the brain to adversity — none of it was being funneled into the lived experiences of the youth who desperately needed it.
@@ -48,6 +48,9 @@ function AboutMission() {
                 </p>
                 <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.signal, margin: 0, fontStyle: 'italic', fontWeight: 500 }}>
                   By educating adults, we change the path every young person walks along and the destinations they find.
+                </p>
+                <p style={{ fontFamily: window.CL.mono, fontSize: isMobile ? 12 : 13, color: window.CL.inkSoft, margin: 0, letterSpacing: '.05em' }}>
+                  — Nate Roy, Founder & Vision Director
                 </p>
               </div>
             </div>
