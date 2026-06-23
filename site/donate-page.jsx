@@ -12,7 +12,7 @@ function DonatePartnerBanner() {
           Every piece of evidence<br />we ship started<br />with a <em style={{ color: window.CL.signal }}>partner like you.</em>
         </h2>
         <p style={{ fontFamily: window.CL.serif, fontSize: 18, lineHeight: 1.55, color: 'rgba(245,239,226,.75)', maxWidth: 580, margin: '0 auto 36px', textWrap: 'pretty' }}>
-          The research exists. Getting it to the right room, in the right format, at the right time takes infrastructure — and donors who believe the translation is worth funding.
+          Every piece of content we publish is free to access because donors fund the production — and every partner who makes it possible is recognized by name.
         </p>
         <a href="#tiers" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, padding: '16px 32px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 12, letterSpacing: '.22em', textTransform: 'uppercase' }}>
           See how to give →
@@ -46,7 +46,7 @@ function DonateHero() {
               are growing up in.
             </h1>
             <p style={{ fontFamily: window.CL.serif, fontSize: 20, lineHeight: 1.5, color: window.CL.inkSoft, marginTop: 32, maxWidth: 540, textWrap: 'pretty' }}>
-              CAPSuLe does not sell ads, put findings behind a paywall, or chase engagement metrics. We translate developmental science into films, courses, and essays — and that work is entirely funded by partners like you.
+              CAPSuLe translates developmental science into films, courses, and essays — and delivers all of it free. No ads. No subscriptions. No paywall. Producing it isn't free.
             </p>
           </div>
 
@@ -80,9 +80,8 @@ function DonateHero() {
 function DonateImpact() {
   const isMobile = useIsMobile();
   const urgencyStats = [
-    { n: '17 yrs', label: 'Average lag between research publication and clinical practice', note: 'Most parents & teachers never see the findings at all.' },
-    { n: '$0',     label: 'What most developmental research earns its authors in public reach', note: 'Publishing in academic journals doesn\'t pay the rent.' },
-    { n: '5 hrs',  label: 'Average time a parent or educator spends searching for evidence-based guidance per year', note: 'They\'re not finding it — they\'re guessing.' },
+    { n: '17 yrs', label: 'Average lag between biomedical research publication and clinical adoption', note: 'Morris, Wooding & Grant, J R Soc Med, 2011.' },
+    { n: '~50%',   label: 'Share of paywalled academic articles never cited — even by other researchers', note: 'Documented across multiple open-access citation studies.' },
   ];
   return (
     <section style={{ padding: '100px 0', background: window.CL.paperWarm, borderBottom: `1.5px solid ${window.CL.ink}` }}>
@@ -98,16 +97,13 @@ function DonateImpact() {
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <p style={{ fontFamily: window.CL.serif, fontSize: 18, lineHeight: 1.55, color: window.CL.ink, margin: 0, textWrap: 'pretty' }}>
-              Every year, developmental neuroscience and clinical psychology produce findings that could meaningfully improve the lives of children, adolescents, and the adults raising them. Virtually none of it reaches the parents, teachers, clinicians, and coaches who need it most.
-            </p>
-            <p style={{ fontFamily: window.CL.serif, fontSize: 16, lineHeight: 1.55, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>
-              CAPSuLe exists because no one else is doing this work at this level. We don't publish for journals. We publish for the parent up at midnight, the coach before the big game, the teacher in room 14. <strong style={{ color: window.CL.ink }}>That work is entirely funded by partners like you.</strong>
+              Developmental research that could change how parents raise kids and how teachers run classrooms sits in academic journals that almost no one reads. CAPSuLe translates it — into films, courses, podcasts, and essays — and delivers it free. Films require crews, gear, and post-production. Courses require instructional design and platform licensing. None of it runs on goodwill.
             </p>
           </div>
         </div>
 
         {/* Urgency stats */}
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 1, background: window.CL.ink, border: `1.5px solid ${window.CL.ink}`, marginBottom: 56 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2, 1fr)', gap: 1, background: window.CL.ink, border: `1.5px solid ${window.CL.ink}`, marginBottom: 56 }}>
           {urgencyStats.map((s, i) => (
             <div key={i} style={{ background: window.CL.paper, padding: '28px 24px' }}>
               <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 52, fontWeight: 500, letterSpacing: '-0.03em', lineHeight: 1, color: window.CL.signal, marginBottom: 12 }}>{s.n}</div>
@@ -117,18 +113,6 @@ function DonateImpact() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', border: `1.5px solid ${window.CL.ink}` }} className="cl-grid-2-eq">
-          {[
-            { n: '01', h: 'We don\'t sell ads or charge access fees', b: 'Every essay, episode, and course we release is free or subsidized. That model only works with donors who believe the science should reach everyone — not just the people who can pay for it.' },
-            { n: '02', h: 'Films, courses, and podcasts cost real money', b: 'WordRx alone requires gear, crew, travel, and post-production. MicroDose requires instructional design, platform integration, and expert review. None of it happens on goodwill alone.' },
-          ].map((c, i) => (
-            <div key={i} style={{ padding: '28px 24px', borderRight: i < 1 ? `1px solid ${window.CL.ink}` : 'none', background: window.CL.paper }}>
-              <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 12 }}>{c.n}</div>
-              <div style={{ fontFamily: window.CL.display, fontSize: 24, fontWeight: 500, lineHeight: 1.1, letterSpacing: '-0.015em', color: window.CL.ink, marginBottom: 10 }}>{c.h}</div>
-              <p style={{ fontFamily: window.CL.serif, fontSize: 15, lineHeight: 1.55, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>{c.b}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -262,6 +246,13 @@ function DonateTiers() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
           <div className="cl-mono" style={{ color: window.CL.signal }}>Sponsorship Tiers</div>
           <div className="cl-mono" style={{ color: window.CL.inkSoft }}>04 giving levels</div>
+        </div>
+
+        <div style={{ marginBottom: 48, padding: '28px 32px', background: window.CL.cream, border: `1.5px solid ${window.CL.ink}` }}>
+          <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 10 }}>Every sponsorship is named.</div>
+          <p style={{ fontFamily: window.CL.serif, fontSize: 16, lineHeight: 1.65, color: window.CL.ink, margin: 0, textWrap: 'pretty' }}>
+            Whether you fund a single article or an entire lecture series, your contribution is publicly credited — on the content itself, in the show notes, on the event slide deck, or in the series title. We maintain a permanent Sponsors page. Endowed partners receive an annual stewardship report.
+          </p>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0, borderTop: `1.5px solid ${window.CL.ink}` }}>
