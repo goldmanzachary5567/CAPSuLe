@@ -297,15 +297,16 @@ function MicroDoseTracker() {
 
 function Programs() {
   var isMobile = useIsMobile();
+  var [active, setActive] = React.useState(null);
   var pad = isMobile ? '0 20px' : '0 32px';
   var secPad = isMobile ? '64px 0' : '100px 0';
 
-  var partners = [
-    { name: 'Harvard University',       dept: 'Medical School affiliations' },
-    { name: 'Cornell University',       dept: 'Human Development' },
-    { name: 'Columbia University',      dept: 'Teachers College' },
-    { name: 'Johns Hopkins University', dept: 'School of Education' },
-    { name: 'University of Toronto',    dept: 'Learning and Neural Development Lab' },
+  var menu = [
+    { code: 'prescribed-dose',  name: 'Prescribed Dose',  kind: 'Blog',            status: 'Weekly',         tagline: 'Research, written like advice from a friend.' },
+    { code: 'microdose',        name: 'MicroDose',        kind: 'Course Series',    status: 'Launching 2026', tagline: 'Science-based courses for the people raising the next generation.' },
+    { code: 'effective-dose',   name: 'Effective Dose',   kind: 'Podcast',          status: 'Active',         tagline: 'Conversations with the people doing the science.' },
+    { code: 'wordrx',           name: 'WordRx',           kind: 'Documentary Film', status: 'In Production',  tagline: 'The hidden prescription behind healing.' },
+    { code: 'extended-release', name: 'Extended Release', kind: 'Documentary Film', status: 'In Development', tagline: 'Healthcare is often a translation problem.' },
   ];
 
   var wordrxBudget = [
@@ -325,11 +326,18 @@ function Programs() {
     { no: '005', title: 'Nutrition, Performance, and the Power of Clean Fuel', guest: 'Dr. Mary Balliett', tag: 'NUTRITION', yt: 'https://www.youtube.com/watch?v=2JsgKUFkpy0' },
   ];
 
+  var detailRef = React.useRef(null);
+  React.useEffect(function() {
+    if (active && detailRef.current) {
+      detailRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [active]);
+
 
   return (
     <React.Fragment>
 
-      {/* Programs Hero */}
+      {/* ── Hero + Program Selector ── */}
       <section style={{ padding: isMobile ? '64px 0' : '96px 0', borderBottom: `1.5px solid ${window.CL.ink}`, background: window.CL.paper }}>
         <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 14, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
@@ -337,241 +345,240 @@ function Programs() {
             <div className="cl-mono" style={{ color: window.CL.inkSoft }}>05 programs · Compounding impact</div>
           </div>
 
-          <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, marginBottom: 64 }}>
+          <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, marginBottom: 48 }}>
             <h1 style={{ fontFamily: window.CL.display, fontSize: isMobile ? 48 : 64, fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.025em', margin: 0, color: window.CL.ink, textWrap: 'balance' }}>
               One mission,<br /><em style={{ color: window.CL.signal }}>five doses.</em>
             </h1>
             <p style={{ fontFamily: window.CL.serif, fontSize: 18, lineHeight: 1.55, color: window.CL.ink, margin: 0, textWrap: 'pretty', alignSelf: 'flex-end' }}>
-              CAPSuLe ships documentaries, courses, essays, and a podcast that compound into durable infrastructure for the people raising kids. Hover over each letter below to see what we stand for.
+              CAPSuLe ships documentaries, courses, essays, and a podcast that compound into durable infrastructure for the people raising kids. Select a program below to learn more.
             </p>
           </div>
 
-          {/* Interactive acronym */}
-          <div style={{ marginBottom: 8 }}>
+          <div style={{ marginBottom: 48 }}>
             <CAPSuLeAcronym />
-          </div>
-          <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 0, fontSize: 10 }}>Hover each letter · Child and Adolescent Performance Science Laboratory</div>
-        </div>
-      </section>
-
-      {/* ── Prescribed Dose ────────────────────────────────── */}
-      <section id="prescribed-dose" style={{ padding: secPad, background: window.CL.paperWarm, borderBottom: `1.5px solid ${window.CL.ink}` }}>
-        <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
-            <div className="cl-mono" style={{ color: window.CL.signal }}>PRX-DOSE · Blog</div>
-            <div style={{ display: 'inline-block', padding: '4px 10px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em' }}>WEEKLY</div>
+            <div className="cl-mono" style={{ color: window.CL.inkSoft, marginTop: 8, fontSize: 10 }}>Hover each letter · Child and Adolescent Performance Science Laboratory</div>
           </div>
 
-          <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80 }}>
-            <div>
-              <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 1, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>Prescribed Dose</div>
-              <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Research, written like advice from a friend.</p>
-              <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>
-                Short, structured pieces that translate one principle from the scientific literature into two or three things a parent, teacher, or coach can do today — with the science behind why it works. Each essay is around 600 words, rigorously sourced, and written to be shared.
-              </p>
-              <a href="https://www.thecapsl.org/blog"
-                target="_blank" rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 28, padding: '14px 22px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}
-                onMouseEnter={function(e){ e.currentTarget.style.background = window.CL.signal; }}
-                onMouseLeave={function(e){ e.currentTarget.style.background = window.CL.ink; }}
-              >
-                Read the blog →
-              </a>
-            </div>
-            <div style={{ border: `1.5px solid ${window.CL.ink}`, padding: '28px 24px', background: window.CL.paper }}>
-              <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 18 }}>ABOUT THIS PROGRAM</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                {[
-                  { k: 'Format',       v: 'Written essay' },
-                  { k: 'Cadence',      v: 'Weekly' },
-                  { k: 'Audience',     v: 'Parents, educators, coaches, clinicians' },
-                  { k: 'Platform',     v: 'thecapsl.org/blog + newsletter' },
-                  { k: 'Length',       v: '~600 words per piece' },
-                ].map(function(r) {
-                  return (
-                    <div key={r.k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, borderBottom: `1px solid ${window.CL.rule}`, paddingBottom: 10 }}>
-                      <span className="cl-mono" style={{ color: window.CL.inkSoft }}>{r.k}</span>
-                      <span style={{ fontFamily: window.CL.serif, fontSize: 15, color: window.CL.ink, textAlign: 'right' }}>{r.v}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── MicroDose ──────────────────────────────────────── */}
-      <section id="microdose" style={{ padding: secPad, background: window.CL.paper, borderBottom: `1.5px solid ${window.CL.ink}` }}>
-        <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
-            <div className="cl-mono" style={{ color: window.CL.signal }}>PRX-MICRO · Course Series</div>
-            <div style={{ display: 'inline-block', padding: '4px 10px', border: `1px solid ${window.CL.ink}`, color: window.CL.ink, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em' }}>LAUNCHING 2026</div>
-          </div>
-
-          <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80 }}>
-            <div>
-              <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 1, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>MicroDose</div>
-              <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Science-based courses for the people raising the next generation.</p>
-              <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>
-                A micro-course series designed for educators and parents. The 2026 installments are <strong>The Learning Environment</strong> — for educators — and <strong>The Home Environment</strong> — for parents. Distributed via Coursera, alongside a formal book and e-book release.
-              </p>
-            </div>
-
-            {/* Course info card */}
-            <div style={{ border: `1.5px solid ${window.CL.ink}`, padding: '28px 24px', background: window.CL.paperWarm }}>
-              <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 18 }}>ABOUT THIS COURSE</div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
-                {[
-                  { k: 'Format',       v: '5-min micro-modules' },
-                  { k: 'Chapters',     v: '7 · C A P S u L e' },
-                  { k: 'Modules',      v: '315 total · 45 per chapter' },
-                  { k: 'Courses',      v: 'Parents · Teachers · Coaches' },
-                  { k: 'Distribution', v: 'Coursera · Book · E-book' },
-                  { k: 'Launch',       v: 'December 1, 2026' },
-                ].map(function(r) {
-                  return (
-                    <div key={r.k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, borderBottom: `1px solid ${window.CL.rule}`, paddingBottom: 10 }}>
-                      <span className="cl-mono" style={{ color: window.CL.inkSoft }}>{r.k}</span>
-                      <span style={{ fontFamily: window.CL.serif, fontSize: 15, color: window.CL.ink, textAlign: 'right' }}>{r.v}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Inline framework tracker */}
-          <div style={{ marginTop: 48 }}>
-            <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 16 }}>COURSE FRAMEWORK · HOVER ANY LETTER TO EXPLORE</div>
-            <MicroDoseTracker />
-          </div>
-        </div>
-      </section>
-
-      {/* ── Effective Dose ─────────────────────────────────── */}
-      <section id="effective-dose" style={{ padding: secPad, background: window.CL.paperWarm, borderBottom: `1.5px solid ${window.CL.ink}` }}>
-        <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
-            <div className="cl-mono" style={{ color: window.CL.signal }}>PRX-EFFECT · Podcast</div>
-            <div style={{ display: 'inline-block', padding: '4px 10px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em' }}>ACTIVE</div>
-          </div>
-
-          <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, marginBottom: 56 }}>
-            <div>
-              <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 1, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>Effective Dose</div>
-              <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Conversations with the people doing the science.</p>
-              <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>
-                Long-form interviews with researchers, clinicians, and practitioners. The archive that anchors everything we make. Eight episodes available on Spotify, Apple Podcasts, and YouTube.
-              </p>
-            </div>
-
-            {/* Coming soon: in-person dinner */}
-            <div style={{ border: `1.5px solid ${window.CL.ink}`, padding: '28px 24px', background: window.CL.paper }}>
-              <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 16 }}>WHAT'S NEXT</div>
-              <div style={{ fontFamily: window.CL.display, fontSize: 26, fontWeight: 500, letterSpacing: '-0.015em', color: window.CL.ink, marginBottom: 12 }}>The Effective Dose Dinner</div>
-              <p style={{ fontFamily: window.CL.serif, fontSize: 15, lineHeight: 1.6, color: window.CL.inkSoft, margin: '0 0 16px', textWrap: 'pretty' }}>
-                An intimate in-person dinner bringing together researchers, clinicians, and community builders for an evening of candid conversation. Seats are limited. Stay tuned for dates and locations.
-              </p>
-              <div style={{ display: 'inline-block', padding: '4px 10px', border: `1px solid ${window.CL.ink}`, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em', color: window.CL.ink }}>COMING SOON</div>
-            </div>
-          </div>
-
-          {/* Featured episodes */}
-          <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 20 }}>FEATURED EPISODES</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 0, borderTop: `1.5px solid ${window.CL.ink}` }}>
-            {featuredEps.map(function(ep) {
+          {/* Program selector */}
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr 1fr' : 'repeat(5, 1fr)', gap: 1, background: window.CL.ink, border: `1.5px solid ${window.CL.ink}` }}>
+            {menu.map(function(p) {
+              var isActive = active === p.code;
               return (
-                <div key={ep.no} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '80px 1fr auto', gap: isMobile ? 8 : 24, alignItems: 'center', padding: '20px 0', borderBottom: `1px solid ${window.CL.rule}` }}>
-                  <div className="cl-mono" style={{ color: window.CL.signal }}>No. {ep.no}</div>
-                  <div>
-                    <div style={{ fontFamily: window.CL.serif, fontSize: 17, fontWeight: 600, color: window.CL.ink, marginBottom: 4, lineHeight: 1.3 }}>{ep.title}</div>
-                    <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-                      <span style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 14, color: window.CL.inkSoft }}>{ep.guest}</span>
-                      <span style={{ display: 'inline-block', padding: '2px 6px', border: `1px solid ${window.CL.rule}`, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em', color: window.CL.inkSoft }}>{ep.tag}</span>
-                    </div>
+                <button key={p.code}
+                  onClick={function() { setActive(isActive ? null : p.code); }}
+                  style={{ display: 'flex', flexDirection: 'column', background: isActive ? window.CL.ink : window.CL.paper, padding: isMobile ? '20px 16px' : '28px 20px', border: 'none', cursor: 'pointer', textAlign: 'left', transition: 'background .15s', fontFamily: 'inherit' }}
+                  onMouseEnter={function(e) { if (!isActive) e.currentTarget.style.background = window.CL.paperWarm; }}
+                  onMouseLeave={function(e) { if (!isActive) e.currentTarget.style.background = window.CL.paper; }}
+                >
+                  <div className="cl-mono" style={{ color: isActive ? window.CL.signal : window.CL.inkSoft, marginBottom: 8, fontSize: 9 }}>{p.kind}</div>
+                  <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 18 : 22, fontWeight: 500, lineHeight: 1.05, letterSpacing: '-0.015em', color: isActive ? window.CL.paper : window.CL.ink, marginBottom: 10 }}>{p.name}</div>
+                  <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 13, lineHeight: 1.4, color: isActive ? 'rgba(245,239,226,.65)' : window.CL.inkSoft, margin: '0 0 auto', flexGrow: 1 }}>{p.tagline}</p>
+                  <div style={{ marginTop: 14, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ display: 'inline-block', padding: '3px 7px', border: `1px solid ${isActive ? 'rgba(245,239,226,.25)' : window.CL.rule}`, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.14em', textTransform: 'uppercase', color: isActive ? 'rgba(245,239,226,.5)' : window.CL.inkSoft }}>{p.status}</span>
+                    <span style={{ fontFamily: window.CL.mono, fontSize: 11, color: isActive ? window.CL.signal : window.CL.inkSoft }}>{isActive ? '↑' : '↓'}</span>
                   </div>
-                  <a href={ep.yt} target="_blank" rel="noopener noreferrer"
-                    style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 16px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 10, letterSpacing: '.2em', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0, marginTop: isMobile ? 8 : 0 }}
-                    onMouseEnter={function(e){ e.currentTarget.style.background = window.CL.signal; }}
-                    onMouseLeave={function(e){ e.currentTarget.style.background = window.CL.ink; }}
-                  >
-                    Watch →
-                  </a>
-                </div>
+                </button>
               );
             })}
           </div>
-
-          <div style={{ marginTop: 28, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
-            <a href="https://www.youtube.com/@Effective-Dose" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 20px', border: `1.5px solid ${window.CL.ink}`, background: 'transparent', color: window.CL.ink, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase' }}>
-              YouTube →
-            </a>
-            <a href="https://open.spotify.com/show/6sfUU9Upubmm1TCRt6O2d0" target="_blank" rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 20px', border: `1.5px solid ${window.CL.ink}`, background: 'transparent', color: window.CL.ink, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase' }}>
-              Spotify →
-            </a>
-          </div>
         </div>
       </section>
 
-      {/* ── WordRx ─────────────────────────────────────────── */}
-      <section id="wordrx" style={{ padding: secPad, background: window.CL.ink, color: window.CL.paper, borderBottom: `1.5px solid ${window.CL.ink}` }}>
-        <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid rgba(245,239,226,.3)`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
-            <div className="cl-mono" style={{ color: window.CL.signal }}>PRX-WORDRX · Documentary Film</div>
-            <div style={{ display: 'inline-block', padding: '4px 10px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em' }}>IN PRODUCTION</div>
-          </div>
+      {/* ── Detail panels ── */}
+      <div ref={detailRef}>
 
-          <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, marginBottom: 56 }}>
-            <div>
-              <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 64, fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.025em', marginBottom: 16 }}>WordRx</div>
-              <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>The hidden prescription behind healing.</p>
-              <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: 'rgba(245,239,226,.8)', margin: 0, textWrap: 'pretty' }}>
-                Our flagship feature documentary following four "word pharmacists" — a teacher, a parent, a clinician, a coach — making the case that language itself is a therapeutic tool. Filming December 2026 in Belleair, FL, with distribution via Amazon Prime Video.
-              </p>
-              <a href="WordRx-Donate.html"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 28, padding: '14px 22px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}>
-                Fund WordRx →
-              </a>
-            </div>
-
-            {/* Funding thermometer */}
-            <div>
-              <Thermometer label="WORDRX PRODUCTION FUND" raised="$xx,xxx" goal="$16,000" pct={0} note="FILMING DEC 2026 · BELLEAIR, FL" />
-            </div>
-          </div>
-
-          {/* Poster / elevator pitch placeholder + pie chart */}
-          <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, borderTop: `1px solid rgba(245,239,226,.2)`, paddingTop: 48 }}>
-            {/* Film poster + elevator pitch */}
-            <div>
-              <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 16 }}>FILM POSTER & ELEVATOR PITCH</div>
-              {/* Poster cropped to remove pill pile at bottom */}
-              <div style={{ overflow: 'hidden', borderRadius: 4, border: '1px solid rgba(245,239,226,.15)', marginBottom: 24 }}>
-                <img
-                  src="site/assets/WORDRX%20POSTER.png"
-                  alt="WordRx — Film Poster"
-                  style={{ width: '100%', display: 'block', marginBottom: '-36%' }}
-                />
+        {active === 'prescribed-dose' && (
+          <section style={{ padding: secPad, background: window.CL.paperWarm, borderBottom: `1.5px solid ${window.CL.ink}` }}>
+            <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
+                <div className="cl-mono" style={{ color: window.CL.signal }}>PRX-DOSE · Blog</div>
+                <div style={{ display: 'inline-block', padding: '4px 10px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em' }}>WEEKLY</div>
               </div>
-              {/* Elevator pitch */}
-              <p style={{ fontFamily: window.CL.serif, fontSize: 15, lineHeight: 1.7, color: 'rgba(245,239,226,.72)', margin: 0, textWrap: 'pretty' }}>
-                Every single one of us carries a prescription in our pocket: our words. In WordRx, we'll prove that language is a potent therapeutic lever by exploring how words interact with individual minds to shape physiological change. Just like a clinician considers prescription and dosage based on individual factors, we must orient words toward the characteristics of the receiver, because what heals one soul can harm another. By blending raw stories and insights from behavioral neuroscience, we'll show that we're all practitioners of health. Viewers will walk away as newly trained linguistic pharmacists, understanding how we can shape prescriptions for the people in front of us to prompt more resilient health, whether we don a white coat or not.
-              </p>
-            </div>
-
-            {/* Pie chart */}
-            <div>
-              <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 20 }}>PRODUCTION BUDGET ALLOCATION</div>
-              <div style={{ background: 'rgba(245,239,226,.06)', border: `1px solid rgba(245,239,226,.15)`, padding: '28px 24px' }}>
-                <DonutChart budget={wordrxBudget} total={wordrxTotal} />
+              <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80 }}>
+                <div>
+                  <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 1, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>Prescribed Dose</div>
+                  <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Research, written like advice from a friend.</p>
+                  <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>Short, structured pieces that translate one principle from the scientific literature into two or three things a parent, teacher, or coach can do today — with the science behind why it works. Each essay is around 600 words, rigorously sourced, and written to be shared.</p>
+                  <a href="https://www.thecapsl.org/blog" target="_blank" rel="noopener noreferrer"
+                    style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 28, padding: '14px 22px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}
+                    onMouseEnter={function(e){ e.currentTarget.style.background = window.CL.signal; }}
+                    onMouseLeave={function(e){ e.currentTarget.style.background = window.CL.ink; }}>
+                    Read the blog →
+                  </a>
+                </div>
+                <div style={{ border: `1.5px solid ${window.CL.ink}`, padding: '28px 24px', background: window.CL.paper }}>
+                  <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 18 }}>ABOUT THIS PROGRAM</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                    {[{ k: 'Format', v: 'Written essay' }, { k: 'Cadence', v: 'Weekly' }, { k: 'Audience', v: 'Parents, educators, coaches, clinicians' }, { k: 'Platform', v: 'thecapsl.org/blog + newsletter' }, { k: 'Length', v: '~600 words per piece' }].map(function(r) {
+                      return (
+                        <div key={r.k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, borderBottom: `1px solid ${window.CL.rule}`, paddingBottom: 10 }}>
+                          <span className="cl-mono" style={{ color: window.CL.inkSoft }}>{r.k}</span>
+                          <span style={{ fontFamily: window.CL.serif, fontSize: 15, color: window.CL.ink, textAlign: 'right' }}>{r.v}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        )}
+
+        {active === 'microdose' && (
+          <section style={{ padding: secPad, background: window.CL.paper, borderBottom: `1.5px solid ${window.CL.ink}` }}>
+            <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
+                <div className="cl-mono" style={{ color: window.CL.signal }}>PRX-MICRO · Course Series</div>
+                <div style={{ display: 'inline-block', padding: '4px 10px', border: `1px solid ${window.CL.ink}`, color: window.CL.ink, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em' }}>LAUNCHING 2026</div>
+              </div>
+              <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80 }}>
+                <div>
+                  <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 1, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>MicroDose</div>
+                  <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Science-based courses for the people raising the next generation.</p>
+                  <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>A micro-course series designed for educators and parents. The 2026 installments are <strong>The Learning Environment</strong> — for educators — and <strong>The Home Environment</strong> — for parents. Distributed via Coursera, alongside a formal book and e-book release.</p>
+                </div>
+                <div style={{ border: `1.5px solid ${window.CL.ink}`, padding: '28px 24px', background: window.CL.paperWarm }}>
+                  <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 18 }}>ABOUT THIS COURSE</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                    {[{ k: 'Format', v: '5-min micro-modules' }, { k: 'Chapters', v: '7 · C A P S u L e' }, { k: 'Modules', v: '315 total · 45 per chapter' }, { k: 'Courses', v: 'Parents · Teachers · Coaches' }, { k: 'Distribution', v: 'Coursera · Book · E-book' }, { k: 'Launch', v: 'December 1, 2026' }].map(function(r) {
+                      return (
+                        <div key={r.k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, borderBottom: `1px solid ${window.CL.rule}`, paddingBottom: 10 }}>
+                          <span className="cl-mono" style={{ color: window.CL.inkSoft }}>{r.k}</span>
+                          <span style={{ fontFamily: window.CL.serif, fontSize: 15, color: window.CL.ink, textAlign: 'right' }}>{r.v}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              <div style={{ marginTop: 48 }}>
+                <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 16 }}>COURSE FRAMEWORK · HOVER ANY LETTER TO EXPLORE</div>
+                <MicroDoseTracker />
+              </div>
+            </div>
+          </section>
+        )}
+
+        {active === 'effective-dose' && (
+          <section style={{ padding: secPad, background: window.CL.paperWarm, borderBottom: `1.5px solid ${window.CL.ink}` }}>
+            <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
+                <div className="cl-mono" style={{ color: window.CL.signal }}>PRX-EFFECT · Podcast</div>
+                <div style={{ display: 'inline-block', padding: '4px 10px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em' }}>ACTIVE</div>
+              </div>
+              <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, marginBottom: 56 }}>
+                <div>
+                  <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 1, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>Effective Dose</div>
+                  <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Conversations with the people doing the science.</p>
+                  <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>Long-form interviews with researchers, clinicians, and practitioners. The archive that anchors everything we make. Eight episodes available on Spotify, Apple Podcasts, and YouTube.</p>
+                </div>
+                <div style={{ border: `1.5px solid ${window.CL.ink}`, padding: '28px 24px', background: window.CL.paper }}>
+                  <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 16 }}>WHAT'S NEXT</div>
+                  <div style={{ fontFamily: window.CL.display, fontSize: 26, fontWeight: 500, letterSpacing: '-0.015em', color: window.CL.ink, marginBottom: 12 }}>The Effective Dose Dinner</div>
+                  <p style={{ fontFamily: window.CL.serif, fontSize: 15, lineHeight: 1.6, color: window.CL.inkSoft, margin: '0 0 16px', textWrap: 'pretty' }}>An intimate in-person dinner bringing together researchers, clinicians, and community builders for an evening of candid conversation. Seats are limited. Stay tuned for dates and locations.</p>
+                  <div style={{ display: 'inline-block', padding: '4px 10px', border: `1px solid ${window.CL.ink}`, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em', color: window.CL.ink }}>COMING SOON</div>
+                </div>
+              </div>
+              <div className="cl-mono" style={{ color: window.CL.inkSoft, marginBottom: 20 }}>FEATURED EPISODES</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 0, borderTop: `1.5px solid ${window.CL.ink}` }}>
+                {featuredEps.map(function(ep) {
+                  return (
+                    <div key={ep.no} style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '80px 1fr auto', gap: isMobile ? 8 : 24, alignItems: 'center', padding: '20px 0', borderBottom: `1px solid ${window.CL.rule}` }}>
+                      <div className="cl-mono" style={{ color: window.CL.signal }}>No. {ep.no}</div>
+                      <div>
+                        <div style={{ fontFamily: window.CL.serif, fontSize: 17, fontWeight: 600, color: window.CL.ink, marginBottom: 4, lineHeight: 1.3 }}>{ep.title}</div>
+                        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+                          <span style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 14, color: window.CL.inkSoft }}>{ep.guest}</span>
+                          <span style={{ display: 'inline-block', padding: '2px 6px', border: `1px solid ${window.CL.rule}`, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em', color: window.CL.inkSoft }}>{ep.tag}</span>
+                        </div>
+                      </div>
+                      <a href={ep.yt} target="_blank" rel="noopener noreferrer"
+                        style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '10px 16px', background: window.CL.ink, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 10, letterSpacing: '.2em', textTransform: 'uppercase', whiteSpace: 'nowrap', flexShrink: 0, marginTop: isMobile ? 8 : 0 }}
+                        onMouseEnter={function(e){ e.currentTarget.style.background = window.CL.signal; }}
+                        onMouseLeave={function(e){ e.currentTarget.style.background = window.CL.ink; }}>
+                        Watch →
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+              <div style={{ marginTop: 28, display: 'flex', gap: 14, flexWrap: 'wrap' }}>
+                <a href="https://www.youtube.com/@Effective-Dose" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 20px', border: `1.5px solid ${window.CL.ink}`, background: 'transparent', color: window.CL.ink, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase' }}>YouTube →</a>
+                <a href="https://open.spotify.com/show/6sfUU9Upubmm1TCRt6O2d0" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '12px 20px', border: `1.5px solid ${window.CL.ink}`, background: 'transparent', color: window.CL.ink, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase' }}>Spotify →</a>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {active === 'wordrx' && (
+          <section style={{ padding: secPad, background: window.CL.ink, color: window.CL.paper, borderBottom: `1.5px solid ${window.CL.ink}` }}>
+            <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid rgba(245,239,226,.3)`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
+                <div className="cl-mono" style={{ color: window.CL.signal }}>PRX-WORDRX · Documentary Film</div>
+                <div style={{ display: 'inline-block', padding: '4px 10px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em' }}>IN PRODUCTION</div>
+              </div>
+              <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, marginBottom: 56 }}>
+                <div>
+                  <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 64, fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.025em', marginBottom: 16 }}>WordRx</div>
+                  <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>The hidden prescription behind healing.</p>
+                  <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: 'rgba(245,239,226,.8)', margin: 0, textWrap: 'pretty' }}>Our flagship feature documentary following four "word pharmacists" — a teacher, a parent, a clinician, a coach — making the case that language itself is a therapeutic tool. Filming December 2026 in Belleair, FL, with distribution via Amazon Prime Video.</p>
+                  <a href="WordRx-Donate.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 28, padding: '14px 22px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}>Fund WordRx →</a>
+                </div>
+                <div>
+                  <Thermometer label="WORDRX PRODUCTION FUND" raised="$xx,xxx" goal="$16,000" pct={0} note="FILMING DEC 2026 · BELLEAIR, FL" />
+                </div>
+              </div>
+              <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80, borderTop: `1px solid rgba(245,239,226,.2)`, paddingTop: 48 }}>
+                <div>
+                  <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 16 }}>FILM POSTER &amp; ELEVATOR PITCH</div>
+                  <div style={{ overflow: 'hidden', border: '1px solid rgba(245,239,226,.15)', marginBottom: 24 }}>
+                    <img src="site/assets/WORDRX%20POSTER.png" alt="WordRx — Film Poster" style={{ width: '100%', display: 'block', marginBottom: '-36%' }} />
+                  </div>
+                  <p style={{ fontFamily: window.CL.serif, fontSize: 15, lineHeight: 1.7, color: 'rgba(245,239,226,.72)', margin: 0, textWrap: 'pretty' }}>Every single one of us carries a prescription in our pocket: our words. In WordRx, we'll prove that language is a potent therapeutic lever by exploring how words interact with individual minds to shape physiological change. Just like a clinician considers prescription and dosage based on individual factors, we must orient words toward the characteristics of the receiver, because what heals one soul can harm another. By blending raw stories and insights from behavioral neuroscience, we'll show that we're all practitioners of health. Viewers will walk away as newly trained linguistic pharmacists, understanding how we can shape prescriptions for the people in front of us to prompt more resilient health, whether we don a white coat or not.</p>
+                </div>
+                <div>
+                  <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 20 }}>PRODUCTION BUDGET ALLOCATION</div>
+                  <div style={{ background: 'rgba(245,239,226,.06)', border: `1px solid rgba(245,239,226,.15)`, padding: '28px 24px' }}>
+                    <DonutChart budget={wordrxBudget} total={wordrxTotal} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {active === 'extended-release' && (
+          <section style={{ padding: secPad, background: window.CL.paper, borderBottom: `1.5px solid ${window.CL.ink}` }}>
+            <div style={{ maxWidth: window.CL.maxw, margin: '0 auto', padding: pad }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', borderBottom: `1.5px solid ${window.CL.ink}`, paddingBottom: 16, marginBottom: 48, flexWrap: 'wrap', gap: 8 }}>
+                <div className="cl-mono" style={{ color: window.CL.signal }}>PRX-EXR · Documentary Film</div>
+                <div style={{ display: 'inline-block', padding: '4px 10px', border: `1px solid ${window.CL.ink}`, color: window.CL.ink, fontFamily: window.CL.mono, fontSize: 9, letterSpacing: '.18em' }}>IN DEVELOPMENT</div>
+              </div>
+              <div className="cl-grid-2" style={{ gap: isMobile ? 32 : 80 }}>
+                <div>
+                  <div style={{ fontFamily: window.CL.display, fontSize: isMobile ? 40 : 56, fontWeight: 500, lineHeight: 0.95, letterSpacing: '-0.025em', color: window.CL.ink, marginBottom: 16 }}>Extended Release</div>
+                  <p style={{ fontFamily: window.CL.serif, fontStyle: 'italic', fontSize: 18, color: window.CL.signal, margin: '0 0 20px', lineHeight: 1.4 }}>Healthcare is often a translation problem.</p>
+                  <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: window.CL.inkSoft, margin: 0, textWrap: 'pretty' }}>A second documentary in development examining what real patient–clinician relationships look like — and what gets lost between diagnosis and understanding. Where WordRx looks at language as medicine, Extended Release looks at medicine as language.</p>
+                </div>
+                <div style={{ border: `1.5px solid ${window.CL.ink}`, padding: '28px 24px', background: window.CL.paperWarm }}>
+                  <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 18 }}>ABOUT THIS FILM</div>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+                    {[{ k: 'Status', v: 'In development' }, { k: 'Format', v: 'Feature documentary' }, { k: 'Follows', v: 'WordRx (filming Dec 2026)' }, { k: 'Theme', v: 'Patient–clinician communication' }].map(function(r) {
+                      return (
+                        <div key={r.k} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 12, borderBottom: `1px solid ${window.CL.rule}`, paddingBottom: 10 }}>
+                          <span className="cl-mono" style={{ color: window.CL.inkSoft }}>{r.k}</span>
+                          <span style={{ fontFamily: window.CL.serif, fontSize: 15, color: window.CL.ink, textAlign: 'right' }}>{r.v}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+      </div>
 
     </React.Fragment>
   );
