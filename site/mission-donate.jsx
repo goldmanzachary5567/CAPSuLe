@@ -48,7 +48,7 @@ function Mission({ preview = false }) {
                   src={logo.src}
                   alt={logo.name}
                   title={logo.name}
-                  style={{ height: 38, width: 'auto', display: 'block', flexShrink: 0, filter: 'grayscale(100%) opacity(55%)', transition: 'filter .2s', maxWidth: 140 }}
+                  style={{ height: 38, width: 'auto', display: 'block', flexShrink: 0, filter: 'grayscale(100%) opacity(55%)', mixBlendMode: 'multiply', transition: 'filter .2s', maxWidth: 140 }}
                   onMouseEnter={function(e) { e.currentTarget.style.filter = 'grayscale(0%) opacity(100%)'; }}
                   onMouseLeave={function(e) { e.currentTarget.style.filter = 'grayscale(100%) opacity(55%)'; }}
                   onError={function(e) { e.currentTarget.style.display = 'none'; }}
