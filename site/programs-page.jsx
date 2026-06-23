@@ -435,7 +435,7 @@ function WordRxSection() {
           <div>
             <div className="cl-mono" style={{ color: window.CL.signal, marginBottom: 20 }}>PRODUCTION FUNDING</div>
             <Thermometer label="WORDRX PRODUCTION FUND" raised="$xx,xxx" goal="$20,000" pct={0} note="FILMING DEC 2026" />
-            <a href="Donate.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 20, padding: '12px 24px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}>
+            <a href="WordRx-Donate.html" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 20, padding: '12px 24px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}>
               Fund WordRx →
             </a>
           </div>

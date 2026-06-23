@@ -531,7 +531,7 @@ function Programs() {
               <p style={{ fontFamily: window.CL.serif, fontSize: 17, lineHeight: 1.6, color: 'rgba(245,239,226,.8)', margin: 0, textWrap: 'pretty' }}>
                 Our flagship feature documentary following four "word pharmacists" — a teacher, a parent, a clinician, a coach — making the case that language itself is a therapeutic tool. Filming December 2026 in Belleair, FL, with distribution via Amazon Prime Video.
               </p>
-              <a href="Donate.html"
+              <a href="WordRx-Donate.html"
                 style={{ display: 'inline-flex', alignItems: 'center', gap: 10, marginTop: 28, padding: '14px 22px', background: window.CL.signal, color: window.CL.paper, fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase' }}>
                 Fund WordRx →
               </a>

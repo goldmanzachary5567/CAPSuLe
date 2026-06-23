@@ -38,7 +38,7 @@ function FoundingStory() {
 
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1.4fr', gap: isMobile ? 36 : 80, alignItems: 'flex-start' }}>
           <h2 style={{ fontFamily: window.CL.display, fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 500, lineHeight: 1.05, letterSpacing: '-0.025em', margin: 0, color: window.CL.ink, fontStyle: 'italic' }}>
-            Youth developmental trajectories are drowning in information, and starving for understanding.
+            "Youth developmental trajectories are drowning in information, and starving for understanding."
           </h2>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
             <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.ink, margin: 0 }}>
@@ -55,6 +55,9 @@ function FoundingStory() {
             </p>
             <p style={{ fontFamily: window.CL.serif, fontSize: isMobile ? 16 : 17, lineHeight: 1.7, color: window.CL.signal, margin: 0, fontStyle: 'italic', fontWeight: 500 }}>
               By educating adults, we change the path every young person walks along and the destinations they find.
+            </p>
+            <p style={{ fontFamily: window.CL.mono, fontSize: isMobile ? 12 : 13, color: window.CL.inkSoft, margin: 0, letterSpacing: '.05em' }}>
+              — Nate Roy, Founder &amp; Vision Director
             </p>
           </div>
         </div>
