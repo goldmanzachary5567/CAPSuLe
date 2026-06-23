@@ -12,6 +12,7 @@ function ProgramsPreview() {
       blurb: 'Short, structured pieces that translate one principle from the literature into things a parent, teacher, or coach can do today.',
       status: 'Weekly',
       icon: '✍',
+      logo: null,
       color: window.CL.signal,
       href: 'https://www.thecapsl.org/blog',
       ext: true,
@@ -24,6 +25,7 @@ function ProgramsPreview() {
       blurb: 'Long-form interviews with researchers, clinicians, and practitioners. Eight episodes on Spotify, Apple Podcasts, and YouTube.',
       status: 'Active',
       icon: '🎙',
+      logo: 'site/assets/EffectiveDose_logo.png',
       color: window.CL.blueprint,
       href: 'Programs.html',
     },
@@ -35,6 +37,7 @@ function ProgramsPreview() {
       blurb: 'Micro-courses for educators and parents launching on Coursera in 2026.',
       status: 'Launching 2026',
       icon: '📚',
+      logo: 'site/assets/MicroDose_logo.png',
       color: window.CL.ink,
       href: 'Programs.html',
     },
@@ -46,6 +49,7 @@ function ProgramsPreview() {
       blurb: 'Our flagship feature documentary following four "word pharmacists" — in production for Amazon Prime Video.',
       status: 'In Production',
       icon: '🎬',
+      logo: 'site/assets/WordRX_logio.jpg',
       color: '#8B2FC9',
       href: 'Programs.html',
     },
@@ -57,6 +61,7 @@ function ProgramsPreview() {
       blurb: 'A second documentary in development examining what real patient-clinician relationships look like.',
       status: 'In Development',
       icon: '🎥',
+      logo: 'site/assets/ExtendedRelease_logo.png',
       color: '#2E7D5E',
       href: 'Programs.html',
     },
@@ -117,22 +122,19 @@ function ProgramCard({ program: p }) {
         cursor: 'pointer',
       }}
     >
-      {/* Program logo placeholder */}
+      {/* Program logo */}
       <div style={{
         width: 52, height: 52, borderRadius: 4, marginBottom: 18,
-        background: hovered ? p.color : window.CL.paperWarm,
-        border: `1.5px solid ${window.CL.rule}`,
+        background: p.logo ? 'transparent' : (hovered ? p.color : window.CL.paperWarm),
+        border: p.logo ? 'none' : `1.5px solid ${window.CL.rule}`,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         transition: 'background .2s',
         overflow: 'hidden',
       }}>
-        <img
-          src={`site/assets/programs/${p.code.toLowerCase()}.png`}
-          alt={p.name}
-          style={{ width: '100%', height: '100%', objectFit: 'contain' }}
-          onError={e => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'block'; }}
-        />
-        <span style={{ display: 'none', fontSize: 24 }}>{p.icon}</span>
+        {p.logo
+          ? <img src={p.logo} alt={p.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          : <span style={{ fontSize: 24 }}>{p.icon}</span>
+        }
       </div>
 
       <div className="cl-mono" style={{ color: hovered ? p.color : window.CL.inkSoft, marginBottom: 8, transition: 'color .2s' }}>{p.kind}</div>
