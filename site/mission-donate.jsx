@@ -167,11 +167,6 @@ function DonateCTA() {
           </div>
         )}
 
-        <div style={{ marginTop: 36 }}>
-          <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)', marginBottom: 16 }}>ACTIVE PRODUCTION FUND</div>
-          <Thermometer label="WORDRX — DOCUMENTARY FILM" raised="$xx,xxx" goal="$16,000" pct={0} note="FILMING DEC 2026 · BELLEAIR, FL" />
-        </div>
-
         <div style={{ marginTop: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <div className="cl-mono" style={{ color: 'rgba(245,239,226,.5)' }}>Recurring giving · Employer match · Memorial gifts</div>
           <a href="Donate.html" style={{ fontFamily: window.CL.mono, fontSize: 11, letterSpacing: '.22em', textTransform: 'uppercase', color: window.CL.signal, borderBottom: `1px solid ${window.CL.signal}`, paddingBottom: 3 }}>
