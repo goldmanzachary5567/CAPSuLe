@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>*, *::before, *::after{box-sizing:border-box} html,body{margin:0;-webkit-font-smoothing:antialiased}</style>
+</helmet>
+
+<div style="background:#F5EFE2; color:#0B1B26; font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;">
+
+  <!-- Nav -->
+  <header style="position:sticky; top:0; z-index:50; background:#E8E2D1; border-bottom:1.5px solid #0B1B26;">
+    <div style="max-width:1260px; margin:0 auto; padding:0 32px; height:72px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="CAPSuLe Home.dc.html" style="display:flex; align-items:center; flex-shrink:0; text-decoration:none;"><img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:46px; width:auto; display:block;" /></a>
+      <nav style="display:flex; gap:28px; flex:1; justify-content:center;">
+        <a href="CAPSuLe Home.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Home</a>
+        <a href="CAPSuLe About.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; text-decoration:none;">About</a>
+        <a href="CAPSuLe Programs.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Programs</a>
+        <a href="CAPSuLe JoinUs.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join Us</a>
+      </nav>
+      <a href="CAPSuLe Donate.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; flex-shrink:0; transition:background .15s;" style-hover="background:#C84B32;"><span style="width:5px; height:5px; border-radius:50%; background:#C84B32; display:inline-block;"></span>Donate</a>
+    </div>
+    <div style="height:3px; background:rgba(11,27,38,.08); position:relative;"><div id="cl-prog" style="position:absolute; left:0; top:0; height:100%; width:0; background:#C84B32; transition:width .12s linear;"></div></div>
+  </header>
+
+  <!-- §01 Mission — cream with warm radial -->
+  <section style="background:radial-gradient(ellipse 160% 230% at 80% -10%, #FAF0DC 0%, #F5EFE2 58%); border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="position:absolute; right:-36px; top:-52px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.04; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">01</div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px 72px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:16px; margin-bottom:52px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;"><span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">§ 01 — Mission</span></div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">501(c)(3) · Est. 2024</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1.6fr; gap:80px; align-items:flex-start;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:14px;">Mission Statement</div>
+          <h1 style="font-family:'Fraunces',serif; font-size:48px; font-weight:500; line-height:1.05; letter-spacing:-.025em; color:#0B1B26; margin:0;">To equip those who shape adolescent development with <em style="color:#C84B32;">actionable insights</em> grounded in science.</h1>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:24px;">
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:20px; line-height:1.6; color:#0B1B26; margin:0; text-wrap:pretty;">We bring together researchers, clinicians, and community leaders to bridge disciplines and translate developmental research into meaningful practice. Together, we form a working alliance committed to advancing child and adolescent well-being.</p>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.6; color:rgba(11,27,38,.65); margin:0;">Our work spans documentary film, podcast, micro-courses, a lecture series, and a weekly research blog. Every format serves one goal: get the science to the people who can use it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §02 Founding Story — warm parchment -->
+  <section style="background:linear-gradient(150deg,#E6DDC9 0%,#E1D7C4 100%); border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="position:absolute; left:-36px; bottom:-80px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.04; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">02</div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid rgba(11,27,38,.3); padding-bottom:16px; margin-bottom:52px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;"><span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">§ 02 — Founding Story</span></div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">Nate Roy · Founder</span>
+      </div>
+      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; margin-bottom:40px;">
+        <p style="font-family:'Fraunces',serif; font-size:32px; font-weight:500; line-height:1.15; letter-spacing:-.02em; color:#0B1B26; font-style:italic; margin:0;">"Youth developmental trajectories are drowning in information, and starving for understanding."</p>
+      </div>
+      <div class="cl-rv" data-d="100" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1fr; gap:56px;">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.7; color:#0B1B26; margin:0; text-wrap:pretty;">In college, I spent my time between two worlds that rarely spoke to each other: the football field and the neuroscience lab. What I kept noticing was the lack of cross talk. Everything we were uncovering about how the adolescent brain develops, how stress shapes it, and how specific experiences can actually armor the brain to adversity — none of it was being funneled into the lived experiences of the youth who desperately needed it.</p>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.7; color:#0B1B26; margin:0; text-wrap:pretty;">That gap is why I founded Cortex Flex, a neuropsychological performance company built to give adolescents the mental and physical tools to thrive. The deeper I got into that work, the more clearly I heard another signal. In nearly every conversation with a parent, coach, or school administrator there was the same vulnerable confession underneath their questions: <em>I want to do right by this kid. I just don't know where to start.</em></p>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.7; color:#0B1B26; margin:0; text-wrap:pretty;">They weren't uninformed. If anything, they were overwhelmed, awash in headlines and hot takes and contradictory advice. They cared deeply. They wanted to learn and apply. The problem was that the developmental science they needed — translated honestly, accessibly, and practically — had never been handed to them.</p>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.7; color:#0B1B26; margin:0; text-wrap:pretty;">CAPSuLe exists because of that moment of recognition. The adults in a young person's life are not peripheral to their development. They are the environment.</p>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.7; color:#C84B32; margin:0; font-style:italic; font-weight:500;">By educating adults, we change the path every young person walks along and the destinations they find.</p>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.1em; color:rgba(11,27,38,.5);">— Nate Roy, Founder & Vision Director</div>
+          <!-- TED Talk -->
+          <a href="https://www.youtube.com/watch?v=0JmkDyIbEZw" target="_blank" rel="noopener" style="margin-top:28px; display:flex; align-items:center; gap:20px; padding:20px 24px; background:#0B1B26; text-decoration:none; transition:opacity .15s;" style-hover="opacity:.88;">
+            <img src="https://img.youtube.com/vi/0JmkDyIbEZw/hqdefault.jpg" alt="TED Talk thumbnail" style="width:120px; height:68px; object-fit:cover; flex-shrink:0; display:block;" />
+            <div style="flex:1;">
+              <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:5px;">TEDx Talk · Nate Roy</div>
+              <div style="font-family:'Fraunces',serif; font-size:18px; font-weight:500; letter-spacing:-.01em; color:#F5EFE2; line-height:1.2;">Why Vulnerability Is the New Strength</div>
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; flex-shrink:0;">Watch →</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §03 Team — cool slate, carousel -->
+  <section style="background:linear-gradient(to bottom,#EBF2FA,#E7EFF8); border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="position:absolute; right:-48px; top:-56px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.045; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">03</div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:16px; margin-bottom:52px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;"><span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">§ 03 — The Team</span></div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">{{ teamCounter }}</span>
+      </div>
+      <!-- carousel: prev arrow | card | next arrow -->
+      <div style="display:grid; grid-template-columns:64px 1fr 64px; gap:20px; align-items:center;">
+        <button onClick="{{ teamPrev }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">←</button>
+        <div style="opacity:{{ teamCardOpacity }}; transform:{{ teamCardTransform }}; transition:opacity .3s ease, transform .3s ease; overflow:hidden; background:#F5EFE2; border:1.5px solid #0B1B26; display:grid; grid-template-columns:300px 1fr; overflow:hidden; min-height:440px;">
+          <!-- photo — rendered entirely from renderVals to avoid src-hole requests -->
+          <div style="position:relative; overflow:hidden; background:#E8E2D1; min-height:440px; flex-shrink:0;">{{ teamPhoto }}</div>
+          <!-- text -->
+          <div style="padding:48px 52px; display:flex; flex-direction:column; justify-content:flex-start;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">{{ teamMember.title }}</div>
+            <div style="font-family:'Fraunces',serif; font-size:40px; font-weight:500; letter-spacing:-.022em; line-height:1.04; color:#0B1B26; margin-bottom:28px;">{{ teamMember.name }}</div>
+            <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.72; color:#0B1B26; margin:0; text-wrap:pretty;">{{ teamMember.bio }}</p>
+          </div>
+        </div>
+        <button onClick="{{ teamNext }}" style="width:64px; height:64px; border:1.5px solid #0B1B26; background:transparent; color:#0B1B26; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .15s, color .15s; flex-shrink:0; font-family:Georgia,serif;" style-hover="background:#0B1B26; color:#F5EFE2;">→</button>
+      </div>
+      <!-- dot navigation -->
+      <div style="margin-top:28px; display:flex; justify-content:center; align-items:center; gap:8px;">{{ teamDots }}</div>
+    </div>
+  </section>
+
+  <!-- §04 Board of Advisors — paperWarm -->
+  <section style="background:#E8E2D1; border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="position:absolute; left:-36px; bottom:-80px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.04; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">04</div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:16px; margin-bottom:52px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;"><span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span><span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">§ 04 — Board of Advisors</span></div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">4 advisors</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:36px 28px;">
+
+        <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease;">
+          <div style="width:100%; padding-bottom:100%; position:relative; overflow:hidden; background:#E0D9C8; margin-bottom:14px;"><img src="site/assets/Kevin Wisniewski_edited.jpg" alt="Kevin Wisniewski" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top;" /></div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:#C84B32; margin-bottom:4px;">Board Member</div>
+          <div style="font-family:'Fraunces',serif; font-size:19px; font-weight:500; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">Kevin Wisniewski</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.55; color:rgba(11,27,38,.6); margin:0;">Kevin is a medical student at LECOM. He combines scientific insight with a commitment to service in health and athletics.</p>
+        </div>
+
+        <div class="cl-rv" data-d="80" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease;">
+          <div style="width:100%; padding-bottom:100%; position:relative; overflow:hidden; background:#E0D9C8; margin-bottom:14px;"><img src="site/assets/Danielle_edited_edited.png" alt="Danielle Vitelle" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top;" /></div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:#C84B32; margin-bottom:4px;">Board Member</div>
+          <div style="font-family:'Fraunces',serif; font-size:19px; font-weight:500; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">Danielle Vitelle, MD</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.55; color:rgba(11,27,38,.6); margin:0;">Danielle is a Resident Physician at the University of Pennsylvania. She is committed to advancing patient-centered care and bringing scientific rigor to clinical practice.</p>
+        </div>
+
+        <div class="cl-rv" data-d="160" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease;">
+          <div style="width:100%; padding-bottom:100%; position:relative; overflow:hidden; background:#E0D9C8; margin-bottom:14px;"><img src="site/assets/maya_edited.jpg" alt="Maya Haykal" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top;" /></div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:#C84B32; margin-bottom:4px;">Board Member</div>
+          <div style="font-family:'Fraunces',serif; font-size:19px; font-weight:500; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">Maya Haykal, MD</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.55; color:rgba(11,27,38,.6); margin:0;">Maya is a PM&R resident at Johns Hopkins University. She brings a holistic, community-centered approach to promoting health and well-being through research, sports medicine, and athlete mentorship.</p>
+        </div>
+
+        <div class="cl-rv" data-d="240" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease;">
+          <div style="width:100%; padding-bottom:100%; position:relative; overflow:hidden; background:#E0D9C8; margin-bottom:14px;"><img src="site/assets/Yael_edited.jpg" alt="Yael Ihejirika" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:top;" /></div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:#C84B32; margin-bottom:4px;">Board Member</div>
+          <div style="font-family:'Fraunces',serif; font-size:19px; font-weight:500; letter-spacing:-.015em; color:#0B1B26; margin-bottom:6px;">Yael Ihejirika, MD</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:13px; line-height:1.55; color:rgba(11,27,38,.6); margin:0;">Yael is a PM&R resident at Jefferson Moss. He is dedicated to patient-centered rehabilitation and lifelong learning, with clinical interests in sports medicine and prosthetics.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- Footer -->
+  <!-- ── Footer ── -->
+  <footer style="background:#E8E2D1; border-top:1.5px solid #0B1B26;">
+    <div style="max-width:1260px; margin:0 auto; padding:56px 32px 32px;">
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(11,27,38,.12);">
+        <div>
+          <img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:48px; width:auto; display:block; margin-bottom:14px;" />
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; line-height:1.55; color:rgba(11,27,38,.6); margin:0; max-width:280px;">The Child and Adolescent Performance Science Laboratory — a 501(c)(3) nonprofit translating youth development research into real-world guidance.</p>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">01 — Explore</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="CAPSuLe Home.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Home</a>
+            <a href="CAPSuLe About.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">About</a>
+            <a href="CAPSuLe Programs.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Programs</a>
+            <a href="https://www.thecapsl.org/blog" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Blog</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">02 — Involved</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="CAPSuLe Donate.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Donate</a>
+            <a href="CAPSuLe JoinUs.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join the team</a>
+            <a href="CAPSuLe JoinUs.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Partner with us</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">03 — Connect</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="https://www.linkedin.com/company/the-capsl-" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">LinkedIn</a>
+            <a href="https://www.instagram.com/the.capsl/" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Instagram</a>
+            <a href="https://www.youtube.com/@Effective-Dose" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">YouTube</a>
+            <a href="mailto:contact@thecapsl.org" style="display:inline-flex; align-items:center; gap:8px; padding:9px 16px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; text-decoration:none; transition:background .15s;">Email →</a>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">CAPSuLe © 2026 · 501(c)(3) Nonprofit</span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">Cat. № 240-80-22</span>
+      </div>
+    </div>
+  </footer>
+
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  static _team = [
+    { name: 'Nate Roy M.S.',      title: 'Founder & Vision Director',                    photo: 'site/assets/Nate headshot.png',                  bio: 'Nate is a Medical Student at Cornell University and Team USA Bobsled athlete. His mission is to translate neuroscience into practical tools for clinics and communities around the world.' },
+    { name: 'Keton Johnson',       title: 'President & Community Connection Director',    photo: 'site/assets/keton headshot.jpg',                  bio: 'Keton is a pre-med graduate from Seattle Pacific University. She is driven to provide thoughtful, compassionate, patient-centered care.' },
+    { name: 'Emily Smith Ph.D',    title: 'Director of Narrative Translation',            photo: 'site/assets/emily headshot.jpg',                  bio: 'Emily is a postdoctoral research fellow at the Centre for Addiction and Mental Health. She is passionate about applying her expertise in the brain\u2013body connection to support mental and physical well-being across the lifespan.' },
+    { name: 'Gabriella Cha',       title: 'Director of Digital Product Design',           photo: 'site/assets/gabrielle headshot.jpg',              bio: 'Gabriella is an undergraduate student in biochemistry and neuroscience at McGill University. She is passionate about exploring the neuroscience of addiction and aspires to pursue a medical career with a focus in neuroscience.' },
+    { name: 'Matt Shumway',        title: 'Director of Clinical Integration',             photo: 'site/assets/Matt bio pic.jpg',                    bio: 'Matt is a medical student at LECOM. He is dedicated to bridging the gap between complex clinical research and everyday wellness.' },
+    { name: 'Nicole Ahsan',        title: 'Director of Visual Narrative',                 photo: 'site/assets/nicole headshot.JPG',                 bio: 'Nicole is a pre-med student in Film and Media Studies at Yale University. She strives to bridge the worlds of science and storytelling to make health information more accessible to diverse communities.' },
+    { name: 'Lyra Tiffin',         title: 'Director of Narrative Dissemination',          photo: 'site/assets/lyra headshot.jpg',                   bio: 'Lyra is a pre-med student in Nutrition and Health Sciences at Pepperdine University. She hopes to integrate nutrition and medicine as a physician to improve health outcomes and support patient longevity.' },
+    { name: 'Curtis Roy',          title: 'Growth Engineer',                              photo: 'site/assets/curtis headshot.jpg',                 bio: 'Curtis is an undergraduate student in neuroscience at the University of Rochester. He is passionate about applying neuroscience to enhance human performance and better understand how the brain drives physical and mental potential.' },
+    { name: 'Zachary Goldman',     title: 'Director of Implementation Strategy',          photo: 'site/assets/Zach Goldman headshot (1).jpg',       bio: 'Zachary is a senior at the University of Alabama studying physics and conducting biophysics research through their Randall Research Scholars Program. As a founder of multiple nonprofits, he is passionate about bringing a quantitative, research-driven perspective to scientific engagement and community development.' },
+    { name: 'Avery Kirchmann',     title: 'Director of Operations & Production Logistics', photo: 'site/assets/avery headshot.jpg',                 bio: 'Avery leads operations and production logistics for CAPSuLe, ensuring every program runs with precision and purpose.' },
+    { name: 'Johanna Kunz',        title: 'Creative Visual Associate',                    photo: '',                                                bio: "Johanna is a senior at Auburn University studying PR & studio art. She brings her creative visual expertise to CAPSuLe's storytelling and design work." },
+    { name: 'Miller Kiser',        title: 'Film & Media Associate',                       photo: '',                                                bio: "Miller is a senior at Florida State studying digital media production & psychology interested in bridging the human condition and storytelling through CAPSuLe's documentary and video projects." },
+  ];
+
+  state = { teamIdx: 0, teamDir: 0, teamAnim: false };
+
+  _goTo(i, dir) {
+    if (this.state.teamAnim) return;
+    const T = Component._team;
+    const newIdx = ((i % T.length) + T.length) % T.length;
+    this.setState({ teamAnim: true, teamDir: dir });
+    setTimeout(() => this.setState({ teamIdx: newIdx, teamDir: 0, teamAnim: false }), 300);
+  }
+
+  renderVals() {
+    const T = Component._team;
+    const { teamIdx, teamDir, teamAnim } = this.state;
+    const m = T[teamIdx];
+    const initials = m.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    const tx = teamAnim ? (teamDir < 0 ? '-56px' : '56px') : '0px';
+    return {
+      teamMember: { ...m, initials },
+      teamPhoto: React.createElement(React.Fragment, null,
+        m.photo ? React.createElement('img', {
+          src: m.photo, alt: m.name,
+          style: { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top', display: 'block' },
+          onLoad: function(e) { var ph = e.target.parentNode.querySelector('.cl-photo-ph'); if (ph) ph.style.display = 'none'; },
+          onError: function(e) { e.target.style.display = 'none'; }
+        }) : null,
+        React.createElement('div', { className: 'cl-photo-ph', style: { position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 8, background: '#E8E2D1' } },
+          React.createElement('span', { style: { fontFamily: "'Fraunces',serif", fontSize: 64, fontWeight: 500, color: 'rgba(11,27,38,.2)', lineHeight: 1 } }, initials),
+          React.createElement('span', { style: { fontFamily: "'JetBrains Mono',monospace", fontSize: 9, letterSpacing: '.18em', textTransform: 'uppercase', color: 'rgba(11,27,38,.3)' } }, 'Photo coming soon')
+        )
+      ),
+      teamCounter: String(teamIdx + 1).padStart(2, '0') + ' / ' + String(T.length).padStart(2, '0'),
+      teamCardOpacity: teamAnim ? 0 : 1,
+      teamCardTransform: 'translateX(' + tx + ')',
+      teamPrev: () => this._goTo(teamIdx - 1, 1),
+      teamNext: () => this._goTo(teamIdx + 1, -1),
+      teamDots: React.createElement(React.Fragment, null,
+        ...T.map((_, i) => React.createElement('button', {
+          key: i,
+          onClick: () => this._goTo(i, i > teamIdx ? -1 : 1),
+          'aria-label': 'Go to member ' + (i + 1),
+          style: {
+            width: i === teamIdx ? 24 : 8,
+            height: 8,
+            background: i === teamIdx ? '#C84B32' : 'rgba(11,27,38,.2)',
+            border: 'none',
+            borderRadius: 4,
+            cursor: 'pointer',
+            transition: 'width .25s ease, background .25s ease',
+            padding: 0,
+            flexShrink: 0,
+          }
+        }))
+      ),
+    };
+  }
+
+  componentDidMount() {
+    this._sc = () => {
+      const s = window.pageYOffset, t = document.documentElement.scrollHeight - window.innerHeight;
+      const b = document.getElementById('cl-prog');
+      if (b) b.style.width = (t > 0 ? Math.min(100, s/t*100) : 0) + '%';
+    };
+    window.addEventListener('scroll', this._sc, { passive: true });
+    this._obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const d = +(e.target.dataset.d || 0);
+        setTimeout(() => { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }, d);
+        this._obs.unobserve(e.target);
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.cl-rv').forEach(el => this._obs.observe(el));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._sc);
+    if (this._obs) this._obs.disconnect();
+  }
+}
+
+</script>
+</body>
+</html>
