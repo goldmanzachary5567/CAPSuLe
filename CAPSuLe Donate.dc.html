@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>*, *::before, *::after{box-sizing:border-box} html,body{margin:0;-webkit-font-smoothing:antialiased}</style>
+</helmet>
+
+<div style="background:#F5EFE2; color:#0B1B26; font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;">
+
+  <!-- Nav -->
+  <header style="position:sticky; top:0; z-index:50; background:#E8E2D1; border-bottom:1.5px solid #0B1B26;">
+    <div style="max-width:1260px; margin:0 auto; padding:0 32px; height:72px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="CAPSuLe Home.dc.html" style="display:flex; align-items:center; flex-shrink:0; text-decoration:none;"><img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:46px; width:auto; display:block;" /></a>
+      <nav style="display:flex; gap:28px; flex:1; justify-content:center;">
+        <a href="CAPSuLe Home.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Home</a>
+        <a href="CAPSuLe About.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">About</a>
+        <a href="CAPSuLe Programs.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Programs</a>
+        <a href="CAPSuLe JoinUs.dc.html" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join Us</a>
+      </nav>
+      <a href="CAPSuLe Donate.dc.html" style="display:inline-flex; align-items:center; gap:8px; padding:10px 16px; background:#C84B32; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.2em; text-transform:uppercase; text-decoration:none; flex-shrink:0;">
+        <span style="width:5px; height:5px; border-radius:50%; background:#F5EFE2; display:inline-block;"></span>Donate
+      </a>
+    </div>
+    <div style="height:3px; background:rgba(11,27,38,.08); position:relative;"><div id="cl-prog" style="position:absolute; left:0; top:0; height:100%; width:0; background:#C84B32; transition:width .12s linear;"></div></div>
+  </header>
+
+  <!-- Partner banner — sticky, fades out as hero scrolls in -->
+  <div id="cl-donate-wrap" style="position:relative; height:200vh;">
+    <!-- Sticky partner banner -->
+    <div id="cl-partner-banner" style="position:sticky; top:72px; z-index:10; background:#0B1B26; color:#F5EFE2; overflow:hidden; transition:opacity .1s linear;">
+      <div style="position:absolute; right:-100px; bottom:-40px; width:500px; height:190px; border-radius:190px; background:#C84B32; opacity:.08; transform:rotate(-18deg); pointer-events:none;"></div>
+      <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative; text-align:center;">
+        <div style="width:80px; height:80px; border-radius:50%; border:2px solid #C84B32; display:flex; align-items:center; justify-content:center; margin:0 auto 28px;">
+          <img src="site/assets/capsule-logo.png" alt="" style="width:52px; height:52px; object-fit:contain; display:block; filter:brightness(0) invert(1);" />
+        </div>
+        <h2 style="font-family:'Fraunces',serif; font-size:clamp(40px,6vw,80px); font-weight:500; line-height:.92; letter-spacing:-.04em; margin:0 0 20px; text-wrap:balance;">Every piece of evidence<br />we ship started<br />with a <em style="color:#C84B32;">partner like you.</em></h2>
+        <p style="font-family:'Source Serif 4',Georgia,serif; font-size:18px; line-height:1.55; color:rgba(245,239,226,.75); max-width:580px; margin:0 auto 36px; text-wrap:pretty;">Every piece of content we publish is free to access because donors fund the production — and every partner who makes it possible is recognized by name.</p>
+        <a href="#tiers" style="display:inline-flex; align-items:center; gap:12px; padding:16px 32px; background:#C84B32; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.22em; text-transform:uppercase; text-decoration:none; transition:background .15s;" style-hover="background:#E05A3F;">See how to give →</a>
+      </div>
+    </div>
+    <!-- Hero revealed as you scroll -->
+    <div style="position:absolute; top:100vh; left:0; right:0;">
+  <!-- §01 Hero — cream with warm radial -->
+  <section style="background:radial-gradient(ellipse 160% 230% at 75% -10%, #FAF0DC 0%, #F5EFE2 58%); border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden; padding:80px 0;">
+    <div style="position:absolute; right:-36px; top:-52px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.04; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">$</div>
+    <div style="max-width:1260px; margin:0 auto; padding:0 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:14px; margin-bottom:52px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          <span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">Sponsorship Prospectus</span>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">File CAPSL/SPN/2026</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:flex-start;">
+        <div>
+          <h1 style="font-family:'Fraunces',serif; font-size:clamp(52px,6vw,96px); font-weight:500; line-height:.88; letter-spacing:-.04em; margin:0 0 28px; color:#0B1B26; text-wrap:balance;">Underwrite the <em style="color:#C84B32;">science</em> our kids are growing up in.</h1>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:19px; line-height:1.55; color:rgba(11,27,38,.7); margin:0; text-wrap:pretty;">CAPSuLe translates developmental science into films, courses, and essays — and delivers all of it free. No ads. No subscriptions. No paywall. Producing it isn't free.</p>
+        </div>
+        <!-- At a glance card -->
+        <div style="border:1.5px solid #0B1B26; background:#F5EFE2; padding:28px;">
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:18px; padding-bottom:14px; border-bottom:1px solid rgba(11,27,38,.12);">At a glance</div>
+          <div style="display:flex; flex-direction:column; gap:0;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:10px 0; border-bottom:1px solid rgba(11,27,38,.08);"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">Status</span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26;">501(c)(3) Nonprofit</span></div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:10px 0; border-bottom:1px solid rgba(11,27,38,.08);"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">Founded</span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26;">2024</span></div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:10px 0; border-bottom:1px solid rgba(11,27,38,.08);"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">Programs</span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26;">Film · Course · Podcast · Blog</span></div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:10px 0; border-bottom:1px solid rgba(11,27,38,.08);"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">Tax-deductible</span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26;">100% of contribution</span></div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; gap:16px; padding:10px 0;"><span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">Contact</span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#C84B32;">sponsor@thecapsl.org</span></div>
+          </div>
+          <a href="#tiers" style="display:block; margin-top:24px; padding:14px 16px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; text-align:center; text-decoration:none; transition:background .15s;" style-hover="background:#C84B32;">See sponsorship tiers →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    </div><!-- close hero inside scroll wrapper -->
+  </div><!-- close cl-donate-wrap -->
+
+  <!-- §02 Partner banner — parchment -->
+  <section style="background:#E8E2D1; border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="max-width:1260px; margin:0 auto; padding:64px 32px; position:relative;">
+      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1.2fr 1fr; gap:80px; align-items:center;">
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:16px;">Why It Matters</div>
+          <h2 style="font-family:'Fraunces',serif; font-size:clamp(32px,3.5vw,48px); font-weight:500; line-height:1.04; letter-spacing:-.025em; margin:0; color:#0B1B26; text-wrap:pretty;">Every piece of evidence we ship started with a partner like you.</h2>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:17px; line-height:1.65; color:#0B1B26; margin:0; text-wrap:pretty;">Our programs are only possible because donors, institutions, and individual supporters chose to invest in translation — not just production. When you give to CAPSuLe, you're not funding overhead. You're funding the gap between the lab and the living room.</p>
+          <a href="#tiers" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:#C84B32; text-decoration:none; border-bottom:1px solid #C84B32; padding-bottom:3px; align-self:flex-start; transition:opacity .15s;" style-hover="opacity:.7;">See giving tiers →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §02 Translation gap — warm parchment -->
+  <section style="background:linear-gradient(150deg,#E6DDC9 0%,#E1D7C4 100%); border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="position:absolute; left:-36px; bottom:-80px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.04; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">17</div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid rgba(11,27,38,.3); padding-bottom:16px; margin-bottom:48px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          <span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">Why We Need You</span>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">The translation gap</span>
+      </div>
+      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1.4fr; gap:64px; margin-bottom:48px; align-items:end;">
+        <h2 style="font-family:'Fraunces',serif; font-size:clamp(40px,4vw,56px); font-weight:500; line-height:.98; letter-spacing:-.025em; margin:0; color:#0B1B26; text-wrap:balance;">The research exists.<br />The <em style="color:#C84B32;">translation</em> is missing.</h2>
+        <p style="font-family:'Source Serif 4',Georgia,serif; font-size:18px; line-height:1.55; color:#0B1B26; margin:0; text-wrap:pretty;">Developmental research that could change how parents raise kids and how teachers run classrooms sits in academic journals almost no one reads. CAPSuLe translates it and delivers it free. Films require crews, gear, and post-production. Courses require instructional design. None of it runs on goodwill.</p>
+      </div>
+      <div class="cl-rv" data-d="100" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:1fr 1fr; gap:1px; background:#0B1B26; border:1.5px solid #0B1B26;">
+        <div style="background:#F5EFE2; padding:32px 28px;">
+          <div style="font-family:'Fraunces',serif; font-size:52px; font-weight:500; letter-spacing:-.03em; line-height:1; color:#C84B32; margin-bottom:14px;">17 yrs</div>
+          <div style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.5; color:#0B1B26; margin-bottom:8px;">Average lag between biomedical research publication and clinical adoption</div>
+          <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:13px; color:rgba(11,27,38,.55);">Morris, Wooding &amp; Grant, J R Soc Med, 2011.</div>
+        </div>
+        <div style="background:#F5EFE2; padding:32px 28px;">
+          <div style="font-family:'Fraunces',serif; font-size:52px; font-weight:500; letter-spacing:-.03em; line-height:1; color:#C84B32; margin-bottom:14px;">~50%</div>
+          <div style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.5; color:#0B1B26; margin-bottom:8px;">Share of paywalled academic articles never cited — even by other researchers</div>
+          <div style="font-family:'Source Serif 4',Georgia,serif; font-style:italic; font-size:13px; color:rgba(11,27,38,.55);">Documented across multiple open-access citation studies.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- §03 Tiers — cream -->
+  <section id="tiers" style="background:#F5EFE2; border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="position:absolute; right:-48px; top:-56px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.04; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">T</div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:16px; margin-bottom:32px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          <span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">Sponsorship Tiers</span>
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.55);">04 giving levels · All named</span>
+      </div>
+
+      <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; padding:24px 28px; background:#E8E2D1; border:1.5px solid #0B1B26; margin-bottom:36px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:10px;">Every sponsorship is named.</div>
+        <p style="font-family:'Source Serif 4',Georgia,serif; font-size:16px; line-height:1.65; color:#0B1B26; margin:0; text-wrap:pretty;">Whether you fund a single article or an entire lecture series, your contribution is publicly credited — on the content itself, in the show notes, on the event slide deck, or in the series title.</p>
+      </div>
+
+      <div style="border-top:1.5px solid #0B1B26;">
+
+        <div class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:160px 1fr 1fr; gap:36px; padding:36px 0; border-bottom:1px solid rgba(11,27,38,.12); align-items:flex-start;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:6px;">TIER 01</div>
+            <div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; line-height:.95; color:#0B1B26;">$250</div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-top:6px;">Per article</div>
+          </div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:500; line-height:1.1; letter-spacing:-.015em; color:#0B1B26; margin-bottom:10px;">Blog Post Sponsor</div>
+            <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.55; color:rgba(11,27,38,.65); margin:0;">A single Prescribed Dose article — ~600 words, evidence-based, with concrete takeaways for parents, educators, or coaches.</p>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:10px;">Includes</div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Named credit on the published article</span></div>
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Listing on the Sponsors page</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cl-rv" data-d="80" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:160px 1fr 1fr; gap:36px; padding:36px 0; border-bottom:1px solid rgba(11,27,38,.12); align-items:flex-start;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:6px;">TIER 02</div>
+            <div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; line-height:.95; color:#0B1B26;">$500</div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-top:6px;">Per episode</div>
+          </div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:500; line-height:1.1; letter-spacing:-.015em; color:#0B1B26; margin-bottom:10px;">Podcast Episode Sponsor</div>
+            <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.55; color:rgba(11,27,38,.65); margin:0;">A single Effective Dose episode — a long-form interview with a researcher, clinician, or practitioner in youth development.</p>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:10px;">Includes</div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Verbal credit in the episode</span></div>
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Logo and credit in show notes</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cl-rv" data-d="160" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:160px 1fr 1fr; gap:36px; padding:36px 16px; border-bottom:1px solid rgba(11,27,38,.12); align-items:flex-start; background:#E8E2D1; margin:0 -16px;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:6px;">TIER 03</div>
+            <div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; line-height:.95; color:#0B1B26;">$1,000</div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-top:6px;">Per lecture</div>
+            <div style="margin-top:12px; display:inline-block; padding:4px 8px; background:#C84B32; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em;">POPULAR</div>
+          </div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:500; line-height:1.1; letter-spacing:-.015em; color:#0B1B26; margin-bottom:10px;">Public Lecture Sponsor</div>
+            <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.55; color:rgba(11,27,38,.65); margin:0;">A single CAPSuLe community lecture — one researcher's work brought directly to an audience of parents, coaches, and educators.</p>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:10px;">Includes</div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Verbal credit at the event</span></div>
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Logo on the slideshow and materials</span></div>
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Post-event recap sent to sponsor</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cl-rv" data-d="240" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; display:grid; grid-template-columns:160px 1fr 1fr; gap:36px; padding:36px 0; align-items:flex-start;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32; margin-bottom:6px;">TIER 04</div>
+            <div style="font-family:'Fraunces',serif; font-size:44px; font-weight:500; letter-spacing:-.025em; line-height:.95; color:#0B1B26;">$5,000+</div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-top:6px;">Annual</div>
+            <div style="margin-top:12px; display:inline-block; padding:4px 8px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:.18em;">FLAGSHIP</div>
+          </div>
+          <div>
+            <div style="font-family:'Fraunces',serif; font-size:24px; font-weight:500; line-height:1.1; letter-spacing:-.015em; color:#0B1B26; margin-bottom:10px;">Endowed Lecture Series</div>
+            <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.55; color:rgba(11,27,38,.65); margin:0;">A named multi-event series — e.g., "The [Sponsor] Lecture Series on Adolescent Mental Health." Annual stewardship report included.</p>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:rgba(11,27,38,.5); margin-bottom:10px;">Includes</div>
+            <div style="display:flex; flex-direction:column; gap:7px;">
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Named series with sponsor recognition in the title</span></div>
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Annual stewardship report</span></div>
+              <div style="display:flex; gap:8px; align-items:flex-start;"><span style="width:4px; height:4px; border-radius:4px; background:#C84B32; margin-top:6px; flex-shrink:0;"></span><span style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; color:#0B1B26; line-height:1.45;">Priority access to CAPSuLe research briefings</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-rv" data-d="300" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; margin-top:8px; padding:28px 32px; background:#0B1B26; color:#F5EFE2; display:flex; justify-content:space-between; align-items:center; gap:28px; flex-wrap:wrap;">
+        <div>
+          <div style="font-family:'Fraunces',serif; font-size:26px; font-weight:500; letter-spacing:-.015em; margin-bottom:6px;">Ready to support CAPSuLe?</div>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:rgba(245,239,226,.7); margin:0; line-height:1.5;">Reach out and we'll put together a giving plan that fits your goals.</p>
+        </div>
+        <a href="mailto:sponsor@thecapsl.org" style="flex-shrink:0; padding:14px 28px; background:#C84B32; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.22em; text-transform:uppercase; text-decoration:none; white-space:nowrap; transition:background .15s;" style-hover="background:#E05A3F;">Get in touch →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- §05 FAQ — paperWarm -->
+  <section style="background:#E8E2D1; border-bottom:1.5px solid #0B1B26; position:relative; overflow:hidden;">
+    <div style="position:absolute; left:-36px; bottom:-80px; font-family:'Fraunces',serif; font-size:360px; font-weight:700; color:#0B1B26; opacity:.04; line-height:1; pointer-events:none; user-select:none; letter-spacing:-.06em;">?</div>
+    <div style="max-width:1260px; margin:0 auto; padding:80px 32px; position:relative;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; border-bottom:1.5px solid #0B1B26; padding-bottom:16px; margin-bottom:44px; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; align-items:center; gap:9px;">
+          <span style="width:7px; height:7px; background:#C84B32; display:inline-block; flex-shrink:0;"></span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#C84B32;">Common Questions</span>
+        </div>
+        <a href="mailto:contact@thecapsl.org" style="display:inline-flex; align-items:center; gap:8px; padding:9px 16px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; text-decoration:none; transition:background .15s;">Email →</a>
+      </div>
+      <div id="cl-faq" style="border-top:1.5px solid #0B1B26;">
+        <details class="cl-rv" data-d="0" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; border-bottom:1px solid rgba(11,27,38,.12);">
+          <summary style="display:flex; justify-content:space-between; align-items:center; padding:22px 0; cursor:pointer; list-style:none; gap:24px;">
+            <span style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.15; letter-spacing:-.015em; color:#0B1B26;">Is my donation tax-deductible?</span>
+            <span class="cl-faq-icon" style="font-family:'JetBrains Mono',monospace; font-size:18px; color:#C84B32; flex-shrink:0; transition:transform .25s;">+</span>
+          </summary>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.7; color:rgba(11,27,38,.65); margin:0 0 22px; text-wrap:pretty;">Yes. CAPSuLe is a registered 501(c)(3) nonprofit. All contributions are tax-deductible to the full extent permitted by law. You'll receive a receipt for your records.</p>
+        </details>
+        <details class="cl-rv" data-d="60" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; border-bottom:1px solid rgba(11,27,38,.12);">
+          <summary style="display:flex; justify-content:space-between; align-items:center; padding:22px 0; cursor:pointer; list-style:none; gap:24px;">
+            <span style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.15; letter-spacing:-.015em; color:#0B1B26;">Can I designate my gift?</span>
+            <span class="cl-faq-icon" style="font-family:'JetBrains Mono',monospace; font-size:18px; color:#C84B32; flex-shrink:0; transition:transform .25s;">+</span>
+          </summary>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.7; color:rgba(11,27,38,.65); margin:0 0 22px; text-wrap:pretty;">Yes. You can designate your contribution to any active production fund (WordRx, Extended Release, MicroDose) or to the general operating fund.</p>
+        </details>
+        <details class="cl-rv" data-d="120" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; border-bottom:1px solid rgba(11,27,38,.12);">
+          <summary style="display:flex; justify-content:space-between; align-items:center; padding:22px 0; cursor:pointer; list-style:none; gap:24px;">
+            <span style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.15; letter-spacing:-.015em; color:#0B1B26;">Donation vs. sponsorship?</span>
+            <span class="cl-faq-icon" style="font-family:'JetBrains Mono',monospace; font-size:18px; color:#C84B32; flex-shrink:0; transition:transform .25s;">+</span>
+          </summary>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.7; color:rgba(11,27,38,.65); margin:0 0 22px; text-wrap:pretty;">Sponsorships are designated to a specific program and include named public recognition. General fund donations support overall operations with no credit required.</p>
+        </details>
+        <details class="cl-rv" data-d="180" style="opacity:0; transform:translateY(22px); transition:opacity .65s ease, transform .65s ease; border-bottom:1px solid rgba(11,27,38,.12);">
+          <summary style="display:flex; justify-content:space-between; align-items:center; padding:22px 0; cursor:pointer; list-style:none; gap:24px;">
+            <span style="font-family:'Fraunces',serif; font-size:20px; font-weight:500; line-height:1.15; letter-spacing:-.015em; color:#0B1B26;">Do you accept recurring gifts?</span>
+            <span class="cl-faq-icon" style="font-family:'JetBrains Mono',monospace; font-size:18px; color:#C84B32; flex-shrink:0; transition:transform .25s;">+</span>
+          </summary>
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; line-height:1.7; color:rgba(11,27,38,.65); margin:0 0 22px; text-wrap:pretty;">Yes. Recurring giving is especially helpful for sustained productions. Reach out to discuss a monthly or annual giving arrangement.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <!-- ── Footer ── -->
+  <footer style="background:#E8E2D1; border-top:1.5px solid #0B1B26;">
+    <div style="max-width:1260px; margin:0 auto; padding:56px 32px 32px;">
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; padding-bottom:48px; border-bottom:1px solid rgba(11,27,38,.12);">
+        <div>
+          <img src="site/assets/capsule-logo.png" alt="CAPSuLe" style="height:48px; width:auto; display:block; margin-bottom:14px;" />
+          <p style="font-family:'Source Serif 4',Georgia,serif; font-size:14px; line-height:1.55; color:rgba(11,27,38,.6); margin:0; max-width:280px;">The Child and Adolescent Performance Science Laboratory — a 501(c)(3) nonprofit translating youth development research into real-world guidance.</p>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">01 — Explore</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="CAPSuLe Home.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Home</a>
+            <a href="CAPSuLe About.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">About</a>
+            <a href="CAPSuLe Programs.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Programs</a>
+            <a href="https://www.thecapsl.org/blog" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Blog</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">02 — Involved</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="CAPSuLe Donate.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Donate</a>
+            <a href="CAPSuLe JoinUs.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Join the team</a>
+            <a href="CAPSuLe JoinUs.dc.html" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Partner with us</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:#C84B32; margin-bottom:14px;">03 — Connect</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="https://www.linkedin.com/company/the-capsl-" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">LinkedIn</a>
+            <a href="https://www.instagram.com/the.capsl/" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">Instagram</a>
+            <a href="https://www.youtube.com/@Effective-Dose" target="_blank" rel="noopener" style="font-family:'Source Serif 4',Georgia,serif; font-size:15px; color:#0B1B26; text-decoration:none; transition:color .15s;" style-hover="color:#C84B32;">YouTube</a>
+            <a href="mailto:contact@thecapsl.org" style="display:inline-flex; align-items:center; gap:8px; padding:9px 16px; background:#0B1B26; color:#F5EFE2; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; text-decoration:none; transition:background .15s;">Email →</a>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top:20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">CAPSuLe © 2026 · 501(c)(3) Nonprofit</span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.15em; text-transform:uppercase; color:rgba(11,27,38,.5);">Cat. № 240-80-22</span>
+      </div>
+    </div>
+  </footer>
+
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+class Component extends DCLogic {
+  componentDidMount() {
+    this._sc = () => {
+      const s = window.pageYOffset, t = document.documentElement.scrollHeight - window.innerHeight;
+      // Fade out partner banner as we scroll into the hero
+      const wrap = document.getElementById('cl-donate-wrap');
+      const banner = document.getElementById('cl-partner-banner');
+      if (wrap && banner) {
+        const wh = window.innerHeight;
+        const p = Math.max(0, Math.min(1, s / (wh * 0.25)));
+        banner.style.opacity = String(1 - p);
+      }
+      const b = document.getElementById('cl-prog');
+      if (b) b.style.width = (t > 0 ? Math.min(100, s/t*100) : 0) + '%';
+    };
+    window.addEventListener('scroll', this._sc, { passive: true });
+    this._obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const d = +(e.target.dataset.d || 0);
+        setTimeout(() => { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }, d);
+        this._obs.unobserve(e.target);
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.cl-rv').forEach(el => this._obs.observe(el));
+    // FAQ accordion: toggle + icon
+    document.getElementById('cl-faq').addEventListener('toggle', function(e) {
+      const det = e.target; if (!det.tagName === 'DETAILS') return;
+      const icon = det.querySelector('.cl-faq-icon');
+      if (icon) icon.style.transform = det.open ? 'rotate(45deg)' : 'rotate(0deg)';
+    }, true);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._sc);
+    if (this._obs) this._obs.disconnect();
+  }
+}
+
+</script>
+</body>
+</html>
